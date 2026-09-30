@@ -23,13 +23,14 @@ th { color:var(--dim); font-weight:600; font-size:12.5px; text-transform:upperca
 code { background:#0f1b33; padding:1px 6px; border-radius:4px; font-size:12.5px; }
 </style></head><body>
 <h1>NEW AI — Self-Evolving Model Experiment Dashboard</h1>
-<div class="sub">Pre-registered battery · generated 2026-09-29 16:58 UTC · hardware: RTX 5090 Laptop GPU (24 GB) (2.11.0+cu128) · seeds: 1, 7, 42, 123, 999</div>
+<div class="sub">Pre-registered battery · generated 2026-09-30 09:21 UTC · hardware: RTX 5090 Laptop GPU (24 GB) (2.11.0+cu128) · seeds: 1, 7, 42, 123, 999</div>
 <h2>Status board</h2><div class="grid">
 <div class="card"><b>E0</b> — Harness & baselines<br><span class="badge pass">COMPLETE</span><div class="small">5 seed(s) recorded</div></div>
 <div class="card"><b>E1</b> — M1 — EBM phase-locking (iterations)<br><span class="badge warn">1/2 thresholds met</span></div>
 <div class="card"><b>E2</b> — M2/M3′ — headline: stress-triggered growth<br><span class="badge warn">2/4 thresholds met</span></div>
 <div class="card"><b>E3</b> — M4 — knowledge grafting<br><span class="badge warn">1/2 thresholds met</span></div>
 <div class="card"><b>E4</b> — M5 — ternary substrate (1.58-bit)<br><span class="badge warn">1/4 thresholds met</span></div>
+<div class="card"><b>E11</b> — Configuration sweep — optimal growth config<br><span class="badge pass">WINNER FOUND</span><div class="small">gate · midpoint trigger · small expert · b100 · gain +6.56 pts · retention drop 1.67 pts (gate ≤2) · score 6.56</div></div>
 </div>
 <h2>E0 — Harness & baselines</h2><p class="small">frozen core + iteration map on T1/T2; static fine-tune reference</p>
 <table><tr><th>Arm</th><th>Seeds</th>
@@ -296,8 +297,30 @@ code { background:#0f1b33; padding:1px 6px; border-radius:4px; font-size:12.5px;
 <tr><td>weight_compression_frac</td><td class="num">0.75</td><td class="num">0.87</td><td class="badc">FAIL / FALSIFIED</td></tr>
 </table>
 <div class="card"><b>Throughput ratio (ternary / FP32)</b><svg width="220" height="120" style="max-width:100%"><rect x="30" y="30.0" width="60" height="65.0" fill="#a78bfa"/><text x="60.0" y="26.0" text-anchor="middle" font-size="11" fill="#cbd5e1">1.11</text><text x="60.0" y="109" text-anchor="middle" font-size="10" fill="#94a3b8">GPU</text><rect x="120" y="39.6" width="60" height="55.4" fill="#a78bfa"/><text x="150.0" y="35.6" text-anchor="middle" font-size="11" fill="#cbd5e1">0.95</text><text x="150.0" y="109" text-anchor="middle" font-size="10" fill="#94a3b8">CPU</text></svg></div>
+<h2>E11 — Configuration sweep — optimal growth config</h2><p class="small">objective: max capability gained per unit thawing compute with retention drop ≤2 pts gate; 32 configs = {global-gate, learned-router} × {midpoint, abs-energy, rel-energy, confidence} triggers × {small, large} capacity × {100, 200} step budget</p>
+<div class="card"><b>Optimal configuration:</b> gate · midpoint trigger · small expert · b100 — mean gain +6.56 pts over frozen floor, worst-case retention drop 1.67 pts (gate ≤2 met on all seeds), score 6.56, 5-seed confirmed.
+<br><b>Best stress-triggered config</b> (no scheduled trigger): router · rel_energy trigger · small expert · b100 — gain +3.67 pts, retention drop 1.11 pts, 5 seeds.
+<br>Interpretation: at toy scale the <i>mechanism</i> that matters is capacity + thawing budget; the trigger policy barely changes outcome because telemetry cannot separate F1 from F2 inputs (E2-T2 finding, now mechanistically explained). The learned router matches the global gate on gain but adds parameters — no advantage at this scale.</div>
+<table><tr><th>Rank</th><th>Config</th><th class="num">Seeds</th><th class="num">Mean gain (pts)</th><th class="num">Worst retention drop (pts)</th><th class="num">Score</th><th class="num">Fired</th><th>Gate ≤2 pts</th></tr>
+<tr><td>1 ★</td><td>gate · midpoint trigger · small expert · b100</td><td class="num">5</td><td class="num">+6.56</td><td class="num">1.67</td><td class="num">6.56</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>2</td><td>router · rel_energy trigger · small expert · b100</td><td class="num">5</td><td class="num">+3.67</td><td class="num">1.11</td><td class="num">4.33</td><td class="num">80%</td><td class="ok">PASS</td></tr>
+<tr><td>3</td><td>gate · abs_energy trigger · large expert · b100</td><td class="num">5</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>4</td><td>router · rel_energy trigger · large expert · b100</td><td class="num">3</td><td class="num">+7.04</td><td class="num">0.56</td><td class="num">7.41</td><td class="num">33%</td><td class="ok">PASS</td></tr>
+<tr><td>5</td><td>gate · rel_energy trigger · small expert · b200</td><td class="num">3</td><td class="num">+9.81</td><td class="num">0.00</td><td class="num">4.91</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>6</td><td>router · rel_energy trigger · large expert · b200</td><td class="num">3</td><td class="num">+0.74</td><td class="num">1.67</td><td class="num">0.19</td><td class="num">67%</td><td class="ok">PASS</td></tr>
+<tr><td>7</td><td>gate · abs_energy trigger · small expert · b100</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>8</td><td>gate · abs_energy trigger · small expert · b200</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>9</td><td>gate · confidence trigger · large expert · b100</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0%</td><td class="ok">PASS</td></tr>
+<tr><td>10</td><td>gate · confidence trigger · large expert · b200</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0%</td><td class="ok">PASS</td></tr>
+<tr><td>11</td><td>gate · confidence trigger · small expert · b100</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0%</td><td class="ok">PASS</td></tr>
+<tr><td>12</td><td>gate · confidence trigger · small expert · b200</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0%</td><td class="ok">PASS</td></tr>
+<tr><td>13</td><td>gate · rel_energy trigger · large expert · b200</td><td class="num">3</td><td class="num">+0.00</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">33%</td><td class="ok">PASS</td></tr>
+<tr><td>14</td><td>router · abs_energy trigger · large expert · b200</td><td class="num">3</td><td class="num">+0.56</td><td class="num">1.11</td><td class="num">0.00</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>15</td><td>router · abs_energy trigger · small expert · b200</td><td class="num">3</td><td class="num">+0.93</td><td class="num">0.56</td><td class="num">0.00</td><td class="num">100%</td><td class="ok">PASS</td></tr>
+<tr><td>16</td><td>router · confidence trigger · large expert · b100</td><td class="num">3</td><td class="num">+0.19</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0%</td><td class="ok">PASS</td></tr>
+</table>
 <h2>Reproducibility</h2><div class="card">
-<p class="small">hardware string: <code>Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128</code><br>config hash (E1): <code>2b954690e96471d5</code> · git commit: <code>local-uncommitted</code><br>seeds per arm: 40 · every run logs seed, config hash, hardware, wall-clock and git commit (pre-registration rule 3)</p>
+<p class="small">hardware string: <code>Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128</code><br>config hash (E1): <code>2b954690e96471d5</code> · git commit: <code>local-uncommitted</code><br>seeds per arm: 111 · every run logs seed, config hash, hardware, wall-clock and git commit (pre-registration rule 3)</p>
 <p class="small">Pre-registration rules: (1) thresholds frozen at Phase 0 — changes require a new experiment ID; (2) 5 seeds per arm, single-seed runs are pilots only; (3) full run provenance logged; (4) negative results are first-class outcomes; (5) no post-hoc metric selection.</p>
 <p class="small">Interpretation ladder: E1+E2 pass → both mechanisms real, proceed to composition. E2 control arm ≈ frozen-only → the <i>timing</i> claim is dead (capacity only). E4 post-hoc fail but QAT pass → substrate needs training-time commitment. All results are toy-scale: a PASS licenses more testing, never an extrapolation to real LLMs.</p>
 </div></body></html>
