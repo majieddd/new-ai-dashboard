@@ -1,0 +1,837 @@
+{
+  "history": [
+    {
+      "round": 1,
+      "size_target": [
+        64,
+        16,
+        0
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 1,
+          "nparams": 4096,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2721,
+          "score": 27.208,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.565,
+            "hellaswag_completion": 0.1433,
+            "arc_grids": 0.2533,
+            "gsm8k_arithmetic": 0.1267
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 1,
+          "nparams": 4096,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2242,
+          "score": 5.917,
+          "retention_drop_pts": 35.0,
+          "per_family": {
+            "mmlu_knowledge": 0.1733,
+            "hellaswag_completion": 0.1567,
+            "arc_grids": 0.2933,
+            "gsm8k_arithmetic": 0.2733
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 1,
+          "nparams": 4096,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2625,
+          "score": 19.833,
+          "retention_drop_pts": 14.833,
+          "per_family": {
+            "mmlu_knowledge": 0.41,
+            "hellaswag_completion": 0.1067,
+            "arc_grids": 0.2933,
+            "gsm8k_arithmetic": 0.24
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.0,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.003,
+        "steps": 250
+      }
+    },
+    {
+      "round": 2,
+      "size_target": [
+        96,
+        24,
+        1
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 2,
+          "nparams": 7104,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2896,
+          "score": 28.958,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.5983,
+            "hellaswag_completion": 0.1267,
+            "arc_grids": 0.2767,
+            "gsm8k_arithmetic": 0.1567
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 2,
+          "nparams": 7104,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2267,
+          "score": 4.083,
+          "retention_drop_pts": 39.167,
+          "per_family": {
+            "mmlu_knowledge": 0.2167,
+            "hellaswag_completion": 0.1533,
+            "arc_grids": 0.28,
+            "gsm8k_arithmetic": 0.2567
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 2,
+          "nparams": 7104,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2558,
+          "score": 13.167,
+          "retention_drop_pts": 26.833,
+          "per_family": {
+            "mmlu_knowledge": 0.36,
+            "hellaswag_completion": 0.1167,
+            "arc_grids": 0.3,
+            "gsm8k_arithmetic": 0.2467
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.0,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.003,
+        "steps": 250
+      }
+    },
+    {
+      "round": 3,
+      "size_target": [
+        160,
+        32,
+        2
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 3,
+          "nparams": 12832,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.3008,
+          "score": 30.083,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.68,
+            "hellaswag_completion": 0.12,
+            "arc_grids": 0.2667,
+            "gsm8k_arithmetic": 0.1367
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 3,
+          "nparams": 12832,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2204,
+          "score": 1.958,
+          "retention_drop_pts": 42.167,
+          "per_family": {
+            "mmlu_knowledge": 0.2383,
+            "hellaswag_completion": 0.1033,
+            "arc_grids": 0.2567,
+            "gsm8k_arithmetic": 0.2833
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 3,
+          "nparams": 12832,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2375,
+          "score": 8.25,
+          "retention_drop_pts": 33.0,
+          "per_family": {
+            "mmlu_knowledge": 0.3,
+            "hellaswag_completion": 0.1,
+            "arc_grids": 0.3033,
+            "gsm8k_arithmetic": 0.2467
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.0,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.003,
+        "steps": 250
+      }
+    },
+    {
+      "round": 4,
+      "size_target": [
+        256,
+        48,
+        3
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 4,
+          "nparams": 25152,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2933,
+          "score": 29.333,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.6933,
+            "hellaswag_completion": 0.13,
+            "arc_grids": 0.2167,
+            "gsm8k_arithmetic": 0.1333
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 4,
+          "nparams": 25152,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.245,
+          "score": 5.417,
+          "retention_drop_pts": 40.167,
+          "per_family": {
+            "mmlu_knowledge": 0.2133,
+            "hellaswag_completion": 0.1267,
+            "arc_grids": 0.3933,
+            "gsm8k_arithmetic": 0.2467
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 4,
+          "nparams": 30336,
+          "genome": {
+            "hidden_mult": 1.25,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.0042,
+            "steps": 250
+          },
+          "composite": 0.2167,
+          "score": 3.25,
+          "retention_drop_pts": 38.833,
+          "per_family": {
+            "mmlu_knowledge": 0.3067,
+            "hellaswag_completion": 0.1133,
+            "arc_grids": 0.1667,
+            "gsm8k_arithmetic": 0.28
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.25,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.0042,
+        "steps": 250
+      }
+    },
+    {
+      "round": 5,
+      "size_target": [
+        384,
+        72,
+        4
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 5,
+          "nparams": 48672,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2892,
+          "score": 28.917,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.7067,
+            "hellaswag_completion": 0.1,
+            "arc_grids": 0.2433,
+            "gsm8k_arithmetic": 0.1067
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 5,
+          "nparams": 48672,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.1808,
+          "score": -7.333,
+          "retention_drop_pts": 52.833,
+          "per_family": {
+            "mmlu_knowledge": 0.18,
+            "hellaswag_completion": 0.0733,
+            "arc_grids": 0.17,
+            "gsm8k_arithmetic": 0.3
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 5,
+          "nparams": 48957,
+          "genome": {
+            "hidden_mult": 1.25,
+            "latent_mult": 0.8,
+            "max_sprouts_add": 0,
+            "lr": 0.0042,
+            "steps": 250
+          },
+          "composite": 0.2346,
+          "score": 3.042,
+          "retention_drop_pts": 42.833,
+          "per_family": {
+            "mmlu_knowledge": 0.315,
+            "hellaswag_completion": 0.1367,
+            "arc_grids": 0.2433,
+            "gsm8k_arithmetic": 0.2433
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.25,
+        "latent_mult": 0.8,
+        "max_sprouts_add": 0,
+        "lr": 0.0042,
+        "steps": 250
+      }
+    },
+    {
+      "round": 6,
+      "size_target": [
+        576,
+        96,
+        5
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 6,
+          "nparams": 87744,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2863,
+          "score": 28.625,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.7317,
+            "hellaswag_completion": 0.12,
+            "arc_grids": 0.19,
+            "gsm8k_arithmetic": 0.1033
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 6,
+          "nparams": 87744,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2275,
+          "score": -2.5,
+          "retention_drop_pts": 52.5,
+          "per_family": {
+            "mmlu_knowledge": 0.1733,
+            "hellaswag_completion": 0.1533,
+            "arc_grids": 0.2633,
+            "gsm8k_arithmetic": 0.32
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 6,
+          "nparams": 87744,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2325,
+          "score": 0.5,
+          "retention_drop_pts": 47.5,
+          "per_family": {
+            "mmlu_knowledge": 0.26,
+            "hellaswag_completion": 0.1333,
+            "arc_grids": 0.2667,
+            "gsm8k_arithmetic": 0.27
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.0,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.003,
+        "steps": 250
+      }
+    },
+    {
+      "round": 7,
+      "size_target": [
+        864,
+        144,
+        6
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 7,
+          "nparams": 180000,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.3129,
+          "score": 31.292,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.7717,
+            "hellaswag_completion": 0.0967,
+            "arc_grids": 0.2767,
+            "gsm8k_arithmetic": 0.1067
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 7,
+          "nparams": 180000,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2271,
+          "score": -4.542,
+          "retention_drop_pts": 56.5,
+          "per_family": {
+            "mmlu_knowledge": 0.225,
+            "hellaswag_completion": 0.13,
+            "arc_grids": 0.29,
+            "gsm8k_arithmetic": 0.2633
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 7,
+          "nparams": 178125,
+          "genome": {
+            "hidden_mult": 1.25,
+            "latent_mult": 0.8,
+            "max_sprouts_add": 0,
+            "lr": 0.0042,
+            "steps": 250
+          },
+          "composite": 0.2071,
+          "score": -5.458,
+          "retention_drop_pts": 54.333,
+          "per_family": {
+            "mmlu_knowledge": 0.2083,
+            "hellaswag_completion": 0.1467,
+            "arc_grids": 0.2333,
+            "gsm8k_arithmetic": 0.24
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.25,
+        "latent_mult": 0.8,
+        "max_sprouts_add": 0,
+        "lr": 0.0042,
+        "steps": 250
+      }
+    },
+    {
+      "round": 8,
+      "size_target": [
+        1296,
+        216,
+        8
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 8,
+          "nparams": 378864,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2942,
+          "score": 29.417,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.7833,
+            "hellaswag_completion": 0.1,
+            "arc_grids": 0.21,
+            "gsm8k_arithmetic": 0.0833
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 8,
+          "nparams": 378864,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.1904,
+          "score": -11.208,
+          "retention_drop_pts": 62.5,
+          "per_family": {
+            "mmlu_knowledge": 0.1317,
+            "hellaswag_completion": 0.1333,
+            "arc_grids": 0.26,
+            "gsm8k_arithmetic": 0.2367
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 8,
+          "nparams": 378864,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.2342,
+          "score": 0.917,
+          "retention_drop_pts": 47.0,
+          "per_family": {
+            "mmlu_knowledge": 0.3333,
+            "hellaswag_completion": 0.1333,
+            "arc_grids": 0.25,
+            "gsm8k_arithmetic": 0.22
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.0,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.003,
+        "steps": 250
+      }
+    },
+    {
+      "round": 9,
+      "size_target": [
+        1944,
+        324,
+        10
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 9,
+          "nparams": 813240,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.3108,
+          "score": 31.083,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.8,
+            "hellaswag_completion": 0.0933,
+            "arc_grids": 0.2133,
+            "gsm8k_arithmetic": 0.1367
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 9,
+          "nparams": 813240,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.1696,
+          "score": -10.042,
+          "retention_drop_pts": 56.0,
+          "per_family": {
+            "mmlu_knowledge": 0.2117,
+            "hellaswag_completion": 0.14,
+            "arc_grids": 0.0267,
+            "gsm8k_arithmetic": 0.3
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 9,
+          "nparams": 646125,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 0.8,
+            "max_sprouts_add": 0,
+            "lr": 0.0042,
+            "steps": 250
+          },
+          "composite": 0.2125,
+          "score": -5.5,
+          "retention_drop_pts": 55.5,
+          "per_family": {
+            "mmlu_knowledge": 0.23,
+            "hellaswag_completion": 0.1533,
+            "arc_grids": 0.2433,
+            "gsm8k_arithmetic": 0.2233
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 1.0,
+        "latent_mult": 0.8,
+        "max_sprouts_add": 0,
+        "lr": 0.0042,
+        "steps": 250
+      }
+    },
+    {
+      "round": 10,
+      "size_target": [
+        2916,
+        486,
+        12
+      ],
+      "arms": {
+        "frozen_baseline": {
+          "cfg": "frozen_baseline",
+          "seed": 7,
+          "round": 10,
+          "nparams": 1770984,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.3025,
+          "score": 30.25,
+          "retention_drop_pts": 0.0,
+          "per_family": {
+            "mmlu_knowledge": 0.7867,
+            "hellaswag_completion": 0.0933,
+            "arc_grids": 0.2333,
+            "gsm8k_arithmetic": 0.0967
+          }
+        },
+        "full_finetune": {
+          "cfg": "full_finetune",
+          "seed": 7,
+          "round": 10,
+          "nparams": 1770984,
+          "genome": {
+            "hidden_mult": 1.0,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.003,
+            "steps": 250
+          },
+          "composite": 0.0825,
+          "score": -29.75,
+          "retention_drop_pts": 78.0,
+          "per_family": {
+            "mmlu_knowledge": 0.0,
+            "hellaswag_completion": 0.1467,
+            "arc_grids": 0.0,
+            "gsm8k_arithmetic": 0.1833
+          }
+        },
+        "self_assembly": {
+          "cfg": "self_assembly",
+          "seed": 7,
+          "round": 10,
+          "nparams": 1467888,
+          "genome": {
+            "hidden_mult": 0.8,
+            "latent_mult": 1.0,
+            "max_sprouts_add": 0,
+            "lr": 0.0042,
+            "steps": 250
+          },
+          "composite": 0.1908,
+          "score": -2.917,
+          "retention_drop_pts": 46.0,
+          "per_family": {
+            "mmlu_knowledge": 0.1733,
+            "hellaswag_completion": 0.1467,
+            "arc_grids": 0.1967,
+            "gsm8k_arithmetic": 0.2467
+          }
+        }
+      },
+      "best_genome": {
+        "hidden_mult": 0.8,
+        "latent_mult": 1.0,
+        "max_sprouts_add": 0,
+        "lr": 0.0042,
+        "steps": 250
+      }
+    }
+  ],
+  "hardware": "Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128",
+  "git_commit": "cf72d79",
+  "wall_s": 169.7
+}
