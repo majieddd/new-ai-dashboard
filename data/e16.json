@@ -1,0 +1,257 @@
+{
+  "experiment": "E16",
+  "scope": "corrected synthetic instrument / scheduled adapter control, not EBM, LLM, or self-evolution",
+  "protocol": {
+    "seeds": [
+      1,
+      7,
+      42,
+      123,
+      999
+    ],
+    "old_steps": 140,
+    "new_steps": 140,
+    "batch": 64,
+    "test_selection": "none",
+    "replay": "none",
+    "rule_cue": "explicit",
+    "train_budget": "matched steps/examples, not matched FLOPs or GPU time"
+  },
+  "provenance": {
+    "git_base": "8aca040707566e6b5766a954ebcff80cb6161c28",
+    "working_tree_dirty": true,
+    "source_sha256": {
+      "tasks_v2.py": "5ccef0244eff34bcab9c762e9ca4f63d03b01ca89b4f27e8066b9ece4dda02f4",
+      "run_e16.py": "ae17209cdbc2a3f9a891dbe6adc532d93f209efd81dfbad07b7fe8b8352a93c3"
+    },
+    "torch": "2.11.0+cu128",
+    "numpy": "2.4.6",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 5090 Laptop GPU",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.9",
+    "command": "python run_e16.py --seeds 1,7,42,123,999 --device cuda --old-steps 140 --new-steps 140"
+  },
+  "runs": [
+    {
+      "seed": 1,
+      "before": {
+        "old_test": 1.0,
+        "old_val": 1.0,
+        "new_test": 0.123377
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 1.0,
+          "new_test": 0.123377,
+          "old_val": 1.0,
+          "new_val": 0.117264,
+          "trainable_params": 0,
+          "total_params": 3784,
+          "adapt_seconds": 0.0
+        },
+        "full_finetune": {
+          "old_test": 0.123377,
+          "new_test": 1.0,
+          "old_val": 0.117264,
+          "new_val": 1.0,
+          "trainable_params": 3784,
+          "total_params": 3784,
+          "adapt_seconds": 0.1336
+        },
+        "scheduled_adapter": {
+          "old_test": 1.0,
+          "new_test": 0.123377,
+          "old_val": 1.0,
+          "new_val": 0.117264,
+          "trainable_params": 400,
+          "total_params": 4184,
+          "adapt_seconds": 0.1272
+        }
+      },
+      "old_train_seconds": 0.3364,
+      "peak_allocated_bytes": 19193344,
+      "split_sizes": {
+        "train": 1433,
+        "val": 307,
+        "test": 308
+      }
+    },
+    {
+      "seed": 7,
+      "before": {
+        "old_test": 1.0,
+        "old_val": 1.0,
+        "new_test": 0.100649
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 1.0,
+          "new_test": 0.100649,
+          "old_val": 1.0,
+          "new_val": 0.120521,
+          "trainable_params": 0,
+          "total_params": 3784,
+          "adapt_seconds": 0.0
+        },
+        "full_finetune": {
+          "old_test": 0.100649,
+          "new_test": 1.0,
+          "old_val": 0.120521,
+          "new_val": 1.0,
+          "trainable_params": 3784,
+          "total_params": 3784,
+          "adapt_seconds": 0.1672
+        },
+        "scheduled_adapter": {
+          "old_test": 1.0,
+          "new_test": 0.100649,
+          "old_val": 1.0,
+          "new_val": 0.120521,
+          "trainable_params": 400,
+          "total_params": 4184,
+          "adapt_seconds": 0.1529
+        }
+      },
+      "old_train_seconds": 0.1543,
+      "peak_allocated_bytes": 19193344,
+      "split_sizes": {
+        "train": 1433,
+        "val": 307,
+        "test": 308
+      }
+    },
+    {
+      "seed": 42,
+      "before": {
+        "old_test": 1.0,
+        "old_val": 1.0,
+        "new_test": 0.13961
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 1.0,
+          "new_test": 0.13961,
+          "old_val": 1.0,
+          "new_val": 0.120521,
+          "trainable_params": 0,
+          "total_params": 3784,
+          "adapt_seconds": 0.0
+        },
+        "full_finetune": {
+          "old_test": 0.13961,
+          "new_test": 1.0,
+          "old_val": 0.120521,
+          "new_val": 1.0,
+          "trainable_params": 3784,
+          "total_params": 3784,
+          "adapt_seconds": 0.1697
+        },
+        "scheduled_adapter": {
+          "old_test": 1.0,
+          "new_test": 0.13961,
+          "old_val": 1.0,
+          "new_val": 0.120521,
+          "trainable_params": 400,
+          "total_params": 4184,
+          "adapt_seconds": 0.1565
+        }
+      },
+      "old_train_seconds": 0.1527,
+      "peak_allocated_bytes": 19193344,
+      "split_sizes": {
+        "train": 1433,
+        "val": 307,
+        "test": 308
+      }
+    },
+    {
+      "seed": 123,
+      "before": {
+        "old_test": 1.0,
+        "old_val": 1.0,
+        "new_test": 0.126623
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 1.0,
+          "new_test": 0.126623,
+          "old_val": 1.0,
+          "new_val": 0.094463,
+          "trainable_params": 0,
+          "total_params": 3784,
+          "adapt_seconds": 0.0
+        },
+        "full_finetune": {
+          "old_test": 0.126623,
+          "new_test": 1.0,
+          "old_val": 0.094463,
+          "new_val": 1.0,
+          "trainable_params": 3784,
+          "total_params": 3784,
+          "adapt_seconds": 0.1765
+        },
+        "scheduled_adapter": {
+          "old_test": 1.0,
+          "new_test": 0.126623,
+          "old_val": 1.0,
+          "new_val": 0.094463,
+          "trainable_params": 400,
+          "total_params": 4184,
+          "adapt_seconds": 0.14
+        }
+      },
+      "old_train_seconds": 0.1608,
+      "peak_allocated_bytes": 19193344,
+      "split_sizes": {
+        "train": 1433,
+        "val": 307,
+        "test": 308
+      }
+    },
+    {
+      "seed": 999,
+      "before": {
+        "old_test": 1.0,
+        "old_val": 1.0,
+        "new_test": 0.11039
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 1.0,
+          "new_test": 0.11039,
+          "old_val": 1.0,
+          "new_val": 0.156352,
+          "trainable_params": 0,
+          "total_params": 3784,
+          "adapt_seconds": 0.0
+        },
+        "full_finetune": {
+          "old_test": 0.11039,
+          "new_test": 1.0,
+          "old_val": 0.156352,
+          "new_val": 1.0,
+          "trainable_params": 3784,
+          "total_params": 3784,
+          "adapt_seconds": 0.1428
+        },
+        "scheduled_adapter": {
+          "old_test": 1.0,
+          "new_test": 0.11039,
+          "old_val": 1.0,
+          "new_val": 0.156352,
+          "trainable_params": 400,
+          "total_params": 4184,
+          "adapt_seconds": 0.1494
+        }
+      },
+      "old_train_seconds": 0.1438,
+      "peak_allocated_bytes": 19193344,
+      "split_sizes": {
+        "train": 1433,
+        "val": 307,
+        "test": 308
+      }
+    }
+  ]
+}

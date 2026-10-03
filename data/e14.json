@@ -1,0 +1,162 @@
+[
+  {
+    "exp": "E14",
+    "seed": 123,
+    "arm": "noreplay_b100",
+    "config_hash": "bee0cd5c8eed8e31",
+    "hardware": "Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128",
+    "git_commit": "cd6e75d",
+    "wall_s": 13.6,
+    "metrics": {
+      "seed": 123,
+      "budget": 100,
+      "acc_floor": 0.0,
+      "arm_self_assembly": {
+        "acc_f2": 0.9417,
+        "gain_pts": 94.167,
+        "f1_before": 1.0,
+        "f1_after": 1.0,
+        "retention_drop_pts": 0.0,
+        "gated": true
+      },
+      "arm_full_finetune": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 0.85,
+        "retention_drop_pts": 15.0,
+        "gated": false
+      },
+      "delta_acc_f2_pts": -5.83,
+      "delta_retention_drop_pts": -15.0
+    }
+  },
+  {
+    "exp": "E14",
+    "seed": 1,
+    "arm": "noreplay_b100",
+    "config_hash": "bee0cd5c8eed8e31",
+    "hardware": "Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128",
+    "git_commit": "cd6e75d",
+    "wall_s": 3.5,
+    "metrics": {
+      "seed": 1,
+      "budget": 100,
+      "acc_floor": 0.0,
+      "arm_self_assembly": {
+        "acc_f2": 0.9875,
+        "gain_pts": 98.75,
+        "f1_before": 1.0,
+        "f1_after": 1.0,
+        "retention_drop_pts": 0.0,
+        "gated": true
+      },
+      "arm_full_finetune": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 0.6375,
+        "retention_drop_pts": 36.25,
+        "gated": false
+      },
+      "delta_acc_f2_pts": -1.25,
+      "delta_retention_drop_pts": -36.25
+    }
+  },
+  {
+    "exp": "E14",
+    "seed": 42,
+    "arm": "noreplay_b100",
+    "config_hash": "bee0cd5c8eed8e31",
+    "hardware": "Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128",
+    "git_commit": "cd6e75d",
+    "wall_s": 9.9,
+    "metrics": {
+      "seed": 42,
+      "budget": 100,
+      "acc_floor": 0.0,
+      "arm_self_assembly": {
+        "acc_f2": 0.9833,
+        "gain_pts": 98.333,
+        "f1_before": 1.0,
+        "f1_after": 1.0,
+        "retention_drop_pts": 0.0,
+        "gated": true
+      },
+      "arm_full_finetune": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 0.7583,
+        "retention_drop_pts": 24.167,
+        "gated": false
+      },
+      "delta_acc_f2_pts": -1.67,
+      "delta_retention_drop_pts": -24.167
+    }
+  },
+  {
+    "exp": "E14",
+    "seed": 7,
+    "arm": "noreplay_b100",
+    "config_hash": "bee0cd5c8eed8e31",
+    "hardware": "Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128",
+    "git_commit": "cd6e75d",
+    "wall_s": 6.8,
+    "metrics": {
+      "seed": 7,
+      "budget": 100,
+      "acc_floor": 0.0,
+      "arm_self_assembly": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 1.0,
+        "retention_drop_pts": 0.0,
+        "gated": true
+      },
+      "arm_full_finetune": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 0.7917,
+        "retention_drop_pts": 20.833,
+        "gated": false
+      },
+      "delta_acc_f2_pts": 0.0,
+      "delta_retention_drop_pts": -20.833
+    }
+  },
+  {
+    "exp": "E14",
+    "seed": 999,
+    "arm": "noreplay_b100",
+    "config_hash": "bee0cd5c8eed8e31",
+    "hardware": "Windows Intel64 Family 6 Model 198 Stepping 2, GenuineIntel, GPU=NVIDIA GeForce RTX 5090 Laptop GPU, torch=2.11.0+cu128",
+    "git_commit": "cd6e75d",
+    "wall_s": 17.1,
+    "metrics": {
+      "seed": 999,
+      "budget": 100,
+      "acc_floor": 0.0,
+      "arm_self_assembly": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 1.0,
+        "retention_drop_pts": 0.0,
+        "gated": true
+      },
+      "arm_full_finetune": {
+        "acc_f2": 1.0,
+        "gain_pts": 100.0,
+        "f1_before": 1.0,
+        "f1_after": 0.4208,
+        "retention_drop_pts": 57.917,
+        "gated": false
+      },
+      "delta_acc_f2_pts": 0.0,
+      "delta_retention_drop_pts": -57.917
+    }
+  }
+]
