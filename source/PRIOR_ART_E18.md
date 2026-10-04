@@ -1,0 +1,12 @@
+# Prior art checked before E18 (October 4, 2026)
+
+A targeted scan of **original** publications, not a claim to have exhausted all research. These existing methods already implement major pieces of the proposed vision; our next mechanisms must beat strong controls, not claim to have invented adapters, growth or energy-based continual learning.
+
+- **SEMA** (Wang et al., CVPR 2025): [self-expanding mixture of adapters](https://openaccess.thecvf.com/content/CVPR2025/html/Wang_Self-Expansion_of_Pre-trained_Models_with_Mixture_of_Adapters_for_Continual_CVPR_2025_paper.html), adding modules on representation distribution shift. Compare against this class of detector/expansion before attributing value to novelty timing.
+- **MaRS** (Yan, ICLR 2026): [statistically governed memory/router expansion](https://openreview.net/forum?id=GGrLeik2qo), including explicit false-alarm/delay treatment. Calibrated alerting is existing work, not our contribution.
+- **SCALE** (Lee et al., Findings of ACL 2026): [frozen-base width expansion](https://aclanthology.org/2026.findings-acl.2037/) preserving original functionality while training selected expansions. Compare function-preserving growth at a matched budget.
+- **Meta-UCF** (Xiao et al., ICLR 2026): [task-conditioned LoRA generation](https://proceedings.iclr.cc/paper_files/paper/2026/hash/12202970782399ee67981dc5269c3b8a-Abstract-Conference.html) without keeping an ever-growing adapter per task. Compare constant-memory adaptation on language task streams.
+- **Energy-Based Models for Continual Learning** (Li et al., 2020 preprint): [actual EBM objective and continual-learning evaluation](https://arxiv.org/abs/2011.12216). E18's classifier free-energy statistic is *not* this trained mechanism.
+- **OOD likelihood limitations** (Nalisnick et al., ICLR 2019): [generative likelihood can prefer unrelated data](https://arxiv.org/abs/1810.09136); [typicality-based test](https://arxiv.org/abs/1906.02994). Treat density novelty and task error as different signals.
+
+E18's matched-input concept shift makes every fixed input-only score uninformative by construction. This does not rule out feedback-driven or context-driven task-free learning; it rules out the specific inference that high input energy alone detects *all* new rules. The next prototype should preregister its feedback channel, adaptive capacity, no-cue routing, comparable cost and strong published baselines before looking at held-out scores.
