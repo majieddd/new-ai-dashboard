@@ -20,13 +20,15 @@ def load_results(source=HERE):
     e15 = json.loads((source / "results/E15/summary.json").read_text(encoding="utf-8"))
     e16 = json.loads((source / "results/E16/summary.json").read_text(encoding="utf-8"))
     e17 = json.loads((source / "results/E17/summary.json").read_text(encoding="utf-8"))
+    e18 = json.loads((source / "results/E18/summary.json").read_text(encoding="utf-8"))
     e14 = [json.loads(p.read_text(encoding="utf-8"))
            for p in sorted((source / "results/E14").glob("*_e14.jsonl"))]
     assert len(e15["history"]) == 10 and len(e14) == 5
     assert len(e16["runs"]) == len(e17["runs"]) == 5
+    assert [r["seed"] for r in e18["runs"]] == [31, 37, 41, 43, 47]
     assert set(r["seed"] for r in e16["runs"]).isdisjoint(r["seed"] for r in e17["runs"])
     assert [r["round"] for r in e15["history"]] == list(range(1, 11))
-    return e14, e15, e16, e17
+    return e14, e15, e16, e17, e18
 
 
 def chart(rounds):
@@ -56,7 +58,7 @@ def chart(rounds):
     return "".join(bits)
 
 
-def summarise(e14, e15, e16, e17):
+def summarise(e14, e15, e16, e17, e18):
     rounds = e15["history"]
     wins = sum(r["arms"]["self_assembly"]["composite"] > r["arms"]["frozen_baseline"]["composite"] for r in rounds)
     retention_pass = sum(r["arms"]["self_assembly"]["retention_drop_pts"] <= 2 for r in rounds)
@@ -77,11 +79,19 @@ def summarise(e14, e15, e16, e17):
             "E16": {arm: {"old": score(e16, arm, "old_test"), "new": score(e16, arm, "new_test"), "seconds": seconds(e16, arm)}
                     for arm in ("frozen", "scheduled_adapter", "full_finetune")},
             "E17": {arm: {"old": score(e17, arm, "old_test"), "new": score(e17, arm, "new_test"), "seconds": seconds(e17, arm)}
-                    for arm in ("frozen", "scheduled_adapter", "full_finetune")}}
+                    for arm in ("frozen", "scheduled_adapter", "full_finetune")},
+            "E18": {"concept_auc": mean(r["metrics"]["input_nll"]["old_vs_concept_auc"] for r in e18["runs"]),
+                    "nuisance_auc": mean(r["metrics"]["input_nll"]["old_vs_nuisance_auc"] for r in e18["runs"]),
+                    "nuisance_tpr": 100 * mean(r["metrics"]["input_nll"]["nuisance_tpr"] for r in e18["runs"]),
+                    "val_fpr": 100 * mean(r["metrics"]["input_nll"]["old_val_fpr"] for r in e18["runs"]),
+                    "test_fpr": 100 * mean(r["metrics"]["input_nll"]["old_test_fpr"] for r in e18["runs"]),
+                    "nuisance_accuracy": 100 * mean(r["feedback"]["nuisance"]["accuracy_before_adaptation"] for r in e18["runs"]),
+                    "concept_accuracy": 100 * mean(r["feedback"]["concept"]["accuracy_before_adaptation"] for r in e18["runs"]),
+                    "feedback_delay": [r["feedback"]["concept"]["first_alert_after_labels"] for r in e18["runs"]]}}
 
 
-def render(e14, e15, e16, e17):
-    s = summarise(e14, e15, e16, e17)
+def render(e14, e15, e16, e17, e18):
+    s = summarise(e14, e15, e16, e17, e18)
     def row(label, old, new, seconds):
         return f'<tr><th scope="row">{html.escape(label)}</th><td>{old:.1f}%</td><td>{new:.1f}%</td><td>{seconds:.3f}s</td></tr>'
     table15 = "".join(
@@ -109,7 +119,7 @@ a{color:#a9c0ff}a:hover{color:white}a:focus-visible,summary:focus-visible{outlin
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card,.block{border:1px solid var(--line);border-radius:16px;background:var(--panel)}.card{padding:23px}.card strong{display:block;font-size:2.25rem;letter-spacing:-.045em;line-height:1.1}.card small{display:block;color:var(--muted);margin-top:7px}.card p{margin:8px 0 0;color:var(--muted)}.mint{color:var(--mint)}.coral{color:var(--coral)}.blue{color:var(--blue)}section{padding:48px 0}.block{padding:26px;margin-top:18px}.small{font-size:.91rem;color:var(--muted)}.legend{display:flex;gap:14px 24px;flex-wrap:wrap;font-size:.91rem;color:var(--ink);margin:6px 0 20px}.legend span{display:inline-flex;gap:8px;align-items:center}.legend i{width:13px;height:13px;border-radius:4px;display:inline-block}.chart{width:100%;height:auto;display:block;min-width:520px}.chartbox{overflow-x:auto}.note{border-left:3px solid var(--coral);padding:12px 16px;background:#30283a;color:var(--ink);margin:20px 0 0}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}td,th{text-align:left;border-bottom:1px solid var(--line);padding:10px 9px}thead th{color:var(--muted);font-size:.82rem}td{text-align:right}tbody th{font-weight:600}details{margin-top:16px}summary{cursor:pointer;font-weight:700}.scroll{overflow-x:auto}.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.steps{padding-left:23px}.steps li{padding-left:8px;margin:12px 0}.footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--muted)}code{font-size:.86em;background:#202c44;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
 @media(max-width:800px){.grid,.twocol{grid-template-columns:1fr}.hero{padding-top:42px}.block{padding:18px}.top nav{gap:12px}}
 </style></head><body>
-<header class="top wrap"><div class="brand">NEW AI <span class="small">/ research ledger</span></div><nav aria-label="Sections"><a href="#rounds">Rounds</a><a href="#corrected">Corrected test</a><a href="#roadmap">Next gates</a><a href="#data">Data</a></nav></header>
+<header class="top wrap"><div class="brand">NEW AI <span class="small">/ research ledger</span></div><nav aria-label="Sections"><a href="#rounds">Rounds</a><a href="#corrected">Corrected test</a><a href="#trigger">Trigger audit</a><a href="#roadmap">Next gates</a><a href="#data">Data</a></nav></header>
 <main class="wrap">
 <section class="hero"><div class="eyebrow">Transparent experiments · synthetic scale</div><h1>Can a model add a new skill without erasing an old one?</h1>
 <p class="lead">We are testing a self-assembling, energy-guided language-model hypothesis. What exists today is a small classifier and several toy experiments—not a self-evolving LLM. The 10-round pilot did <strong>not</strong> meet its win condition.</p><span class="pill">Current verdict: hypothesis not established</span></section>
@@ -124,8 +134,12 @@ a{color:#a9c0ff}a:hover{color:white}a:focus-visible,summary:focus-visible{outlin
 <div class="block"><h3>E17 · exploratory correction</h3><p>After inspecting E16, the adapter learning rate was raised to 0.15. On five <em>fresh</em> seeds it reached <strong>__E17_OLD__% old / __E17_NEW__% new</strong> test accuracy. Full fine-tuning reached __E17_FINE_OLD__% / __E17_FINE_NEW__%. This is a toy, task-cued control and a post-E16 hyperparameter choice, <em>not</em> a preregistered mechanistic win.</p><div class="scroll"><table><thead><tr><th scope="col">Arm</th><th scope="col">Old test</th><th scope="col">New test</th><th scope="col">Adapt time*</th></tr></thead><tbody>__E17_TABLE__</tbody></table></div></div></div>
 <p class="small">*GPU seconds are observed adaptation wall time averaged over five seeds, not equalized compute. Arms used the same examples, minibatch order and 140 optimizer steps, but have different trainable parameter counts and learning rates in E17. There is no stress-triggered growth arm here.</p>
 <div class="block"><h3>Prior narrow result: E14</h3><p>In a separate, favorable no-replay geometry task with disjoint classes, the localized arm averaged __E14_SA_OLD__ points old-task drop and __E14_SA_NEW__% new-task accuracy; naive full fine-tune averaged __E14_FF_OLD__ points old-task drop and __E14_FF_NEW__% new-task accuracy across five seeds. Its core was frozen and new rows were already allocated. This supports a narrow retention observation, not an open-ended no-forgetting guarantee.</p></div></section>
+<section id="trigger"><h2>E18 · can novelty tell us when to grow?</h2><p class="lede">Five fresh-seed detector audit, no task cue. A fixed classifier faces two held-out changes: (1) the <em>same exact inputs</em> with the answer rule switched from last symbol to first; (2) new first-symbol values, but the original last-symbol rule still works. No model expands or learns a new rule in this round.</p>
+<div class="grid"><div class="card"><strong class="coral">__E18_CONCEPT_AUC__</strong><small>Input-only AUROC on label-only change</small><p>Exact input pairing forces chance-level detection for <em>any</em> fixed input-only score. Logit free energy and entropy also measured 0.500.</p></div><div class="card"><strong class="blue">__E18_NUISANCE_TPR__%</strong><small>Input-density alarm on harmless shift</small><p>Categorical input NLL detected it with AUROC __E18_NUISANCE_AUC__; old-rule accuracy remained __E18_NUISANCE_ACC__%.</p></div><div class="card"><strong class="mint">__E18_DELAY__ labels</strong><small>Feedback-based alert on true rule change</small><p>Errors after seeing outcomes signalled it on all five seeds. Concept-rule accuracy before adaptation was __E18_CONCEPT_ACC__%.</p></div></div>
+<p class="note"><strong>Pre-registered calibration miss:</strong> 95th-percentile input-density alarm exceeded its ≤5% old-validation false-alarm gate: __E18_VAL_FPR__% (held-out old test mean __E18_TEST_FPR__%). Input novelty alone would call for growth when no new skill is needed. A feedback alert is not proof an adapter would help. These are synthetic detector measurements, not an energy-trained model or an autonomous LLM.</p>
+<p class="small">Read the <a href="source/PROTOCOL_E18.md">pre-registered protocol</a>, <a href="source/E18_REPORT.md">full outcome and gate accounting</a>, and <a href="source/PRIOR_ART_E18.md">prior-art comparison with primary papers</a>. Published SEMA and MaRS already study dynamic adapter/slot expansion; SCALE studies frozen-base growth; Meta-UCF studies constant-memory LLM adapters. The next causal round must beat these kinds of baselines, not relabel them as new.</p></section>
 <section id="roadmap"><h2>What would count as progress?</h2><ol class="steps"><li><strong>Mechanism test:</strong> train and validate an explicit energy function. Measure descent and held-out accuracy independently; reject stable-but-wrong answers.</li><li><strong>Causal trigger test:</strong> compare stress-triggered, random-triggered (matched event count), scheduled/fixed adapters, frozen, and full fine-tune under held-out novelty. Report false alarms, detection delay, retention, parameters, GPU-seconds and transfer cost.</li><li><strong>Real evolution:</strong> inherit trained weights/modules across rounds; select the top 80% on validation only; breed compatible survivors, seal tests and confirm champions on independent seeds. Scaling size alone is a separate ablation.</li><li><strong>Language and systems:</strong> only after toy causal gates pass, test actual text generation and unmodified external benchmarks. Separately validate two-model freeze/swap rollback, compressed ternary kernels and tiered paging. Keep the model unable to edit its evaluator.</li></ol><p class="note">The announced target—at least +15 composite points versus <em>both</em> frozen and fine-tuned controls at matched compute, with ≤2-point old-task loss—remains a target. It has not been met.</p></section>
-<section id="data"><h2>Check the numbers yourself</h2><p>Download the exact records behind this page: <a href="data/e15.json" download>E15 ten rounds</a> · <a href="data/e16.json" download>E16 five seeds</a> · <a href="data/e17.json" download>E17 five fresh seeds</a> · <a href="data/e14.json" download>E14 five seeds</a>. <a href="source/PROTOCOL_E16_E17.md">Read the E16/E17 protocol</a> and <a href="source/run_e17.py">runner source</a>; their JSON records include exact source-file hashes and a dirty-tree warning. E15's embedded commit hash predates its runner, so that old record is not independently reproducible from the cited commit alone.</p><p class="small">Generated from raw files by <a href="source/build_research_site.py"><code>build_research_site.py</code></a>; no results are manually entered into the page. The source benchmark names refer to synthetic analogues; original papers: Hendrycks et al. (MMLU, arXiv:2009.03300), Zellers et al. (HellaSwag, arXiv:1905.07830), Chollet (ARC, arXiv:1911.01547), Cobbe et al. (GSM8K, arXiv:2110.14168). <a href="data/method.html">Method and limitations</a>.</p></section>
+<section id="data"><h2>Check the numbers yourself</h2><p>Download the exact records behind this page: <a href="data/e15.json" download>E15 ten rounds</a> · <a href="data/e16.json" download>E16 five seeds</a> · <a href="data/e17.json" download>E17 five fresh seeds</a> · <a href="data/e18.json" download>E18 five-seed trigger audit</a> · <a href="data/e14.json" download>E14 five seeds</a>. <a href="source/PROTOCOL_E16_E17.md">Read the E16/E17 protocol</a>, <a href="source/PROTOCOL_E18.md">E18 protocol</a> and <a href="source/run_e18.py">E18 runner source</a>; JSON records include source-file hashes and a dirty-tree warning. E15's embedded commit hash predates its runner, so that old record is not independently reproducible from the cited commit alone.</p><p class="small">Generated from raw files by <a href="source/build_research_site.py"><code>build_research_site.py</code></a>; no results are manually entered into the page. The source benchmark names refer to synthetic analogues; original papers: Hendrycks et al. (MMLU, arXiv:2009.03300), Zellers et al. (HellaSwag, arXiv:1905.07830), Chollet (ARC, arXiv:1911.01547), Cobbe et al. (GSM8K, arXiv:2110.14168). <a href="data/method.html">Method and limitations</a>.</p></section>
 </main><footer class="footer"><div class="wrap">New AI · a research log, not a product claim. Historical negative results remain public.</div></footer></body></html>"""
     replacements = {
         "__WINS__": str(s["wins"]), "__RET_PASS__": str(s["retention_pass"]),
@@ -145,6 +159,14 @@ a{color:#a9c0ff}a:hover{color:white}a:focus-visible,summary:focus-visible{outlin
         "__E14_FF_OLD__": f'{s["E14"]["fine_old_drop"]:.1f}',
         "__E14_SA_NEW__": f'{s["E14"]["self_new"]:.1f}',
         "__E14_FF_NEW__": f'{s["E14"]["fine_new"]:.1f}',
+        "__E18_CONCEPT_AUC__": f'{s["E18"]["concept_auc"]:.3f}',
+        "__E18_NUISANCE_AUC__": f'{s["E18"]["nuisance_auc"]:.3f}',
+        "__E18_NUISANCE_TPR__": f'{s["E18"]["nuisance_tpr"]:.0f}',
+        "__E18_NUISANCE_ACC__": f'{s["E18"]["nuisance_accuracy"]:.0f}',
+        "__E18_CONCEPT_ACC__": f'{s["E18"]["concept_accuracy"]:.1f}',
+        "__E18_DELAY__": str(max(s["E18"]["feedback_delay"])),
+        "__E18_VAL_FPR__": f'{s["E18"]["val_fpr"]:.3f}',
+        "__E18_TEST_FPR__": f'{s["E18"]["test_fpr"]:.3f}',
     }
     for key, value in replacements.items():
         template = template.replace(key, value)
@@ -159,24 +181,28 @@ def build(source=HERE, out=None):
     dest.mkdir(parents=True, exist_ok=True)
     data = dest / "data"
     data.mkdir(exist_ok=True)
-    e14, e15, e16, e17 = load_results(source)
-    page = render(e14, e15, e16, e17)
+    e14, e15, e16, e17, e18 = load_results(source)
+    page = render(e14, e15, e16, e17, e18)
     (dest / "index.html").write_text(page, encoding="utf-8")
-    for key in ("E15", "E16", "E17"):
+    for key in ("E15", "E16", "E17", "E18"):
         shutil.copyfile(source / "results" / key / "summary.json", data / (key.lower() + ".json"))
     (data / "e14.json").write_text(json.dumps(e14, indent=2), encoding="utf-8")
     public_source = dest / "source"
     public_source.mkdir(exist_ok=True)
     for filename in ("PROTOCOL_E16_E17.md", "tasks_v2.py", "run_e16.py", "run_e17.py",
-                     "test_e16.py", "test_site.py", "build_research_site.py"):
+                     "test_e16.py", "test_site.py", "build_research_site.py",
+                     "PROTOCOL_E18.md", "E18_REPORT.md", "PRIOR_ART_E18.md",
+                     "run_e18.py", "test_e18.py"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'
               '<h1>Method and limitations</h1><p>E15 is a historical single-seed pilot with independent new models in each round;'
               ' selection occurred on test and its embedded git commit does not contain the runner. It does not prove evolution.'
               '</p><p>E14 is a task-specific no-replay comparison, not a general guarantee. E16/E17 use toy categorical rules with an explicit'
-              ' task cue; E17 was tuned after inspecting E16. Neither tests learned energy or stress-triggered growth. All scores'
-              ' come from raw JSON linked on the home page.</p><p>Current scientific protocol: test learned energy against held-out correctness,'
+              ' task cue; E17 was tuned after inspecting E16. E18 pairs identical X with different labels to show that fixed'
+              ' input-only scores cannot detect this concept shift. Its density alarm slightly misses the 5% validation'
+              ' false-alarm gate. Neither tests learned energy or stress-triggered growth. All scores come from raw JSON'
+              ' linked on the home page.</p><p>Current scientific protocol: test learned energy against held-out correctness,'
               ' stress trigger against matched random/scheduled controls, inheritance across rounds and then real language tasks.'
               '</p><a style="color:#a9c0ff" href="../index.html">Back to results</a></body></html>')
     (data / "method.html").write_text(method, encoding="utf-8")
