@@ -175,6 +175,53 @@ a{color:#a9c0ff}a:hover{color:white}a:focus-visible,summary:focus-visible{outlin
     return template
 
 
+def e19_section(record):
+    """Derive all E19 display values from five pinned raw seed records."""
+    runs = record["runs"]
+    assert record["experiment"] == "E19"
+    assert [r["seed"] for r in runs] == [31, 37, 41, 43, 47]
+    arms = (("frozen", "Frozen"), ("scheduled", "Scheduled adapter"),
+            ("random", "Random-timed adapter"), ("feedback", "Feedback-triggered adapter"),
+            ("full_finetune", "Full fine-tune"))
+    def metric(arm, key):
+        return mean(r["arms"][arm][key] for r in runs)
+    rows = "".join(
+        f'<tr><th scope="row">{html.escape(label)}</th>'
+        f'<td>{100*metric(arm, "old_test"):.2f}%</td>'
+        f'<td>{100*metric(arm, "new_test"):.2f}%</td>'
+        f'<td>{100*metric(arm, "balanced_test"):.2f}%</td>'
+        f'<td>{metric(arm, "old_drop_points"):.2f} pts</td></tr>'
+        for arm, label in arms)
+    versus_scheduled = 100 * (metric("feedback", "balanced_test") - metric("scheduled", "balanced_test"))
+    versus_random = 100 * (metric("feedback", "balanced_test") - metric("random", "balanced_test"))
+    assert [r["arms"]["feedback"]["trigger_after_labels"] for r in runs] == [32] * 5
+    assert versus_scheduled == 0
+    return (f'<section id="text-pilot"><h2>E19 · real text, but no timing win</h2>'
+            f'<p class="lede">Five-seed AG News binary-transfer pilot: topic A (World/Sports) then topic B '
+            f'(Business/Science). A hashed-word <strong>linear classifier</strong>, not a language model, '
+            f'processes English articles without an explicit task cue. The feedback alarm sees outcome labels '
+            f'and creates a zero-initialized adapter; scheduled and random-timed controls use the same '
+            f'adapter and training-step budget.</p>'
+            f'<div class="grid"><div class="card"><strong class="coral">{versus_scheduled:.2f} pts</strong>'
+            f'<small>Feedback vs scheduled · balanced accuracy</small><p>Both triggered after 32 labels '
+            f'on every seed. Required advantage: at least 2 points; timing gate failed.</p></div>'
+            f'<div class="card"><strong class="coral">{100*metric("feedback", "new_test"):.2f}%</strong>'
+            f'<small>Feedback new-topic test accuracy</small><p>Below the locked 65% minimum. '
+            f'Router activates on only 19–28% of new-topic test examples.</p></div>'
+            f'<div class="card"><strong class="blue">{versus_random:.2f} pts</strong>'
+            f'<small>Feedback vs random timing</small><p>Below the locked 2-point advantage.</p></div></div>'
+            f'<div class="block"><h3>Same-class classifier controls · official held-out test</h3>'
+            f'<div class="scroll"><table><thead><tr><th>Arm</th><th>Old accuracy</th>'
+            f'<th>New accuracy</th><th>Balanced mean</th><th>Old drop</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table></div><p class="small">Five-seed means, no test tuning. '
+            f'Full fine-tuning learns more on the new topic but forgets more of the old one. '
+            f'Equal optimizer steps are not equal total compute or latency. This custom binary topic '
+            f'transfer is not the standard four-class AG News leaderboard task.</p>'
+            f'<p><a href="source/PROTOCOL_E19.md">Locked protocol</a> · '
+            f'<a href="source/E19_REPORT.md">Interpretation and limits</a> · '
+            f'<a href="data/e19.json">All five raw seed records</a> · '
+            f'<a href="source/run_e19.py">Runner source</a></p></div></section>')
+
 def build(source=HERE, out=None):
     source = Path(source)
     dest = Path(out) if out else source / "research-site"
@@ -183,8 +230,15 @@ def build(source=HERE, out=None):
     data.mkdir(exist_ok=True)
     e14, e15, e16, e17, e18 = load_results(source)
     page = render(e14, e15, e16, e17, e18)
+    e19 = json.loads((source / "results/E19/summary.json").read_text(encoding="utf-8"))
+    page = page.replace('<section id="roadmap">', e19_section(e19) + '<section id="roadmap">')
+    page = page.replace('<a href="#roadmap">Next gates</a>',
+                        '<a href="#text-pilot">Real-text pilot</a><a href="#roadmap">Next gates</a>')
+    page = page.replace('a small classifier and several toy experiments—not a self-evolving LLM.',
+                        'small classifiers on synthetic rules and a real news-text pilot—not a self-evolving LLM.')
+    assert '<section id="text-pilot">' in page and page.count('<svg') == 1
     (dest / "index.html").write_text(page, encoding="utf-8")
-    for key in ("E15", "E16", "E17", "E18"):
+    for key in ("E15", "E16", "E17", "E18", "E19"):
         shutil.copyfile(source / "results" / key / "summary.json", data / (key.lower() + ".json"))
     (data / "e14.json").write_text(json.dumps(e14, indent=2), encoding="utf-8")
     public_source = dest / "source"
@@ -192,7 +246,8 @@ def build(source=HERE, out=None):
     for filename in ("PROTOCOL_E16_E17.md", "tasks_v2.py", "run_e16.py", "run_e17.py",
                      "test_e16.py", "test_site.py", "build_research_site.py",
                      "PROTOCOL_E18.md", "E18_REPORT.md", "PRIOR_ART_E18.md",
-                     "run_e18.py", "test_e18.py"):
+                     "run_e18.py", "test_e18.py", "PROTOCOL_E19.md", "E19_REPORT.md",
+                     "run_e19.py", "test_e19.py"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'
@@ -201,7 +256,9 @@ def build(source=HERE, out=None):
               '</p><p>E14 is a task-specific no-replay comparison, not a general guarantee. E16/E17 use toy categorical rules with an explicit'
               ' task cue; E17 was tuned after inspecting E16. E18 pairs identical X with different labels to show that fixed'
               ' input-only scores cannot detect this concept shift. Its density alarm slightly misses the 5% validation'
-              ' false-alarm gate. Neither tests learned energy or stress-triggered growth. All scores come from raw JSON'
+              ' false-alarm gate. E19 uses genuine news text in a linear classifier but its feedback-triggered adapter'
+              ' matches scheduled timing and fails its new-task accuracy gate. None tests learned energy'
+              ' or competitive language generation. All scores come from raw JSON'
               ' linked on the home page.</p><p>Current scientific protocol: test learned energy against held-out correctness,'
               ' stress trigger against matched random/scheduled controls, inheritance across rounds and then real language tasks.'
               '</p><a style="color:#a9c0ff" href="../index.html">Back to results</a></body></html>')

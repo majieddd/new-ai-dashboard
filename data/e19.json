@@ -1,0 +1,492 @@
+{
+  "experiment": "E19",
+  "scope": "AG News no-cue linear classifier pilot; NOT LLM/EBM",
+  "dataset_url": "https://huggingface.co/datasets/SetFit/ag_news/resolve/ca5ba619eb034211db5f70932b6702efd21e7c73/",
+  "dataset_sha256": {
+    "train.jsonl": "ea432c816ef5219d8bd1e049d63f5e05ad76b35e5efd15420d48a96f15ddaa94",
+    "test.jsonl": "68290dee715edcb5a28ff1f3fc933ea7649fb0f01263af94411cfec255c55284"
+  },
+  "cleaning": {
+    "train_test_collision_rows": 10,
+    "train_internal_duplicate_rows": 151,
+    "cleaned_train_rows": 119839
+  },
+  "protocol": {
+    "seeds": [
+      31,
+      37,
+      41,
+      43,
+      47
+    ],
+    "feature_dim": 4096,
+    "base_steps": 120,
+    "adapt_steps": 100,
+    "batch": 64,
+    "lr": 0.02,
+    "block": 32,
+    "adapt_examples": 384,
+    "text_split": "official AG News test, no tuning"
+  },
+  "provenance": {
+    "git_base": "ad1aa2db2d15205d5256463760532b45884647ed",
+    "working_tree_dirty": true,
+    "source_sha256": {
+      "run_e19.py": "e779723aad75120a775075fa7b99c35b860d4e2672563b4609e947bd34af4e7e",
+      "PROTOCOL_E19.md": "9d31f75e5a73fe01d06faa4d13e93bbf99fdfb95d8c928d140a693d1b9c21445",
+      "test_e19.py": "37cf74a6e497e1cd2408a464251fd503677b5a28490e5ffdd20053b3b28cba8b"
+    },
+    "torch": "2.11.0+cu128",
+    "numpy": "2.4.6",
+    "python": "3.11.9",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 5090 Laptop GPU"
+  },
+  "runs": [
+    {
+      "seed": 31,
+      "old_before_test": 0.9015789031982422,
+      "old_val_before": 0.9074999690055847,
+      "new_val_before": 0.5849999785423279,
+      "old_train_seconds": 0.22713560005649924,
+      "feedback_threshold_old_val_errors_per_32": 5,
+      "old_val_block_errors": [
+        4,
+        4,
+        3,
+        0,
+        3,
+        4,
+        4,
+        1,
+        4,
+        2,
+        5,
+        1
+      ],
+      "new_first_3_block_errors": [
+        9,
+        14,
+        16
+      ],
+      "density_probe": {
+        "old_val_fpr": 0.04999999701976776,
+        "new_first_block_alarm_rate": 0.03125
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 0.9015789031982422,
+          "new_test": 0.5386841893196106,
+          "adapt_seconds": 0.0,
+          "trigger_after_labels": null,
+          "total_params": 8194,
+          "trainable_params": 0,
+          "balanced_test": 0.7201315462589264,
+          "old_drop_points": 0.0
+        },
+        "scheduled": {
+          "old_test": 0.8997368216514587,
+          "new_test": 0.5642104744911194,
+          "router_old_rate": 0.02368420921266079,
+          "router_new_rate": 0.26289471983909607,
+          "adapt_seconds": 0.07115679990965873,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7319736480712891,
+          "old_drop_points": 0.18420815467834473
+        },
+        "random": {
+          "old_test": 0.8999999761581421,
+          "new_test": 0.5463157892227173,
+          "router_old_rate": 0.016578946262598038,
+          "router_new_rate": 0.11289472877979279,
+          "adapt_seconds": 0.07226390007417649,
+          "trigger_after_labels": 96,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7231578826904297,
+          "old_drop_points": 0.15789270401000977
+        },
+        "feedback": {
+          "old_test": 0.8997368216514587,
+          "new_test": 0.5642104744911194,
+          "router_old_rate": 0.02368420921266079,
+          "router_new_rate": 0.26289471983909607,
+          "adapt_seconds": 0.07101700000930578,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7319736480712891,
+          "old_drop_points": 0.18420815467834473
+        },
+        "full_finetune": {
+          "old_test": 0.8394736647605896,
+          "new_test": 0.7192105054855347,
+          "adapt_seconds": 0.05710199999157339,
+          "trigger_after_labels": 32,
+          "total_params": 8194,
+          "trainable_params": 8194,
+          "balanced_test": 0.7793420851230621,
+          "old_drop_points": 6.210523843765259
+        }
+      }
+    },
+    {
+      "seed": 37,
+      "old_before_test": 0.8976315259933472,
+      "old_val_before": 0.9124999642372131,
+      "new_val_before": 0.5849999785423279,
+      "old_train_seconds": 0.07249980000779033,
+      "feedback_threshold_old_val_errors_per_32": 7,
+      "old_val_block_errors": [
+        1,
+        5,
+        4,
+        7,
+        4,
+        2,
+        2,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "new_first_3_block_errors": [
+        14,
+        11,
+        12
+      ],
+      "density_probe": {
+        "old_val_fpr": 0.04999999701976776,
+        "new_first_block_alarm_rate": 0.03125
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 0.8976315259933472,
+          "new_test": 0.5715789198875427,
+          "adapt_seconds": 0.0,
+          "trigger_after_labels": null,
+          "total_params": 8194,
+          "trainable_params": 0,
+          "balanced_test": 0.734605222940445,
+          "old_drop_points": 0.0
+        },
+        "scheduled": {
+          "old_test": 0.8968420624732971,
+          "new_test": 0.6015788912773132,
+          "router_old_rate": 0.015263156965374947,
+          "router_new_rate": 0.1981578916311264,
+          "adapt_seconds": 0.07791089999955148,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7492104768753052,
+          "old_drop_points": 0.07894635200500488
+        },
+        "random": {
+          "old_test": 0.8963157534599304,
+          "new_test": 0.5884210467338562,
+          "router_old_rate": 0.030526313930749893,
+          "router_new_rate": 0.21789473295211792,
+          "adapt_seconds": 0.07548680005129427,
+          "trigger_after_labels": 96,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7423684000968933,
+          "old_drop_points": 0.1315772533416748
+        },
+        "feedback": {
+          "old_test": 0.8968420624732971,
+          "new_test": 0.6015788912773132,
+          "router_old_rate": 0.015263156965374947,
+          "router_new_rate": 0.1981578916311264,
+          "adapt_seconds": 0.07299240003339946,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7492104768753052,
+          "old_drop_points": 0.07894635200500488
+        },
+        "full_finetune": {
+          "old_test": 0.8321052193641663,
+          "new_test": 0.7255262732505798,
+          "adapt_seconds": 0.05607759999111295,
+          "trigger_after_labels": 32,
+          "total_params": 8194,
+          "trainable_params": 8194,
+          "balanced_test": 0.778815746307373,
+          "old_drop_points": 6.552630662918091
+        }
+      }
+    },
+    {
+      "seed": 41,
+      "old_before_test": 0.9034209847450256,
+      "old_val_before": 0.9024999737739563,
+      "new_val_before": 0.5774999856948853,
+      "old_train_seconds": 0.06712769996374846,
+      "feedback_threshold_old_val_errors_per_32": 6,
+      "old_val_block_errors": [
+        2,
+        2,
+        3,
+        4,
+        2,
+        1,
+        6,
+        4,
+        1,
+        4,
+        5,
+        5
+      ],
+      "new_first_3_block_errors": [
+        18,
+        12,
+        16
+      ],
+      "density_probe": {
+        "old_val_fpr": 0.04999999701976776,
+        "new_first_block_alarm_rate": 0.125
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 0.9034209847450256,
+          "new_test": 0.5621052384376526,
+          "adapt_seconds": 0.0,
+          "trigger_after_labels": null,
+          "total_params": 8194,
+          "trainable_params": 0,
+          "balanced_test": 0.7327631115913391,
+          "old_drop_points": 0.0
+        },
+        "scheduled": {
+          "old_test": 0.9007894396781921,
+          "new_test": 0.6034210324287415,
+          "router_old_rate": 0.04605263099074364,
+          "router_new_rate": 0.2668420970439911,
+          "adapt_seconds": 0.07243749999906868,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7521052360534668,
+          "old_drop_points": 0.2631545066833496
+        },
+        "random": {
+          "old_test": 0.9015789031982422,
+          "new_test": 0.5899999737739563,
+          "router_old_rate": 0.036315787583589554,
+          "router_new_rate": 0.22447367012500763,
+          "adapt_seconds": 0.06825110001955181,
+          "trigger_after_labels": 64,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7457894384860992,
+          "old_drop_points": 0.18420815467834473
+        },
+        "feedback": {
+          "old_test": 0.9007894396781921,
+          "new_test": 0.6034210324287415,
+          "router_old_rate": 0.04605263099074364,
+          "router_new_rate": 0.2668420970439911,
+          "adapt_seconds": 0.07216370000969619,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7521052360534668,
+          "old_drop_points": 0.2631545066833496
+        },
+        "full_finetune": {
+          "old_test": 0.8421052098274231,
+          "new_test": 0.7307894229888916,
+          "adapt_seconds": 0.06004990008659661,
+          "trigger_after_labels": 32,
+          "total_params": 8194,
+          "trainable_params": 8194,
+          "balanced_test": 0.7864473164081573,
+          "old_drop_points": 6.131577491760254
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "old_before_test": 0.9081578254699707,
+      "old_val_before": 0.9149999618530273,
+      "new_val_before": 0.5550000071525574,
+      "old_train_seconds": 0.07602520007640123,
+      "feedback_threshold_old_val_errors_per_32": 6,
+      "old_val_block_errors": [
+        1,
+        3,
+        3,
+        3,
+        2,
+        2,
+        3,
+        3,
+        2,
+        6,
+        2,
+        4
+      ],
+      "new_first_3_block_errors": [
+        14,
+        14,
+        15
+      ],
+      "density_probe": {
+        "old_val_fpr": 0.04999999701976776,
+        "new_first_block_alarm_rate": 0.0
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 0.9081578254699707,
+          "new_test": 0.5571052432060242,
+          "adapt_seconds": 0.0,
+          "trigger_after_labels": null,
+          "total_params": 8194,
+          "trainable_params": 0,
+          "balanced_test": 0.7326315343379974,
+          "old_drop_points": 0.0
+        },
+        "scheduled": {
+          "old_test": 0.9063157439231873,
+          "new_test": 0.5847368240356445,
+          "router_old_rate": 0.025789473205804825,
+          "router_new_rate": 0.18763157725334167,
+          "adapt_seconds": 0.0752401000354439,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7455262839794159,
+          "old_drop_points": 0.18420815467834473
+        },
+        "random": {
+          "old_test": 0.9078946709632874,
+          "new_test": 0.5723683834075928,
+          "router_old_rate": 0.03578947111964226,
+          "router_new_rate": 0.19078946113586426,
+          "adapt_seconds": 0.07401910005137324,
+          "trigger_after_labels": 64,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7401315271854401,
+          "old_drop_points": 0.02631545066833496
+        },
+        "feedback": {
+          "old_test": 0.9063157439231873,
+          "new_test": 0.5847368240356445,
+          "router_old_rate": 0.025789473205804825,
+          "router_new_rate": 0.18763157725334167,
+          "adapt_seconds": 0.07540659990627319,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.7455262839794159,
+          "old_drop_points": 0.18420815467834473
+        },
+        "full_finetune": {
+          "old_test": 0.8605262637138367,
+          "new_test": 0.7307894229888916,
+          "adapt_seconds": 0.06373339996207505,
+          "trigger_after_labels": 32,
+          "total_params": 8194,
+          "trainable_params": 8194,
+          "balanced_test": 0.7956578433513641,
+          "old_drop_points": 4.763156175613403
+        }
+      }
+    },
+    {
+      "seed": 47,
+      "old_before_test": 0.9071052074432373,
+      "old_val_before": 0.9074999690055847,
+      "new_val_before": 0.5575000047683716,
+      "old_train_seconds": 0.07005430001299828,
+      "feedback_threshold_old_val_errors_per_32": 6,
+      "old_val_block_errors": [
+        1,
+        4,
+        2,
+        5,
+        6,
+        4,
+        4,
+        1,
+        5,
+        1,
+        2,
+        1
+      ],
+      "new_first_3_block_errors": [
+        17,
+        14,
+        17
+      ],
+      "density_probe": {
+        "old_val_fpr": 0.04999999701976776,
+        "new_first_block_alarm_rate": 0.03125
+      },
+      "arms": {
+        "frozen": {
+          "old_test": 0.9071052074432373,
+          "new_test": 0.5665789246559143,
+          "adapt_seconds": 0.0,
+          "trigger_after_labels": null,
+          "total_params": 8194,
+          "trainable_params": 0,
+          "balanced_test": 0.7368420660495758,
+          "old_drop_points": 0.0
+        },
+        "scheduled": {
+          "old_test": 0.9047368168830872,
+          "new_test": 0.6036841869354248,
+          "router_old_rate": 0.08210525661706924,
+          "router_new_rate": 0.2794736623764038,
+          "adapt_seconds": 0.0737620999570936,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.754210501909256,
+          "old_drop_points": 0.23683905601501465
+        },
+        "random": {
+          "old_test": 0.9047368168830872,
+          "new_test": 0.6036841869354248,
+          "router_old_rate": 0.08210525661706924,
+          "router_new_rate": 0.2794736623764038,
+          "adapt_seconds": 0.07594030001200736,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.754210501909256,
+          "old_drop_points": 0.23683905601501465
+        },
+        "feedback": {
+          "old_test": 0.9047368168830872,
+          "new_test": 0.6036841869354248,
+          "router_old_rate": 0.08210525661706924,
+          "router_new_rate": 0.2794736623764038,
+          "adapt_seconds": 0.07206499995663762,
+          "trigger_after_labels": 32,
+          "total_params": 16386,
+          "trainable_params": 8192,
+          "balanced_test": 0.754210501909256,
+          "old_drop_points": 0.23683905601501465
+        },
+        "full_finetune": {
+          "old_test": 0.8515788912773132,
+          "new_test": 0.7323684096336365,
+          "adapt_seconds": 0.05964540003333241,
+          "trigger_after_labels": 32,
+          "total_params": 8194,
+          "trainable_params": 8194,
+          "balanced_test": 0.7919736504554749,
+          "old_drop_points": 5.552631616592407
+        }
+      }
+    }
+  ]
+}
