@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "E21 · Proposed energy versus direct update / unrun",
+    "subtitle": "Static authored hypothesis map; arrows are not live traffic or scientific proof.",
+    "output": "blueprint-e21.html",
+    "animation": "none",
+    "visual_preset": "blueprint",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "stream",
+      "type": "external",
+      "label": "Allowed stream",
+      "sublabel": "E21 allowed language train/dev data",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        40,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "core",
+      "type": "backend",
+      "label": "Frozen core",
+      "sublabel": "Proposed frozen SmolLM2-360M",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        350,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "energy",
+      "type": "backend",
+      "label": "Energy refiner",
+      "sublabel": "E21 scalar E + grad_z update",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        660,
+        110
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "direct",
+      "type": "backend",
+      "label": "Direct control",
+      "sublabel": "E21 same-capacity direct U update",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        660,
+        560
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "evaluator",
+      "type": "security",
+      "label": "Evaluator",
+      "sublabel": "Proposed separate E21 final evaluator",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        970,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "telemetry",
+      "type": "backend",
+      "label": "Cost ledger",
+      "sublabel": "Proposed derivative / generation costs",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        970,
+        600
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "publishing",
+      "type": "frontend",
+      "label": "Public record",
+      "sublabel": "E21 planned separate mechanism section",
+      "tag": "E21 PROPOSED; UNRUN",
+      "pos": [
+        1280,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "promotion",
+      "type": "security",
+      "label": "Human release gate",
+      "sublabel": "Human protocol / verdict handoff",
+      "tag": "PROPOSED HUMAN REVIEW; NOT AUTO-PROMOTION",
+      "pos": [
+        1280,
+        100
+      ],
+      "size": [
+        188,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "e01",
+      "from": "stream",
+      "to": "core",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e14",
+      "from": "core",
+      "to": "energy",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e15",
+      "from": "core",
+      "to": "direct",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e18",
+      "from": "energy",
+      "to": "evaluator",
+      "label": "evaluation artifact",
+      "variant": "dashed"
+    },
+    {
+      "id": "e19",
+      "from": "direct",
+      "to": "evaluator",
+      "label": "evaluation artifact",
+      "variant": "dashed"
+    },
+    {
+      "id": "e23",
+      "from": "evaluator",
+      "to": "publishing",
+      "label": "result",
+      "variant": "dashed"
+    },
+    {
+      "id": "e24",
+      "from": "telemetry",
+      "to": "publishing",
+      "label": "audit",
+      "variant": "dashed"
+    },
+    {
+      "id": "e25",
+      "from": "evaluator",
+      "to": "promotion",
+      "label": "review",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "Allowed stream · E21",
+      "items": [
+        "E21 allowed language train/dev data",
+        "E21 PROPOSED; UNRUN",
+        "Gate: Pinned/licensed/group-disjoint allowed data only; no task/source IDs or future outcomes in routing; E20 suffix revealed only after saved prefix decisions.",
+        "Boundary: Untrusted corpus/user text -> approved, provenance-checked input; source metadata kept out of model decisions.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S03:34-95, S05:82-116, S02:213-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Frozen core · E21",
+      "items": [
+        "Proposed frozen SmolLM2-360M",
+        "E21 PROPOSED; UNRUN",
+        "Gate: Hash/freeze base tensors; preserve common-start outputs; no model code, tokenizer, evaluator or safety-gate edits. E19 freezing starts after A training, not pretrained initialization.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Retain the immutable reference/core state; mark the candidate or router failure. In a preregistered run, do not silently replace a failing arm with baseline output and call it success.",
+        "Evidence: S03:98-113, S05:66-78, S02:171-175"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Energy refiner · E21",
+      "items": [
+        "E21 scalar E + grad_z update",
+        "E21 PROPOSED; UNRUN",
+        "Gate: E21 protocol/compute/data lock first; scalar E and real grad_z update; CE must train the energy through the update; finite-difference/nonzero-gradient/bypass tests; independent quality and equal measured-compute controls. Energy decrease alone fails the capability claim.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Stop unsafe/nonfinite/over-budget candidate work, preserve partial logs and report failed/incomplete seed. No replacement seed or score-driven tuning.",
+        "Evidence: S02:177-191, S02:201-223, S01:161-161"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Direct control · E21",
+      "items": [
+        "E21 same-capacity direct U update",
+        "E21 PROPOSED; UNRUN",
+        "Gate: Same functional head capacity, initial conditions, restoring drift, decoder and permitted data; independently verify real tensor counts; report equal-data and equal-compute views without conflating them.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Stop unsafe/nonfinite/over-budget candidate work, preserve partial logs and report failed/incomplete seed. No replacement seed or score-driven tuning.",
+        "Evidence: S02:177-209, S02:217-223"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Evaluator · E21",
+      "items": [
+        "Proposed separate E21 final evaluator",
+        "E21 PROPOSED; UNRUN",
+        "Gate: Separate custodian, real access isolation, immutable all-arm artifacts, one locked final transaction, no adaptive final queries, no post-hoc checkpoint/threshold choice. E19 official-test scoring was not a demonstrated ACL-enforced custodian seal.",
+        "Boundary: Independent custodian owns final data/evaluator; model artifacts cross read-only, never trainer-accessible final text or adaptive score queries.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S03:133-136, S04:20-21, S05:229-242, S02:213-223"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Cost ledger · E21",
+      "items": [
+        "Proposed derivative / generation costs",
+        "E21 PROPOSED; UNRUN",
+        "Gate: Cost collector outside candidate write authority; count data, detector, routing, training and generation; reject NaN/missing/zero counts; equal steps do not prove equal compute. E19 records limited adaptation wall time, not full LLM/GPU cost.",
+        "Boundary: Protected measurement/record collector can observe candidates but candidates cannot rewrite measurement or outcome records.",
+        "Failure: Mark missing/malformed cost or scoring evidence INCOMPLETE; do not invent estimates or publish a pass.",
+        "Evidence: S03:116-130, S03:241-260, S06:15-17, S02:217-219, S05:203-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Public record · E21",
+      "items": [
+        "E21 planned separate mechanism section",
+        "E21 PROPOSED; UNRUN",
+        "Gate: Per-EXX raw/protocol/source/verdict; preserve failures; separate task/model classes; sanitize licensed corpus/test content; human website PR and desktop/mobile/live-byte verification. A proposed graph is not a measured EXX result.",
+        "Boundary: Reviewed export -> public log; no raw sealed/licensed text, credentials or model-control channel.",
+        "Failure: Keep prior verified result release; correct/version the new export through review. A deployment failure means not live; old negative records remain visible.",
+        "Evidence: S01:24-25, S01:122-122, S08:3-12"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Human release gate · E21",
+      "items": [
+        "Human protocol / verdict handoff",
+        "PROPOSED HUMAN REVIEW; NOT AUTO-PROMOTION",
+        "Gate: Human review of a precommitted candidate and independent validity/quality/retention/cost verdict; PASS licenses the stated next test, not automatic deployment. Reject/incomplete/invalid retains the accepted baseline; Majied approves budget or project-gate changes.",
+        "Boundary: Human protocol/release authorization separated from learned detector/model output; no autonomous acceptance-gate rewriting.",
+        "Failure: Reject promotion on failed/incomplete/invalid evidence; keep last accepted version and publish the narrow verdict, including negatives.",
+        "Evidence: S01:107-122, S02:225-231, S05:229-250"
+      ]
+    }
+  ]
+}

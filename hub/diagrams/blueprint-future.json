@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Future · Unimplemented composition, not a running system",
+    "subtitle": "Static authored hypothesis map; arrows are not live traffic or scientific proof.",
+    "output": "blueprint-future.html",
+    "animation": "none",
+    "visual_preset": "blueprint",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "stream",
+      "type": "external",
+      "label": "Allowed stream",
+      "sublabel": "Approved input + feedback ingress",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        40,
+        380
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "core",
+      "type": "backend",
+      "label": "Frozen core",
+      "sublabel": "Frozen cortical-core candidate",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        310,
+        380
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "energy",
+      "type": "backend",
+      "label": "Energy refiner",
+      "sublabel": "Candidate energy-descent inference",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        310,
+        80
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "direct",
+      "type": "backend",
+      "label": "Direct control",
+      "sublabel": "Non-energy recurrent comparator",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        40,
+        680
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "detector",
+      "type": "backend",
+      "label": "Feedback monitor",
+      "sublabel": "Causal monitor; fixed approved policy",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        40,
+        980
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "router",
+      "type": "backend",
+      "label": "Prefix router",
+      "sublabel": "Verified prefix router + expert registry",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        310,
+        680
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "adapter",
+      "type": "backend",
+      "label": "Growth slots",
+      "sublabel": "Sandbox localized parameter growth",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        580,
+        380
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "replay",
+      "type": "database",
+      "label": "Replay control",
+      "sublabel": "Bounded rehearsal memory",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        580,
+        680
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "promotion",
+      "type": "security",
+      "label": "Human release gate",
+      "sublabel": "Reviewed promote-or-rollback gate",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        850,
+        80
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "freeze_swap",
+      "type": "security",
+      "label": "A/B freeze-swap",
+      "sublabel": "Unimplemented atomic A/B role swap",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        580,
+        980
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "evaluator",
+      "type": "security",
+      "label": "Evaluator",
+      "sublabel": "Read-only independent scientific evaluator",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        850,
+        380
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "telemetry",
+      "type": "backend",
+      "label": "Cost ledger",
+      "sublabel": "Protected capability-cost audit trail",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        580,
+        80
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "publishing",
+      "type": "frontend",
+      "label": "Public record",
+      "sublabel": "Human-reviewed research publication",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        850,
+        680
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "tiers",
+      "type": "database",
+      "label": "Expert tiers",
+      "sublabel": "Unimplemented VRAM / RAM / NVMe tiers",
+      "tag": "LONG-TERM UNIMPLEMENTED",
+      "pos": [
+        310,
+        980
+      ],
+      "size": [
+        188,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "e01",
+      "from": "stream",
+      "to": "core",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e02",
+      "from": "stream",
+      "to": "detector",
+      "label": "feedback",
+      "variant": "dashed"
+    },
+    {
+      "id": "e04",
+      "from": "core",
+      "to": "router",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e08",
+      "from": "detector",
+      "to": "adapter",
+      "label": "control",
+      "variant": "dashed"
+    },
+    {
+      "id": "e09",
+      "from": "router",
+      "to": "adapter",
+      "label": "control",
+      "variant": "dashed"
+    },
+    {
+      "id": "e14",
+      "from": "core",
+      "to": "energy",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e15",
+      "from": "core",
+      "to": "direct",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e23",
+      "from": "evaluator",
+      "to": "publishing",
+      "label": "result",
+      "variant": "dashed"
+    },
+    {
+      "id": "e24",
+      "from": "telemetry",
+      "to": "publishing",
+      "label": "audit",
+      "variant": "dashed"
+    },
+    {
+      "id": "e25",
+      "from": "evaluator",
+      "to": "promotion",
+      "label": "review",
+      "variant": "dashed"
+    },
+    {
+      "id": "e27",
+      "from": "promotion",
+      "to": "freeze_swap",
+      "label": "approval",
+      "variant": "dashed"
+    },
+    {
+      "id": "e28",
+      "from": "freeze_swap",
+      "to": "core",
+      "label": "control",
+      "variant": "dashed"
+    },
+    {
+      "id": "e30",
+      "from": "router",
+      "to": "tiers",
+      "label": "storage request",
+      "variant": "dashed"
+    },
+    {
+      "id": "e31",
+      "from": "tiers",
+      "to": "router",
+      "label": "artifact",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "Allowed stream · FUTURE",
+      "items": [
+        "Approved input + feedback ingress",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Pinned/licensed/group-disjoint allowed data only; no task/source IDs or future outcomes in routing; E20 suffix revealed only after saved prefix decisions.",
+        "Boundary: Untrusted corpus/user text -> approved, provenance-checked input; source metadata kept out of model decisions.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S03:34-95, S05:82-116, S02:213-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Frozen core · FUTURE",
+      "items": [
+        "Frozen cortical-core candidate",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Hash/freeze base tensors; preserve common-start outputs; no model code, tokenizer, evaluator or safety-gate edits. E19 freezing starts after A training, not pretrained initialization.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Retain the immutable reference/core state; mark the candidate or router failure. In a preregistered run, do not silently replace a failing arm with baseline output and call it success.",
+        "Evidence: S03:98-113, S05:66-78, S02:171-175"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Energy refiner · FUTURE",
+      "items": [
+        "Candidate energy-descent inference",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: E21 protocol/compute/data lock first; scalar E and real grad_z update; CE must train the energy through the update; finite-difference/nonzero-gradient/bypass tests; independent quality and equal measured-compute controls. Energy decrease alone fails the capability claim.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Stop unsafe/nonfinite/over-budget candidate work, preserve partial logs and report failed/incomplete seed. No replacement seed or score-driven tuning.",
+        "Evidence: S02:177-191, S02:201-223, S01:161-161"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Direct control · FUTURE",
+      "items": [
+        "Non-energy recurrent comparator",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Same functional head capacity, initial conditions, restoring drift, decoder and permitted data; independently verify real tensor counts; report equal-data and equal-compute views without conflating them.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Stop unsafe/nonfinite/over-budget candidate work, preserve partial logs and report failed/incomplete seed. No replacement seed or score-driven tuning.",
+        "Evidence: S02:177-209, S02:217-223"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Feedback monitor · FUTURE",
+      "items": [
+        "Causal monitor; fixed approved policy",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Causal observed feedback and development-only thresholds; no oracle onset or final-score calibration; E19 strict timing gate stays failed. E20 B3/D3 candidate rules are not approval or a universal false-alarm guarantee.",
+        "Boundary: Observed outcomes from the allowed stream only -> detector; no final-test or oracle phase feedback.",
+        "Failure: No allowed causal trigger -> no allocation; score the unchanged system. False alarms, wrong routes and cap saturation remain recorded failures/diagnostics.",
+        "Evidence: S03:139-177, S06:13-15, S05:143-149"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Prefix router · FUTURE",
+      "items": [
+        "Verified prefix router + expert registry",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Prefix/input-only routing, no true task/answer/test identity; log selections and independent oracle gap only as a diagnostic. If learned capability is accessible only with oracle routing, the autonomous system fails.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Retain the immutable reference/core state; mark the candidate or router failure. In a preregistered run, do not silently replace a failing arm with baseline output and call it success.",
+        "Evidence: S03:106-113, S06:15-19, S05:135-137"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Growth slots · FUTURE",
+      "items": [
+        "Sandbox localized parameter growth",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Approved allocation cap and method-specific identity test; train only allowed new weights with logged causal exposure. E19 zero-init residual differs from E20 cloning; no claim that core freezing proves retention.",
+        "Boundary: Trainable candidate, bounded replay and causal keys only; no development/final data access.",
+        "Failure: Stop unsafe/nonfinite/over-budget candidate work, preserve partial logs and report failed/incomplete seed. No replacement seed or score-driven tuning.",
+        "Evidence: S03:98-113, S03:183-201, S05:70-80, S01:40-41"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Replay control · FUTURE",
+      "items": [
+        "Bounded rehearsal memory",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Training-only bounded reservoir; log repeats, bytes and fresh-data tradeoff; charge replay work. Never replay development/final examples or silently add extra updates.",
+        "Boundary: Trainable candidate, bounded replay and causal keys only; no development/final data access.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S05:125-133, S05:203-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Human release gate · FUTURE",
+      "items": [
+        "Reviewed promote-or-rollback gate",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Human review of a precommitted candidate and independent validity/quality/retention/cost verdict; PASS licenses the stated next test, not automatic deployment. Reject/incomplete/invalid retains the accepted baseline; Majied approves budget or project-gate changes.",
+        "Boundary: Human protocol/release authorization separated from learned detector/model output; no autonomous acceptance-gate rewriting.",
+        "Failure: Reject promotion on failed/incomplete/invalid evidence; keep last accepted version and publish the narrow verdict, including negatives.",
+        "Evidence: S01:107-122, S02:225-231, S05:229-250"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "A/B freeze-swap · FUTURE",
+      "items": [
+        "Unimplemented atomic A/B role swap",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Long-term prerequisite: immutable A/B manifests, atomic whole-state pointer change, only the authorized candidate editable, frozen side hashes unchanged, interruption/failure restore drills. This new engineering gate is proposed, not measured or already preregistered.",
+        "Boundary: Human protocol/release authorization separated from learned detector/model output; no autonomous acceptance-gate rewriting.",
+        "Failure: Proposed A/B rollback: atomically restore both manifests and active/frozen roles; quarantine interrupted candidate; neither side may edit evaluator/code/safety controls.",
+        "Evidence: S07:47-52, S04:21-21, S01:107-107"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Evaluator · FUTURE",
+      "items": [
+        "Read-only independent scientific evaluator",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Separate custodian, real access isolation, immutable all-arm artifacts, one locked final transaction, no adaptive final queries, no post-hoc checkpoint/threshold choice. E19 official-test scoring was not a demonstrated ACL-enforced custodian seal.",
+        "Boundary: Independent custodian owns final data/evaluator; model artifacts cross read-only, never trainer-accessible final text or adaptive score queries.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S03:133-136, S04:20-21, S05:229-242, S02:213-223"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Cost ledger · FUTURE",
+      "items": [
+        "Protected capability-cost audit trail",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Cost collector outside candidate write authority; count data, detector, routing, training and generation; reject NaN/missing/zero counts; equal steps do not prove equal compute. E19 records limited adaptation wall time, not full LLM/GPU cost.",
+        "Boundary: Protected measurement/record collector can observe candidates but candidates cannot rewrite measurement or outcome records.",
+        "Failure: Mark missing/malformed cost or scoring evidence INCOMPLETE; do not invent estimates or publish a pass.",
+        "Evidence: S03:116-130, S03:241-260, S06:15-17, S02:217-219, S05:203-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Public record · FUTURE",
+      "items": [
+        "Human-reviewed research publication",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Per-EXX raw/protocol/source/verdict; preserve failures; separate task/model classes; sanitize licensed corpus/test content; human website PR and desktop/mobile/live-byte verification. A proposed graph is not a measured EXX result.",
+        "Boundary: Reviewed export -> public log; no raw sealed/licensed text, credentials or model-control channel.",
+        "Failure: Keep prior verified result release; correct/version the new export through review. A deployment failure means not live; old negative records remain visible.",
+        "Evidence: S01:24-25, S01:122-122, S08:3-12"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Expert tiers · FUTURE",
+      "items": [
+        "Unimplemented VRAM / RAM / NVMe tiers",
+        "LONG-TERM UNIMPLEMENTED",
+        "Gate: Long-term development tests: accurate cold/resident expert identity, bounded p95 paging latency, state/optimizer integrity and full resident comparison; no unbounded-growth or ternary-speed claim without its own tests. Budget enlargement needs owner approval.",
+        "Boundary: Content-addressed resident/cold expert artifacts; checked identity and approved storage/I/O budget; not a memory tier deployed by this draft.",
+        "Failure: Stop paging/grafting test; use the predeclared all-resident or no-graft comparator for diagnosis, not as a relabeled success; owner decides any enlarged budget.",
+        "Evidence: S01:42-44, S01:78-91, S02:66-74"
+      ]
+    }
+  ]
+}

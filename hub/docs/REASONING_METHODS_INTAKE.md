@@ -1,0 +1,23 @@
+# Reasoning-method source intake — proposed, not an experiment result
+
+**Status:** partial source review, October 5, 2026. No model, benchmark outcome, sealed test, or E22 protocol has been run or approved. This page summarizes the checked video caption track and two geometry papers; the separate four-paper philosophical/cybernetic review is still in progress. Do not treat an interview, a paper's own scores, or this proposal as evidence that New AI has acquired a reasoning capability.
+
+## Three distinct ideas
+
+1. **Factorized geometry evaluation:** [GeomVerse](https://arxiv.org/abs/2312.12241) constructs synthetic geometry questions with adjustable proof depth, width, and distractors. Its value here is a controlled test instrument, with independently checked answers and proofs. Its published model results are the authors' results on their own systems, not ours.
+2. **External symbolic assistance:** [Dai et al.](https://arxiv.org/abs/2609.10335) parse a diagram into facts, derive relations using a symbolic solver, and pass those facts to a language model. That is an inference-time system with extra information and tools. A same-backbone, same-budget comparison is needed before attributing a gain to the LM's reasoning; it is not internal latent-geometry training or energy descent.
+3. **Internal geometric training:** The [Sophontic interview](https://www.youtube.com/watch?v=4S8I22ybG2c) discusses organizing a model's internal representations. The complete *returned* 53:42 auto-caption track was reviewed, but captions were not independently checked against audio, and it does not disclose a reproducible loss, architecture, dataset, checkpoint, or matched cost/result package. The claimed size advantage is not an independently measured improvement for New AI. A separate, fully specified and independently controlled surrogate would be our new hypothesis, not a reconstruction of Sophontic's private method.
+
+## Candidate experiment, subject to a new lock
+
+An **E22 candidate** would begin with a clean-room, typed fact/rule generator and an independent oracle. Split by proof-graph lineage before training, and test both answer-changing premise interventions and answer-preserving nuisances; joint correctness requires both members of a pair to be correct. Keep depth, width, distractors, rule mix, total nodes, and prompt length separately accounted for. This first CPU instrument should be validated before reserving model compute.
+
+With a fixed language model, compare original problems, parsed facts only, relevant derived facts, token-matched irrelevant facts, deliberately corrupted facts, and an exact tool with a locked tool budget. Report solver-only and oracle-fact ceilings separately. Score proof validity and end-to-end cost, not only final-answer flips. A later *internal* training arm would compare a precisely declared structured-representation loss against ordinary supervised fine-tuning, a same-data contrastive objective, and permuted structural targets at matched capacity, exposure, and measured compute. Predeclare the layer, representation, loss, dataset, gates, and sealed evaluator. If the direct or ordinary control matches the structural objective, do not credit a novel mechanism.
+
+**Boundaries:** E22 is a suggested separate track, not a reserved experiment ID or an adopted gate. External theorem hints cannot validate E21's trained scalar-energy latent descent; geometry success cannot validate E20's continual-language acquisition or feedback-timing claim. Philosophical claims about consciousness, attractors, or quantum information are not outcome labels or permission to remove independent safety/evaluation controls. No GPU hours or data rights have been authorized for this proposal.
+
+## Review record and limitations
+
+The full local analyses are `RESEARCH/NEW_AI_GEOMETRIC_REASONING_REVIEW_2026_10_05.md` and `RESEARCH/NEW_AI_REASONING_OPERATIONALIZATION_2026_10_05.md` in the kr8 workspace. They record the 1,485 caption segments, the two complete retrieved PDFs, author-reported result caveats, proposed controls, and source-byte identities. This public-preview digest is intentionally shorter and does not redistribute the raw transcript or third-party PDFs. The remaining four papers require a separately verified coverage statement; no inaccessible or superseded version will be represented as read.
+
+**Primary sources:** [GeomVerse](https://arxiv.org/abs/2312.12241); [Dai et al.](https://arxiv.org/abs/2609.10335); [video interview](https://www.youtube.com/watch?v=4S8I22ybG2c). The latter is interview testimony, not a reproducible method or performance record.
