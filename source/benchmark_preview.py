@@ -48,6 +48,17 @@ def render_card(test: dict) -> str:
             f'<details><summary>See method &amp; grading</summary><dl>{definitions}</dl></details></article>')
 
 
+def public_protocol() -> str:
+    """Remove vault frontmatter; Pages otherwise strips it from .txt itself."""
+    source = (ROOT / "BENCHMARK_PREVIEW_PROTOCOL.md").read_text(encoding="utf-8")
+    if not source.startswith("---\n"):
+        raise ValueError("Expected protocol frontmatter")
+    _, marker, body = source.partition("\n---\n")
+    if not marker or not body:
+        raise ValueError("Unterminated protocol frontmatter")
+    return body.lstrip("\n")
+
+
 def build(out: Path | None = None) -> tuple[Path, str]:
     source = MANIFEST.read_bytes()
     suite = json.loads(source)
@@ -71,8 +82,8 @@ def build(out: Path | None = None) -> tuple[Path, str]:
     output = Path(out) if out else OUTPUT
     output.mkdir(parents=True, exist_ok=True)
     (output / "suite.json").write_bytes(source)
-    # GitHub Pages processes .md into .html, so keep this exact source as .txt.
-    (output / "protocol.txt").write_bytes((ROOT / "BENCHMARK_PREVIEW_PROTOCOL.md").read_bytes())
+    # GitHub Pages also strips YAML frontmatter from .txt; publish body bytes.
+    (output / "protocol.txt").write_text(public_protocol(), encoding="utf-8", newline="\n")
     dest = output / "index.html"
     dest.write_text(page, encoding="utf-8")
     return dest, sha

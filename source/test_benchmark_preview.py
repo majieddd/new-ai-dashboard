@@ -50,8 +50,9 @@ class BenchmarkPreviewTests(unittest.TestCase):
         page = path.read_text(encoding="utf-8")
         self.assertEqual(digest, hashlib.sha256(self.source).hexdigest())
         self.assertEqual((path.parent / "suite.json").read_bytes(), self.source)
-        self.assertEqual((path.parent / "protocol.txt").read_bytes(),
-                         (preview.ROOT / "BENCHMARK_PREVIEW_PROTOCOL.md").read_bytes())
+        protocol = (path.parent / "protocol.txt").read_text(encoding="utf-8")
+        self.assertEqual(protocol, preview.public_protocol())
+        self.assertTrue(protocol.startswith("# A benchmark format"))
         self.assertEqual(page.count('class="card"'), 9)
         self.assertIn("Official model result</span><b>— · No receipt", page)
         self.assertIn("No New AI model has an authorized run under this suite", page)
