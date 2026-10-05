@@ -86,6 +86,16 @@ class HubTests(unittest.TestCase):
         self.assertIn("blueprint-e21-v2.html", text)
         self.assertNotIn('href="blueprint.html"', text)
 
+    def test_reasoning_intake_is_proposed_and_separate(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8").lower()
+        intake = (ROOT / "docs" / "REASONING_METHODS_INTAKE.md").read_text(encoding="utf-8").lower()
+        self.assertIn('id="reasoning"', html)
+        self.assertIn('href="docs/reasoning_methods_intake.md"', html)
+        self.assertIn("e22 / possible future instrument · not approved", html)
+        self.assertIn("separate track, not a reserved experiment id", intake)
+        self.assertIn("not internal latent-geometry training or energy descent", intake)
+        self.assertIn("four-paper philosophical/cybernetic review is still in progress", intake)
+
 
 if __name__ == "__main__":
     unittest.main()

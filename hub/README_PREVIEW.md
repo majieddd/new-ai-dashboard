@@ -11,4 +11,6 @@ The current `hub/index.html` combines the previous Silver Lab evidence/diagram i
 
 The Archify `finalize --quality showcase` gates passed for all four views, but automated browser checks do not constitute a scientific result. The long-term graph still has several visually crossing/detoured relations; the ledger preserves each relation unambiguously. Local desktop/mobile interaction and link checks passed for the revised page. **This branch is a review draft, not a live deployment or a scientific validation.**
 
+The draft also includes a **partial reasoning-method source intake** in `hub/docs/REASONING_METHODS_INTAKE.md`: the full returned video caption track and two supplied geometry papers have been reviewed and mapped to a possible separate E22 instrument. The four additional philosophy-paper/current-version readings are still pending. E22 is neither a reserved experiment ID nor an approved protocol, and this section does not change E20/E21 or claim a model result.
+
 To run the structural checks from the checkout root: `python -m unittest discover -s hub -p test_hub.py -v`. Rendering the bundled HTML does not need a model, GPU, network or build step. For future revisions, `hub/build_blueprint.py` regenerates the four native Archify JSON projections from the checked-in ledger; Archify itself is an external tool, not bundled into this repository.
