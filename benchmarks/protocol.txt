@@ -1,10 +1,3 @@
----
-title: "New AI benchmark-program preview, inspired by Luke's Dev Lab"
-tags: [new-ai, evaluation, benchmark, proposal]
-status: draft
-created: 2026-10-05
----
-
 # A benchmark format to review, not an approved model test
 
 The owner's reference is [Luke's Dev Lab video, “Swift 1.5 Qwen3.8-27B · GSQ-RCO tested”](https://www.youtube.com/watch?v=aNOUkWk9piU). I checked its public chapter list and YouTube storyboard frames and inspected the creator's [public benchmark interface](https://lukesdevlab.com/) on October 5, 2026. The video groups throughput, long-context memory, reasoning, Python coding and practical agent-built Kanban/Sand Physics/Dungeon Crawler/Blender/Godot artifacts. The public interface presents model configuration, matched side-by-side reports, denominators and category-level results. YouTube playback/caption retrieval was rate-limited in this session; I did **not** transcribe the full video or assert its exact private prompts and scoring.

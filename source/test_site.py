@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from xml.etree import ElementTree
 
+from benchmark_preview import public_protocol
 from build_research_site import (HERE, build, check_publication, e19_accuracy_chart,
                                  e19_timing_chart, load_results, render, summarise)
 
@@ -123,8 +124,8 @@ class SiteTests(unittest.TestCase):
         self.assertIn("E19’s recorded failed outcome is unchanged", benchmark)
         self.assertEqual(benchmark.count('class="card"'), 9)
         self.assertEqual(json.loads((dest / "benchmarks/suite.json").read_text(encoding="utf-8"))["official_results"], [])
-        self.assertEqual((dest / "benchmarks/protocol.txt").read_bytes(),
-                         (HERE / "BENCHMARK_PREVIEW_PROTOCOL.md").read_bytes())
+        self.assertEqual((dest / "benchmarks/protocol.txt").read_text(encoding="utf-8"),
+                         public_protocol())
         benchmark_tags = Tags()
         benchmark_tags.feed(benchmark)
         for link in benchmark_tags.links:
