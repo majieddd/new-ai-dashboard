@@ -9,6 +9,7 @@ import json
 import shutil
 from pathlib import Path
 from statistics import mean
+from progress_site import home_section, render as render_progress
 
 HERE = Path(__file__).resolve().parent
 ARMS = (("self_assembly", "Readout-only (historically named self-assembly)", "#71d7bf"),
@@ -376,9 +377,17 @@ def build(source=HERE, out=None):
                         'Transparent experiments · real text pilot + historical synthetic tests')
     page = page.replace('The 10-round pilot did <strong>not</strong> meet its win condition.',
                         'The latest real-text timing gate and the historical ten-round pilot both <strong>failed</strong> their win conditions.')
+    progress = json.loads((source / "results/PROGRESS/status.json").read_text(encoding="utf-8"))
+    page = page.replace('<section id="text-pilot">', home_section(progress) + '<section id="text-pilot">')
+    page = page.replace('<a href="#text-pilot">Latest · E19</a>',
+                        '<a href="#progress">Progress</a><a href="#text-pilot">Result · E19</a>')
     assert '<section id="text-pilot">' in page and page.count('<svg') == 3
     check_publication(source, page)
     (dest / "index.html").write_text(page, encoding="utf-8")
+    progress_dir = dest / "progress"
+    progress_dir.mkdir(exist_ok=True)
+    (progress_dir / "index.html").write_text(render_progress(progress), encoding="utf-8")
+    shutil.copyfile(source / "results/PROGRESS/status.json", data / "progress.json")
     for key in PUBLISHED_SUMMARIES:
         shutil.copyfile(source / "results" / key / "summary.json", data / (key.lower() + ".json"))
     (data / "e14.json").write_text(json.dumps(e14, indent=2), encoding="utf-8")
@@ -388,7 +397,9 @@ def build(source=HERE, out=None):
                      "test_e16.py", "test_site.py", "build_research_site.py",
                      "PROTOCOL_E18.md", "E18_REPORT.md", "PRIOR_ART_E18.md",
                      "run_e18.py", "test_e18.py", "PROTOCOL_E19.md", "E19_REPORT.md",
-                     "run_e19.py", "test_e19.py", "SITE_PUBLICATION_CHECKLIST.md"):
+                     "run_e19.py", "test_e19.py", "SITE_PUBLICATION_CHECKLIST.md",
+                     "prepare_progress_snapshot.py", "progress_site.py", "test_progress.py",
+                     "PROGRESS_STATUS.md"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'
