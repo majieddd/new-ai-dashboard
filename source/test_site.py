@@ -105,8 +105,9 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn("<script", progress)
         progress_tags = Tags()
         progress_tags.feed(progress)
+        self.assertIn('https://github.com/majieddd/new-ai-dashboard/blob/main/source/PROGRESS_STATUS.md', progress_tags.links)
         for link in progress_tags.links:
-            if link and not link.startswith("#"):
+            if link and not link.startswith(("#", "https://")):
                 self.assertTrue((dest / "progress" / link.split("#", 1)[0]).is_file(), link)
         self.assertEqual(json.loads((dest / "data/progress.json").read_text(encoding="utf-8")),
                          json.loads((HERE / "results/PROGRESS/status.json").read_text(encoding="utf-8")))
