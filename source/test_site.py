@@ -80,6 +80,7 @@ class SiteTests(unittest.TestCase):
         self.assertLess(page.index('id="progress"'), page.index('id="text-pilot"'))
         self.assertIn('41 missing <em>evidence predicates</em>', page)
         self.assertIn('progress/index.html', page)
+        self.assertIn('href="benchmarks/index.html"', page)
         self.assertIn("Feedback vs scheduled", page)
         self.assertIn("0.00 pts", page)
         self.assertIn("59.15%", page)
@@ -98,6 +99,7 @@ class SiteTests(unittest.TestCase):
             if link and not link.startswith("#"):
                 self.assertTrue((dest / link).is_file(), link)
         progress = (dest / "progress/index.html").read_text(encoding="utf-8")
+        self.assertIn('href="../benchmarks/index.html"', progress)
         self.assertIn("No confirmed LLM result", progress)
         self.assertIn("0 model trials inferred", progress)
         self.assertIn("no model predictions", progress)
@@ -116,6 +118,18 @@ class SiteTests(unittest.TestCase):
             self.assertIn("history" if exp == "e15" else "runs", d)
         self.assertEqual(len(json.loads((dest / "data/e14.json").read_text(encoding="utf-8"))), 5)
         self.assertEqual(json.loads((dest / "data/e19.json").read_text(encoding="utf-8"))["experiment"], "E19")
+        benchmark = (dest / "benchmarks/index.html").read_text(encoding="utf-8")
+        self.assertIn("Proposal, not a model result", benchmark)
+        self.assertIn("E19’s recorded failed outcome is unchanged", benchmark)
+        self.assertEqual(benchmark.count('class="card"'), 9)
+        self.assertEqual(json.loads((dest / "benchmarks/suite.json").read_text(encoding="utf-8"))["official_results"], [])
+        self.assertEqual((dest / "benchmarks/protocol.txt").read_bytes(),
+                         (HERE / "BENCHMARK_PREVIEW_PROTOCOL.md").read_bytes())
+        benchmark_tags = Tags()
+        benchmark_tags.feed(benchmark)
+        for link in benchmark_tags.links:
+            if link and not link.startswith(("#", "https://")):
+                self.assertTrue((dest / "benchmarks" / link.split("#", 1)[0]).is_file(), link)
 
     def test_e19_visuals_are_generated_from_raw_paired_seeds(self):
         record = json.loads((HERE / "results/E19/summary.json").read_text(encoding="utf-8"))

@@ -1,0 +1,113 @@
+{
+  "schema": "new-ai-benchmark-program-proposal-v0.1",
+  "status": "proposal_not_approved",
+  "inspiration": {
+    "video": "https://www.youtube.com/watch?v=aNOUkWk9piU",
+    "creator": "Luke's Dev Lab",
+    "public_benchmark_interface": "https://lukesdevlab.com/",
+    "adaptation": "Category structure and side-by-side evidence presentation are inspirations; prompts, results, branding and score claims are not copied."
+  },
+  "scope": "Future optional capability and engineering tests; no retroactive E19 outcome or E20/E21/E22 confirmatory gate changes.",
+  "official_results": [],
+  "tests": [
+    {
+      "id": "perf",
+      "group": "BENCHMARKS",
+      "title": "Performance",
+      "subtitle": "Prefill, decode and measured resource cost",
+      "measures": "Cached and uncached prefill tokens/s, decode tokens/s, time-to-first-token, peak allocated and reserved VRAM.",
+      "method": "Pin exact model/tokenizer/config hashes, quantization, GPU, runtime and context length. Separate cold/warm and cache conditions; warm up, synchronize GPU, repeat fixed prompt/output lengths, report median and spread with per-trial receipts.",
+      "grade": "Descriptive per-hardware metrics, never a capability PASS. Compare only matched hardware, context, batch, precision and measurement boundaries.",
+      "controls": "Disclose startup/excluded time, OOM, CPU offload, KV cache, sampling, stop conditions and failed trials.",
+      "status": "not_run"
+    },
+    {
+      "id": "memory",
+      "group": "BENCHMARKS",
+      "title": "Long-context retrieval",
+      "subtitle": "Find planted facts across context positions",
+      "measures": "Exact retrieval at 0%, 25%, 50%, 75% and 100% of a declared context length; answer and abstention rates.",
+      "method": "Generate rights-cleared controlled contexts and balanced decoys; preregister seeds, position bins, target length and total examples. Keep final items behind independent custody; randomize ordering and retain raw predictions.",
+      "grade": "Report n/N per position plus overall and confidence interval. Wrong, omitted and malformed answers remain distinct.",
+      "controls": "Audit string leakage, truncation, positional cues, prompt contamination and retrieval-by-guessing baselines.",
+      "status": "not_run"
+    },
+    {
+      "id": "reasoning",
+      "group": "BENCHMARKS",
+      "title": "Reasoning",
+      "subtitle": "Four predeclared difficulty bands",
+      "measures": "Accuracy by easy, medium, hard and expert strata, answer rate and error type.",
+      "method": "Use original, rights-cleared questions with sealed final split and independently reviewed difficulty labels; pin the prompt and token budget before responses are seen.",
+      "grade": "Deterministic gold answers where possible; otherwise blinded rubric and adjudication. Report every denominator, not just aggregate accuracy.",
+      "controls": "Check label shortcuts, memorization and evaluator agreement; no post-outcome threshold changes.",
+      "status": "not_run"
+    },
+    {
+      "id": "coding",
+      "group": "BENCHMARKS",
+      "title": "Python coding",
+      "subtitle": "HumanEval-style, not an unapproved HumanEval claim",
+      "measures": "pass@1, answer rate and pass rate among answered tasks.",
+      "method": "Use approved original tasks or separately licensed public tasks with contamination review. Generate once per task at fixed sampling and budget; execute in a network-disabled sandbox with time/memory limits and hidden tests.",
+      "grade": "Tests passing / all assigned; answered / all assigned; tests passing / answered. Include timeout and unsafe-output categories.",
+      "controls": "Pin interpreter/dependencies, sandbox image and evaluator hashes; independently verify a sample of grader decisions.",
+      "status": "not_run"
+    },
+    {
+      "id": "kanban",
+      "group": "AGENT TASKS",
+      "title": "Kanban app",
+      "subtitle": "Practical front-end implementation",
+      "measures": "Working card CRUD, status movement, labels/assignees, persistence and responsive usability.",
+      "method": "Give a fixed original specification and isolated repository; run a build, unit and browser interaction checks on the submitted artifact.",
+      "grade": "Deterministic functional checklist plus blinded screenshot/UI review; report working features and critical failures separately.",
+      "controls": "Record tool calls, runtime, dependency install and reproduction instructions; a screenshot alone is not a pass.",
+      "status": "not_run"
+    },
+    {
+      "id": "sand",
+      "group": "AGENT TASKS",
+      "title": "Sand simulation",
+      "subtitle": "Algorithmic interactive system",
+      "measures": "Conservation and collision rules, deterministic replay, frame time and interaction correctness.",
+      "method": "Use an original sandboxed spec with seeded scenarios and property-based edge cases; execute the simulation in a real browser.",
+      "grade": "Automated invariants and scenario outcomes with a separate visual/usability check; show measured frame time rather than styling alone.",
+      "controls": "Reveal seeds only after submitted code is frozen; retain traces and browser console errors.",
+      "status": "not_run"
+    },
+    {
+      "id": "dungeon",
+      "group": "AGENT TASKS",
+      "title": "Dungeon crawler",
+      "subtitle": "State, planning and pathfinding",
+      "measures": "Reachable levels, valid navigation, resource-state consistency, win/lose flow and determinism.",
+      "method": "Provide an original bounded game spec, fixed starter repo and seeded maps; drive real inputs through a complete round.",
+      "grade": "Automated invariant/acceptance gates plus blinded playability rubric; keep crashes and blocked completions visible.",
+      "controls": "Check scripted shortcuts, impossible maps, hidden-state access and restart paths.",
+      "status": "not_run"
+    },
+    {
+      "id": "blender",
+      "group": "AGENT TASKS",
+      "title": "Blender scene",
+      "subtitle": "3D artifact, not just code prose",
+      "measures": "Valid saved scene, object topology/material constraints, clean render and reproducible opening.",
+      "method": "Apply an original fixed asset brief with version-pinned Blender in a sandbox; reopen the .blend and render from clean state.",
+      "grade": "Machine checks for object/scene validity plus blinded artistic rubric; archive .blend, render and logs.",
+      "controls": "Declare external assets/rights and file-size limits; do not score an image if the scene fails to reopen.",
+      "status": "not_run"
+    },
+    {
+      "id": "godot",
+      "group": "AGENT TASKS",
+      "title": "Godot scene",
+      "subtitle": "Moving-platform gameplay integration",
+      "measures": "Scene loads, movement/control, platform behavior, reachable objective and clean runtime.",
+      "method": "Use an original fixed project brief with pinned Godot version; open in headless test, then exercise a real playable session.",
+      "grade": "Executable scene and scripted interaction gates plus blinded gameplay/usability review; retain project, logs and capture.",
+      "controls": "No success inferred from generated code or screenshots alone; flag plugins and external assets.",
+      "status": "not_run"
+    }
+  ]
+}

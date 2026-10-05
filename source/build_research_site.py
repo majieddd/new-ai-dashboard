@@ -10,6 +10,7 @@ import shutil
 from pathlib import Path
 from statistics import mean
 from progress_site import home_section, render as render_progress
+from benchmark_preview import build as build_benchmark
 
 HERE = Path(__file__).resolve().parent
 ARMS = (("self_assembly", "Readout-only (historically named self-assembly)", "#71d7bf"),
@@ -381,8 +382,11 @@ def build(source=HERE, out=None):
     page = page.replace('<section id="text-pilot">', home_section(progress) + '<section id="text-pilot">')
     page = page.replace('<a href="#text-pilot">Latest · E19</a>',
                         '<a href="#progress">Progress</a><a href="#text-pilot">Result · E19</a>')
+    page = page.replace('<a href="#progress">Progress</a>',
+                        '<a href="#progress">Progress</a><a href="benchmarks/index.html">Benchmarks · proposal</a>')
     assert '<section id="text-pilot">' in page and page.count('<svg') == 3
     check_publication(source, page)
+    build_benchmark(dest / "benchmarks")
     (dest / "index.html").write_text(page, encoding="utf-8")
     progress_dir = dest / "progress"
     progress_dir.mkdir(exist_ok=True)
@@ -399,7 +403,9 @@ def build(source=HERE, out=None):
                      "run_e18.py", "test_e18.py", "PROTOCOL_E19.md", "E19_REPORT.md",
                      "run_e19.py", "test_e19.py", "SITE_PUBLICATION_CHECKLIST.md",
                      "prepare_progress_snapshot.py", "progress_site.py", "test_progress.py",
-                     "PROGRESS_STATUS.md"):
+                     "PROGRESS_STATUS.md", "benchmark_preview.py",
+                     "benchmark_preview_template.html", "benchmark_suite_v0_1.json",
+                     "BENCHMARK_PREVIEW_PROTOCOL.md", "test_benchmark_preview.py"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'
