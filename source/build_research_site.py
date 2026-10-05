@@ -1,7 +1,7 @@
 """Build a candid, self-contained New AI results site from raw experiment files.
 
-No network, templates, JS frameworks, or hand-entered outcome numbers. The site
-has one rounds-by-configuration graph; other observations are cards and tables.
+No network, templates, JS frameworks, or hand-entered outcome numbers. Charts
+compare only arms on the same test; historical experiments stay separate.
 """
 import argparse
 import html
@@ -14,6 +14,12 @@ HERE = Path(__file__).resolve().parent
 ARMS = (("self_assembly", "Readout-only (historically named self-assembly)", "#71d7bf"),
         ("full_finetune", "Full fine-tune", "#f4a393"),
         ("frozen_baseline", "Frozen", "#88a9fb"))
+E19_ARMS = (("frozen", "Frozen", "#88a9fb"),
+            ("random", "Random timing", "#f5cc86"),
+            ("scheduled", "Scheduled adapter", "#71d7bf"),
+            ("feedback", "Feedback adapter", "#c9f6d8"),
+            ("full_finetune", "Full fine-tune", "#f4a393"))
+PUBLISHED_SUMMARIES = ("E15", "E16", "E17", "E18", "E19")
 
 
 def load_results(source=HERE):
@@ -117,6 +123,7 @@ a{color:#a9c0ff}a:hover{color:white}a:focus-visible,summary:focus-visible{outlin
 .wrap{width:min(1120px,calc(100% - 36px));margin:auto}.top{padding:18px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
 .brand{font-weight:800;letter-spacing:.04em}.top nav{display:flex;gap:20px;font-size:.91rem}.hero{padding:72px 0 30px}.eyebrow{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);font-weight:800}h1{font-size:clamp(2.1rem,5vw,4.5rem);line-height:1.05;letter-spacing:-.045em;max-width:900px;margin:12px 0 23px}h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.025em;margin:0 0 10px}h3{margin:0 0 12px;font-size:1.16rem}.lead{font-size:1.18rem;color:var(--muted);max-width:900px}.lede{font-size:1rem;color:var(--muted);margin:0 0 24px}.pill{display:inline-block;background:#443528;color:#ffcf92;padding:7px 12px;border-radius:100px;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card,.block{border:1px solid var(--line);border-radius:16px;background:var(--panel)}.card{padding:23px}.card strong{display:block;font-size:2.25rem;letter-spacing:-.045em;line-height:1.1}.card small{display:block;color:var(--muted);margin-top:7px}.card p{margin:8px 0 0;color:var(--muted)}.mint{color:var(--mint)}.coral{color:var(--coral)}.blue{color:var(--blue)}section{padding:48px 0}.block{padding:26px;margin-top:18px}.small{font-size:.91rem;color:var(--muted)}.legend{display:flex;gap:14px 24px;flex-wrap:wrap;font-size:.91rem;color:var(--ink);margin:6px 0 20px}.legend span{display:inline-flex;gap:8px;align-items:center}.legend i{width:13px;height:13px;border-radius:4px;display:inline-block}.chart{width:100%;height:auto;display:block;min-width:520px}.chartbox{overflow-x:auto}.note{border-left:3px solid var(--coral);padding:12px 16px;background:#30283a;color:var(--ink);margin:20px 0 0}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}td,th{text-align:left;border-bottom:1px solid var(--line);padding:10px 9px}thead th{color:var(--muted);font-size:.82rem}td{text-align:right}tbody th{font-weight:600}details{margin-top:16px}summary{cursor:pointer;font-weight:700}.scroll{overflow-x:auto}.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.steps{padding-left:23px}.steps li{padding-left:8px;margin:12px 0}.footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--muted)}code{font-size:.86em;background:#202c44;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
+.route{max-width:680px;margin:30px auto 4px}.route strong{display:block;font-size:1.07rem}.meter-label{display:flex;justify-content:space-between;margin:12px 0 4px;color:#e6eeff;font-size:.92rem}.meter{width:100%;height:14px;border-radius:8px;background:#33415a;overflow:hidden}.meter span{display:block;height:100%;min-width:2px;border-radius:8px}.top nav{flex-wrap:wrap}
 @media(max-width:800px){.grid,.twocol{grid-template-columns:1fr}.hero{padding-top:42px}.block{padding:18px}.top nav{gap:12px}}
 </style></head><body>
 <header class="top wrap"><div class="brand">NEW AI <span class="small">/ research ledger</span></div><nav aria-label="Sections"><a href="#rounds">Rounds</a><a href="#corrected">Corrected test</a><a href="#trigger">Trigger audit</a><a href="#roadmap">Next gates</a><a href="#data">Data</a></nav></header>
@@ -175,6 +182,87 @@ a{color:#a9c0ff}a:hover{color:white}a:focus-visible,summary:focus-visible{outlin
     return template
 
 
+def e19_accuracy_chart(runs):
+    """Old/new held-out accuracy trade-off; all five seeds remain visible."""
+    left, top, width, height = 94, 52, 742, 365
+    x = lambda p: left + (p - 80) / 15 * width
+    y = lambda p: top + (80 - p) / 32 * height
+    old_floor = 100 * mean(r["old_before_test"] for r in runs) - 5
+    bits = ['<svg class="chart" viewBox="0 0 960 510" role="img" '
+            'aria-labelledby="e19-accuracy-title e19-accuracy-desc" xmlns="http://www.w3.org/2000/svg">',
+            '<title id="e19-accuracy-title">E19 old versus new test accuracy, five paired seeds per arm</title>',
+            '<desc id="e19-accuracy-desc">The upper right passes the two absolute accuracy gates. '
+            'The feedback and scheduled markers coincide on every seed; full fine-tuning learns the new topic '
+            'better but drops old accuracy below the retention threshold. This chart cannot show the separate '
+            'two-point timing-advantage requirement.</desc>',
+            f'<rect x="{x(old_floor):.1f}" y="{y(80):.1f}" width="{x(95)-x(old_floor):.1f}" '
+            f'height="{y(65)-y(80):.1f}" fill="#173e38" opacity=".52"/>']
+    for tick in (50, 55, 60, 65, 70, 75, 80):
+        pos = y(tick)
+        bits += [f'<path d="M {left} {pos:.1f} H {left+width}" stroke="#394661" stroke-width="1"/>',
+                 f'<text x="{left-13}" y="{pos+5:.1f}" fill="#d5deef" text-anchor="end" font-size="15">{tick}</text>']
+    for tick in (80, 85, 90, 95):
+        pos = x(tick)
+        bits += [f'<path d="M {pos:.1f} {top} V {top+height}" stroke="#394661" stroke-width="1"/>',
+                 f'<text x="{pos:.1f}" y="{top+height+25}" fill="#d5deef" text-anchor="middle" font-size="15">{tick}</text>']
+    bits += [f'<path d="M {x(old_floor):.1f} {top} V {top+height}" stroke="#b6edce" stroke-dasharray="6 5" stroke-width="2"/>',
+             f'<path d="M {left} {y(65):.1f} H {left+width}" stroke="#b6edce" stroke-dasharray="6 5" stroke-width="2"/>',
+             f'<text x="{x(old_floor)+8:.1f}" y="{top+20}" fill="#daf5e5" font-size="15">old loss ≤ 5 pts</text>',
+             f'<text x="{left+width-8}" y="{y(65)-10:.1f}" fill="#daf5e5" text-anchor="end" font-size="15">new ≥ 65%</text>']
+    for arm, label, color in E19_ARMS:
+        if arm == "feedback":
+            continue  # Exactly coincident with scheduled; draw one marker, not two misleading dots.
+        vals = [(100*r["arms"][arm]["old_test"], 100*r["arms"][arm]["new_test"], r["seed"])
+                for r in runs]
+        for old, new, seed in vals:
+            bits.append(f'<circle cx="{x(old):.1f}" cy="{y(new):.1f}" r="4" fill="{color}" '
+                        f'opacity=".52"><title>{label}, seed {seed}: old {old:.2f}%, new {new:.2f}%</title></circle>')
+        old, new = mean(v[0] for v in vals), mean(v[1] for v in vals)
+        bits.append(f'<circle cx="{x(old):.1f}" cy="{y(new):.1f}" r="9" fill="{color}" '
+                    f'stroke="#0b1020" stroke-width="2"><title>{label} mean: old {old:.2f}%, new {new:.2f}%</title></circle>')
+        if arm == "scheduled":
+            bits.append(f'<circle cx="{x(old):.1f}" cy="{y(new):.1f}" r="12" fill="none" '
+                        'stroke="#c9f6d8" stroke-width="2"/>'
+                        f'<text x="{x(old)-14:.1f}" y="{y(new)-17:.1f}" fill="#dfffe9" '
+                        'text-anchor="end" font-size="15">scheduled = feedback</text>')
+    bits += [f'<text x="{left+width/2:.1f}" y="490" text-anchor="middle" fill="#ecf2ff" font-size="17">Old-topic test accuracy (%)</text>',
+             '<text transform="translate(20,235) rotate(-90)" text-anchor="middle" fill="#ecf2ff" font-size="17">New-topic test accuracy (%)</text>',
+             '</svg>']
+    return "".join(bits)
+
+
+def e19_timing_chart(runs):
+    """Paired per-seed timing effect in accuracy points, not raw arm score."""
+    left, top, width = 196, 50, 638
+    x = lambda value: left + value / 2.2 * width
+    bits = ['<svg class="chart" viewBox="0 0 960 350" role="img" '
+            'aria-labelledby="e19-timing-title e19-timing-desc" xmlns="http://www.w3.org/2000/svg">',
+            '<title id="e19-timing-title">E19 feedback advantage over scheduled and random timing, paired by seed</title>',
+            '<desc id="e19-timing-desc">Feedback versus scheduled is zero on all five seeds; versus random '
+            'is positive on four but under one percentage point on all five. Neither reaches the preregistered '
+            'two-point mean advantage.</desc>']
+    for tick in (0, .5, 1, 1.5, 2):
+        xx = x(tick)
+        bits += [f'<path d="M {xx:.1f} {top-8} V 278" stroke="#394661" stroke-width="1"/>',
+                 f'<text x="{xx:.1f}" y="301" fill="#d5deef" text-anchor="middle" font-size="15">{tick:g}</text>']
+    bits.append(f'<path d="M {x(2):.1f} {top-8} V 278" stroke="#f4a393" stroke-width="3" stroke-dasharray="5 5"/>')
+    for i, row in enumerate(runs):
+        yy = top + i * 46
+        bits.append(f'<text x="{left-19}" y="{yy+9}" fill="#ecf2ff" text-anchor="end" font-size="15">seed {row["seed"]}</text>')
+        for arm, color, offset in (("scheduled", "#71d7bf", -6), ("random", "#f5cc86", 8)):
+            diff = 100 * (row["arms"]["feedback"]["balanced_test"] - row["arms"][arm]["balanced_test"])
+            if diff < -1e-8 or diff > 2.2:
+                raise ValueError("E19 timing effect outside chart range")
+            ypos = yy + offset
+            bits.append(f'<path d="M {left} {ypos} H {x(diff):.1f}" stroke="{color}" stroke-width="5"/>')
+            bits.append(f'<circle cx="{x(diff):.1f}" cy="{ypos}" r="5" fill="{color}">'
+                        f'<title>Seed {row["seed"]}, feedback minus {arm}: {diff:.3f} percentage points</title></circle>')
+    bits += [f'<text x="{x(2)-8:.1f}" y="29" fill="#f4a393" text-anchor="end" font-size="15">required ≥2 pts</text>',
+             f'<text x="{left+width/2:.1f}" y="330" fill="#ecf2ff" text-anchor="middle" font-size="16">Feedback balanced-accuracy advantage (percentage points)</text>',
+             '</svg>']
+    return "".join(bits)
+
+
 def e19_section(record):
     """Derive all E19 display values from five pinned raw seed records."""
     runs = record["runs"]
@@ -185,17 +273,24 @@ def e19_section(record):
             ("full_finetune", "Full fine-tune"))
     def metric(arm, key):
         return mean(r["arms"][arm][key] for r in runs)
+    router_old = 100 * metric("feedback", "router_old_rate")
+    router_new = 100 * metric("feedback", "router_new_rate")
+    router_new_range = [100 * r["arms"]["feedback"]["router_new_rate"] for r in runs]
     rows = "".join(
         f'<tr><th scope="row">{html.escape(label)}</th>'
         f'<td>{100*metric(arm, "old_test"):.2f}%</td>'
         f'<td>{100*metric(arm, "new_test"):.2f}%</td>'
         f'<td>{100*metric(arm, "balanced_test"):.2f}%</td>'
-        f'<td>{metric(arm, "old_drop_points"):.2f} pts</td></tr>'
+        f'<td>{metric(arm, "old_drop_points"):.2f} pts</td>'
+        f'<td>{metric(arm, "adapt_seconds"):.3f}s</td>'
+        f'<td>{metric(arm, "total_params"):,.0f}</td></tr>'
         for arm, label in arms)
     versus_scheduled = 100 * (metric("feedback", "balanced_test") - metric("scheduled", "balanced_test"))
     versus_random = 100 * (metric("feedback", "balanced_test") - metric("random", "balanced_test"))
     assert [r["arms"]["feedback"]["trigger_after_labels"] for r in runs] == [32] * 5
     assert versus_scheduled == 0
+    legend = "".join(f'<span><i style="background:{color}"></i>{html.escape(label)}</span>'
+                     for arm, label, color in E19_ARMS if arm != "feedback")
     return (f'<section id="text-pilot"><h2>E19 · real text, but no timing win</h2>'
             f'<p class="lede">Five-seed AG News binary-transfer pilot: topic A (World/Sports) then topic B '
             f'(Business/Science). A hashed-word <strong>linear classifier</strong>, not a language model, '
@@ -207,20 +302,61 @@ def e19_section(record):
             f'on every seed. Required advantage: at least 2 points; timing gate failed.</p></div>'
             f'<div class="card"><strong class="coral">{100*metric("feedback", "new_test"):.2f}%</strong>'
             f'<small>Feedback new-topic test accuracy</small><p>Below the locked 65% minimum. '
-            f'Router activates on only 19–28% of new-topic test examples.</p></div>'
+            f'Router activates on only {min(router_new_range):.0f}–{max(router_new_range):.0f}% of new-topic test examples across seeds.</p></div>'
             f'<div class="card"><strong class="blue">{versus_random:.2f} pts</strong>'
             f'<small>Feedback vs random timing</small><p>Below the locked 2-point advantage.</p></div></div>'
+            f'<div class="block"><h3>Capability versus retention</h3>'
+            f'<p class="small">Each faint dot is one seed; large markers are five-seed means. '
+            f'Scheduled and feedback overlap exactly. Green region is only the absolute old/new '
+            f'accuracy gates; passing it would <em>not</em> establish a timing advantage. '
+            f'Axes are cropped and labelled, not zero-based. On a phone, swipe the charts '
+            f'horizontally to inspect every marker and threshold.</p>'
+            f'<div class="legend">{legend}<span><i style="border:2px solid #c9f6d8;background:none"></i>Feedback = scheduled</span></div>'
+            f'<div class="chartbox">{e19_accuracy_chart(runs)}</div></div>'
+            f'<div class="block"><h3>Does the trigger actually help?</h3>'
+            f'<p class="small">Paired balanced-accuracy difference on the <em>same</em> seed. '
+            f'Zero for scheduled on all five seeds; random timing is slightly worse. '
+            f'The coral line is the locked +2-point mean threshold.</p>'
+            f'<div class="legend"><span><i style="background:#71d7bf"></i>Versus scheduled</span>'
+            f'<span><i style="background:#f5cc86"></i>Versus random</span></div>'
+            f'<div class="chartbox">{e19_timing_chart(runs)}</div>'
+            f'<div class="route"><strong>Why does the adapter learn so little?</strong>'
+            f'<p class="small">The unsupervised route activates on only {router_new:.1f}% of new-topic '
+            f'articles; it also misroutes {router_old:.1f}% of old-topic articles (five-seed means). '
+            f'Coverage is a diagnosis, not a task accuracy score.</p>'
+            f'<div class="meter-label">New-topic routing <b>{router_new:.1f}%</b></div>'
+            f'<div class="meter"><span style="width:{router_new:.1f}%;background:#71d7bf"></span></div>'
+            f'<div class="meter-label">Old-topic false routing <b>{router_old:.1f}%</b></div>'
+            f'<div class="meter"><span style="width:{router_old:.1f}%;background:#f4a393"></span></div>'
+            f'</div></div>'
             f'<div class="block"><h3>Same-class classifier controls · official held-out test</h3>'
             f'<div class="scroll"><table><thead><tr><th>Arm</th><th>Old accuracy</th>'
-            f'<th>New accuracy</th><th>Balanced mean</th><th>Old drop</th></tr></thead>'
+            f'<th>New accuracy</th><th>Balanced mean</th><th>Old drop</th>'
+            f'<th>Adapt time*</th><th>Total weights</th></tr></thead>'
             f'<tbody>{rows}</tbody></table></div><p class="small">Five-seed means, no test tuning. '
             f'Full fine-tuning learns more on the new topic but forgets more of the old one. '
+            f'*Observed adaptation wall time excludes detector, routing and base training. '
             f'Equal optimizer steps are not equal total compute or latency. This custom binary topic '
             f'transfer is not the standard four-class AG News leaderboard task.</p>'
             f'<p><a href="source/PROTOCOL_E19.md">Locked protocol</a> · '
             f'<a href="source/E19_REPORT.md">Interpretation and limits</a> · '
             f'<a href="data/e19.json">All five raw seed records</a> · '
-            f'<a href="source/run_e19.py">Runner source</a></p></div></section>')
+            f'<a href="source/run_e19.py">Runner source</a> · '
+            f'<a href="source/SITE_PUBLICATION_CHECKLIST.md">Future-round publication gate</a>'
+            f'</p></div></section>')
+
+def check_publication(source, page):
+    """Fail the build when a new EXX summary lacks a site entry/download."""
+    observed = {path.parent.name for path in (source / "results").glob("E*/summary.json")
+                if path.parent.name[1:].isdigit()}
+    expected = set(PUBLISHED_SUMMARIES)
+    if observed != expected:
+        raise ValueError(f"update site for experiment summaries before publishing: "
+                         f"missing={sorted(observed-expected)}, unavailable={sorted(expected-observed)}")
+    for exp in PUBLISHED_SUMMARIES:
+        if f'data/{exp.lower()}.json' not in page:
+            raise ValueError(f"{exp} has no discoverable raw-data link")
+
 
 def build(source=HERE, out=None):
     source = Path(source)
@@ -231,14 +367,19 @@ def build(source=HERE, out=None):
     e14, e15, e16, e17, e18 = load_results(source)
     page = render(e14, e15, e16, e17, e18)
     e19 = json.loads((source / "results/E19/summary.json").read_text(encoding="utf-8"))
-    page = page.replace('<section id="roadmap">', e19_section(e19) + '<section id="roadmap">')
-    page = page.replace('<a href="#roadmap">Next gates</a>',
-                        '<a href="#text-pilot">Real-text pilot</a><a href="#roadmap">Next gates</a>')
+    page = page.replace('<section id="rounds">', e19_section(e19) + '<section id="rounds">')
+    page = page.replace('<a href="#rounds">Rounds</a>',
+                        '<a href="#text-pilot">Latest · E19</a><a href="#rounds">Rounds</a>')
     page = page.replace('a small classifier and several toy experiments—not a self-evolving LLM.',
                         'small classifiers on synthetic rules and a real news-text pilot—not a self-evolving LLM.')
-    assert '<section id="text-pilot">' in page and page.count('<svg') == 1
+    page = page.replace('Transparent experiments · synthetic scale',
+                        'Transparent experiments · real text pilot + historical synthetic tests')
+    page = page.replace('The 10-round pilot did <strong>not</strong> meet its win condition.',
+                        'The latest real-text timing gate and the historical ten-round pilot both <strong>failed</strong> their win conditions.')
+    assert '<section id="text-pilot">' in page and page.count('<svg') == 3
+    check_publication(source, page)
     (dest / "index.html").write_text(page, encoding="utf-8")
-    for key in ("E15", "E16", "E17", "E18", "E19"):
+    for key in PUBLISHED_SUMMARIES:
         shutil.copyfile(source / "results" / key / "summary.json", data / (key.lower() + ".json"))
     (data / "e14.json").write_text(json.dumps(e14, indent=2), encoding="utf-8")
     public_source = dest / "source"
@@ -247,7 +388,7 @@ def build(source=HERE, out=None):
                      "test_e16.py", "test_site.py", "build_research_site.py",
                      "PROTOCOL_E18.md", "E18_REPORT.md", "PRIOR_ART_E18.md",
                      "run_e18.py", "test_e18.py", "PROTOCOL_E19.md", "E19_REPORT.md",
-                     "run_e19.py", "test_e19.py"):
+                     "run_e19.py", "test_e19.py", "SITE_PUBLICATION_CHECKLIST.md"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'
@@ -263,7 +404,7 @@ def build(source=HERE, out=None):
               ' stress trigger against matched random/scheduled controls, inheritance across rounds and then real language tasks.'
               '</p><a style="color:#a9c0ff" href="../index.html">Back to results</a></body></html>')
     (data / "method.html").write_text(method, encoding="utf-8")
-    print(f"Built {dest / 'index.html'} ({len(page)} chars; one chart)")
+    print(f"Built {dest / 'index.html'} ({len(page)} chars; three separate, measured charts)")
     return page
 
 

@@ -1,11 +1,15 @@
 """Ground the static research site in immutable experiment records."""
+import copy
 import json
 import hashlib
+import tempfile
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
+from xml.etree import ElementTree
 
-from build_research_site import HERE, build, load_results, render, summarise
+from build_research_site import (HERE, build, check_publication, e19_accuracy_chart,
+                                 e19_timing_chart, load_results, render, summarise)
 
 
 class Tags(HTMLParser):
@@ -76,6 +80,14 @@ class SiteTests(unittest.TestCase):
         self.assertIn("0.00 pts", page)
         self.assertIn("59.15%", page)
         self.assertIn("not a language model", page)
+        self.assertEqual(page.count("<svg"), 3)
+        self.assertLess(page.index('id="text-pilot"'), page.index('id="rounds"'))
+        self.assertIn('id="e19-accuracy-title"', page)
+        self.assertIn('id="e19-timing-title"', page)
+        self.assertIn('id="e19-accuracy-desc"', page)
+        self.assertIn('id="e19-timing-desc"', page)
+        self.assertIn("Future-round publication gate", page)
+        self.assertNotIn("<script", page)
         p = Tags()
         p.feed(page)
         for link in p.links:
@@ -86,6 +98,37 @@ class SiteTests(unittest.TestCase):
             self.assertIn("history" if exp == "e15" else "runs", d)
         self.assertEqual(len(json.loads((dest / "data/e14.json").read_text(encoding="utf-8"))), 5)
         self.assertEqual(json.loads((dest / "data/e19.json").read_text(encoding="utf-8"))["experiment"], "E19")
+
+    def test_e19_visuals_are_generated_from_raw_paired_seeds(self):
+        record = json.loads((HERE / "results/E19/summary.json").read_text(encoding="utf-8"))
+        runs = record["runs"]
+        accuracy = e19_accuracy_chart(runs)
+        timing = e19_timing_chart(runs)
+        ElementTree.fromstring(accuracy)
+        ElementTree.fromstring(timing)
+        self.assertEqual(accuracy.count("seed "), 20)  # 4 distinct visible arms × 5 seeds
+        self.assertEqual(timing.count("feedback minus "), 10)  # 2 controls × 5 paired seeds
+        self.assertIn("scheduled = feedback", accuracy)
+        self.assertIn("required ≥2 pts", timing)
+        self.assertIn("feedback minus scheduled: 0.000", timing)
+        modified = copy.deepcopy(runs)
+        modified[0]["arms"]["frozen"]["new_test"] -= .01
+        self.assertNotEqual(accuracy, e19_accuracy_chart(modified))
+        for row in runs:
+            for arm in ("frozen", "random", "scheduled", "feedback", "full_finetune"):
+                old = 100 * row["arms"][arm]["old_test"]
+                new = 100 * row["arms"][arm]["new_test"]
+                self.assertTrue(80 <= old <= 95 and 48 <= new <= 80,
+                                f"chart axes would clip {arm}, seed {row['seed']}")
+
+    def test_new_summary_blocks_publication_until_site_includes_it(self):
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp)
+            future = source / "results/E20/summary.json"
+            future.parent.mkdir(parents=True)
+            future.write_text('{"experiment":"E20"}', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "E20"):
+                check_publication(source, 'data/e15.json data/e16.json data/e17.json data/e18.json data/e19.json')
 
 
 if __name__ == "__main__":
