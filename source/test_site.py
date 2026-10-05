@@ -46,7 +46,9 @@ class SiteTests(unittest.TestCase):
         self.assertGreater(s["E18"]["val_fpr"], 5)
         self.assertEqual(s["E18"]["feedback_delay"], [32] * 5)
         for filename, expected in self.e18["provenance"]["source_sha256"].items():
-            self.assertEqual(hashlib.sha256((HERE / filename).read_bytes()).hexdigest(), expected)
+            # Git's Windows checkout changes LF to CRLF; E18 recorded LF source bytes.
+            source = (HERE / filename).read_bytes().replace(bytes([13, 10]), bytes([10]))
+            self.assertEqual(hashlib.sha256(source).hexdigest(), expected)
 
     def test_one_graph_and_navigation(self):
         p = Tags()
@@ -69,15 +71,21 @@ class SiteTests(unittest.TestCase):
         dest = HERE / "research-site"
         page = build(out=dest)
         self.assertEqual((dest / "index.html").read_text(encoding="utf-8"), page)
+        self.assertEqual(page.count('<section id="text-pilot">'), 1)
+        self.assertIn("Feedback vs scheduled", page)
+        self.assertIn("0.00 pts", page)
+        self.assertIn("59.15%", page)
+        self.assertIn("not a language model", page)
         p = Tags()
         p.feed(page)
         for link in p.links:
             if link and not link.startswith("#"):
                 self.assertTrue((dest / link).is_file(), link)
-        for exp in ("e15", "e16", "e17", "e18"):
+        for exp in ("e15", "e16", "e17", "e18", "e19"):
             d = json.loads((dest / "data" / (exp + ".json")).read_text(encoding="utf-8"))
             self.assertIn("history" if exp == "e15" else "runs", d)
         self.assertEqual(len(json.loads((dest / "data/e14.json").read_text(encoding="utf-8"))), 5)
+        self.assertEqual(json.loads((dest / "data/e19.json").read_text(encoding="utf-8"))["experiment"], "E19")
 
 
 if __name__ == "__main__":
