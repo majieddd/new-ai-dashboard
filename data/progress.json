@@ -1,0 +1,89 @@
+{
+  "as_of_utc": "2026-10-05T13:01:46Z",
+  "e20": {
+    "checker_scope": "PUBLIC receipt completeness only; no signatures, ACLs or final-data reads verified here",
+    "missing_evidence_predicates": 41,
+    "run_authorized": false,
+    "source_sha256": "bbe16e5a76b2c83386e664e580320aa44d62a04575768c775ebd4a14d8da9d34",
+    "status": "BLOCKED"
+  },
+  "e21": {
+    "compute_match": "equal token exposure only; NOT matched measured compute",
+    "mean_fixture_scores": {
+      "direct_k4": {
+        "accuracy": 0.659375,
+        "inference_scoring_telemetry_wall_seconds": 0.0008579000132158399,
+        "nll_nats_per_token": 0.9376331269966351
+      },
+      "energy_k4": {
+        "accuracy": 0.671875,
+        "inference_scoring_telemetry_wall_seconds": 0.002003359980881214,
+        "nll_nats_per_token": 0.9267260288272446
+      },
+      "frozen_k0": {
+        "accuracy": 0.275,
+        "inference_scoring_telemetry_wall_seconds": 0.00036764002870768306,
+        "nll_nats_per_token": 1.5217263994885044
+      }
+    },
+    "paired_direct_minus_energy_k4_nll": [
+      -0.019103673257468645,
+      0.00731682166221459,
+      0.010094988900857249,
+      0.04146228059024892,
+      0.014765072951100633
+    ],
+    "scope": "SOFTWARE-INSTRUMENT-NOT-E21-SCIENTIFIC-OUTCOME",
+    "seeds": [
+      101,
+      103,
+      107,
+      109,
+      113
+    ],
+    "source_sha256": "2a95f1dcbefb76ab29e4e1f65179656fc55ad5c1978769a3a1e89a19f725a2ff",
+    "status": "LANGUAGE_CONFIRMATION_NOT_RUN",
+    "training_wall_seconds_by_arm": {
+      "direct": 0.6138554001227021,
+      "energy": 1.1318998999195173,
+      "one_step": 0.32368530007079244
+    }
+  },
+  "e22": {
+    "base_examples": 256,
+    "counterfactual_directions": {
+      "-1": 128,
+      "1": 128
+    },
+    "distinct_structural_groups": 117,
+    "factor_cells": 16,
+    "model_outcome": null,
+    "output_sha256": {
+      "model_inputs.jsonl": "a0c6d4cc5a55ab661468c83910f84b9ab1e013784176d5324eafdb911778cea7",
+      "references.jsonl": "54958e8db412d11c9f80c99f2f8cb052ff2e753ac423d9be38d8eb6af8744b62"
+    },
+    "per_cell_groups": {
+      "depth1_arity1_distractors0": 2,
+      "depth1_arity1_distractors4": 2,
+      "depth1_arity2_distractors0": 2,
+      "depth1_arity2_distractors4": 2,
+      "depth2_arity1_distractors0": 4,
+      "depth2_arity1_distractors4": 4,
+      "depth2_arity2_distractors0": 5,
+      "depth2_arity2_distractors4": 4,
+      "depth4_arity1_distractors0": 10,
+      "depth4_arity1_distractors4": 14,
+      "depth4_arity2_distractors0": 16,
+      "depth4_arity2_distractors4": 16,
+      "depth6_arity1_distractors0": 14,
+      "depth6_arity1_distractors4": 13,
+      "depth6_arity2_distractors0": 16,
+      "depth6_arity2_distractors4": 16
+    },
+    "source_sha256": "cfa24e4ef129aa4e0a657848fca21234d71c0455e04794fe86e4f47d476573c0",
+    "status": "PUBLIC_DEVELOPMENT_INSTRUMENT_ONLY",
+    "variants": 768
+  },
+  "schema": "new-ai-public-development-progress-v1",
+  "scientific_verdict": "NO_CONFIRMED_LLM_RESULT"
+}

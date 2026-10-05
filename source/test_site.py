@@ -76,6 +76,10 @@ class SiteTests(unittest.TestCase):
         page = build(out=dest)
         self.assertEqual((dest / "index.html").read_text(encoding="utf-8"), page)
         self.assertEqual(page.count('<section id="text-pilot">'), 1)
+        self.assertEqual(page.count('<section id="progress">'), 1)
+        self.assertLess(page.index('id="progress"'), page.index('id="text-pilot"'))
+        self.assertIn('41 missing <em>evidence predicates</em>', page)
+        self.assertIn('progress/index.html', page)
         self.assertIn("Feedback vs scheduled", page)
         self.assertIn("0.00 pts", page)
         self.assertIn("59.15%", page)
@@ -93,6 +97,19 @@ class SiteTests(unittest.TestCase):
         for link in p.links:
             if link and not link.startswith("#"):
                 self.assertTrue((dest / link).is_file(), link)
+        progress = (dest / "progress/index.html").read_text(encoding="utf-8")
+        self.assertIn("No confirmed LLM result", progress)
+        self.assertIn("0 model trials inferred", progress)
+        self.assertIn("no model predictions", progress)
+        self.assertIn("matched functional parameter count", progress)
+        self.assertNotIn("<script", progress)
+        progress_tags = Tags()
+        progress_tags.feed(progress)
+        for link in progress_tags.links:
+            if link and not link.startswith("#"):
+                self.assertTrue((dest / "progress" / link.split("#", 1)[0]).is_file(), link)
+        self.assertEqual(json.loads((dest / "data/progress.json").read_text(encoding="utf-8")),
+                         json.loads((HERE / "results/PROGRESS/status.json").read_text(encoding="utf-8")))
         for exp in ("e15", "e16", "e17", "e18", "e19"):
             d = json.loads((dest / "data" / (exp + ".json")).read_text(encoding="utf-8"))
             self.assertIn("history" if exp == "e15" else "runs", d)
