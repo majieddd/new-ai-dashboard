@@ -1,0 +1,27 @@
+{
+  "tool": "Archify 3.0.1",
+  "quality": "showcase",
+  "interpretation": "These are diagram/render/browser gates, not scientific or production validations.",
+  "views": {
+    "e19": {
+      "spec_sha256": "7bd8629bf7f2330d4c0998d3eaef2ccf1e2adc409d5f4095ccee8df8c580c603",
+      "html_sha256": "881584cd7274120f1bc290912721fa57b75adb60b26fe2cb1d0b6ee297d86e14",
+      "gates": {"validate": "pass", "deliver": "pass", "check": "pass", "browser-check": "pass"}
+    },
+    "e20": {
+      "spec_sha256": "160f964ea6ca84223204cdd0804466a468f4709ffe37a73e42aeed7bde1ebad3",
+      "html_sha256": "bb28f98fb202e47494ec90c66dd1479cd9b428591699b522df4490f764d8dbf5",
+      "gates": {"validate": "pass", "deliver": "pass", "check": "pass", "browser-check": "pass"}
+    },
+    "e21": {
+      "spec_sha256": "0c02a6370655c192716acf2dcb135450be1ec8a4129e0f10e3e378b091e590d5",
+      "html_sha256": "376983a10b649f567ddaef9caa04b31865555ce01637c019f0a60a552f2eb60b",
+      "gates": {"validate": "pass", "deliver": "pass", "check": "pass", "browser-check": "pass"}
+    },
+    "future": {
+      "spec_sha256": "9f267e43654e768a1bc5ad8136ddefdd8b3fde93e02ae307c995012ac7e9b3ad",
+      "html_sha256": "85758fb724eed2aaffaafa422d35dee55493f4b139db61b3b1c3117bcbe9c62b",
+      "gates": {"validate": "pass", "deliver": "pass", "check": "pass", "browser-check": "pass"}
+    }
+  }
+}

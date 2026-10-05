@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "E20 · Proposed language adaptation / unrun",
+    "subtitle": "Static authored hypothesis map; arrows are not live traffic or scientific proof.",
+    "output": "blueprint-e20.html",
+    "animation": "none",
+    "visual_preset": "blueprint",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "stream",
+      "type": "external",
+      "label": "Allowed stream",
+      "sublabel": "E20 licensed prose / causal suffixes",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        40,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "core",
+      "type": "backend",
+      "label": "Frozen core",
+      "sublabel": "Proposed frozen SmolLM2-1.7B",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        350,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "detector",
+      "type": "backend",
+      "label": "Feedback monitor",
+      "sublabel": "E20 proposed B3/D3 monitors",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        660,
+        80
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "router",
+      "type": "backend",
+      "label": "Prefix router",
+      "sublabel": "E20 proposed prefix GMM + slots",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        660,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "adapter",
+      "type": "backend",
+      "label": "Growth slots",
+      "sublabel": "E20 proposed rank-8 clone / child",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        970,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "replay",
+      "type": "database",
+      "label": "Replay control",
+      "sublabel": "E20 R24 training-only reservoir",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        970,
+        570
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "evaluator",
+      "type": "security",
+      "label": "Evaluator",
+      "sublabel": "Proposed independent sealed custodian",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        1280,
+        320
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "telemetry",
+      "type": "backend",
+      "label": "Cost ledger",
+      "sublabel": "Proposed end-to-end cost ledger",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        1280,
+        570
+      ],
+      "size": [
+        188,
+        78
+      ]
+    },
+    {
+      "id": "publishing",
+      "type": "frontend",
+      "label": "Public record",
+      "sublabel": "E20 planned separate result section",
+      "tag": "E20 PROPOSED; NOT LOCKED/RUN",
+      "pos": [
+        1280,
+        820
+      ],
+      "size": [
+        188,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "e01",
+      "from": "stream",
+      "to": "core",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e02",
+      "from": "stream",
+      "to": "detector",
+      "label": "feedback",
+      "variant": "dashed"
+    },
+    {
+      "id": "e04",
+      "from": "core",
+      "to": "router",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e08",
+      "from": "detector",
+      "to": "adapter",
+      "label": "control",
+      "variant": "dashed"
+    },
+    {
+      "id": "e09",
+      "from": "router",
+      "to": "adapter",
+      "label": "control",
+      "variant": "dashed"
+    },
+    {
+      "id": "e10",
+      "from": "core",
+      "to": "adapter",
+      "label": "data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e11",
+      "from": "stream",
+      "to": "replay",
+      "label": "training data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e12",
+      "from": "replay",
+      "to": "adapter",
+      "label": "training data",
+      "variant": "dashed"
+    },
+    {
+      "id": "e17",
+      "from": "adapter",
+      "to": "evaluator",
+      "label": "evaluation artifact",
+      "variant": "dashed"
+    },
+    {
+      "id": "e23",
+      "from": "evaluator",
+      "to": "publishing",
+      "label": "result",
+      "variant": "dashed"
+    },
+    {
+      "id": "e24",
+      "from": "telemetry",
+      "to": "publishing",
+      "label": "audit",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "Allowed stream · E20",
+      "items": [
+        "E20 licensed prose / causal suffixes",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Pinned/licensed/group-disjoint allowed data only; no task/source IDs or future outcomes in routing; E20 suffix revealed only after saved prefix decisions.",
+        "Boundary: Untrusted corpus/user text -> approved, provenance-checked input; source metadata kept out of model decisions.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S03:34-95, S05:82-116, S02:213-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Frozen core · E20",
+      "items": [
+        "Proposed frozen SmolLM2-1.7B",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Hash/freeze base tensors; preserve common-start outputs; no model code, tokenizer, evaluator or safety-gate edits. E19 freezing starts after A training, not pretrained initialization.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Retain the immutable reference/core state; mark the candidate or router failure. In a preregistered run, do not silently replace a failing arm with baseline output and call it success.",
+        "Evidence: S03:98-113, S05:66-78, S02:171-175"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Feedback monitor · E20",
+      "items": [
+        "E20 proposed B3/D3 monitors",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Causal observed feedback and development-only thresholds; no oracle onset or final-score calibration; E19 strict timing gate stays failed. E20 B3/D3 candidate rules are not approval or a universal false-alarm guarantee.",
+        "Boundary: Observed outcomes from the allowed stream only -> detector; no final-test or oracle phase feedback.",
+        "Failure: No allowed causal trigger -> no allocation; score the unchanged system. False alarms, wrong routes and cap saturation remain recorded failures/diagnostics.",
+        "Evidence: S03:139-177, S06:13-15, S05:143-149"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Prefix router · E20",
+      "items": [
+        "E20 proposed prefix GMM + slots",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Prefix/input-only routing, no true task/answer/test identity; log selections and independent oracle gap only as a diagnostic. If learned capability is accessible only with oracle routing, the autonomous system fails.",
+        "Boundary: Sandbox model/latent computations; read-only frozen base, no network or code/safety/evaluator mutation authority.",
+        "Failure: Retain the immutable reference/core state; mark the candidate or router failure. In a preregistered run, do not silently replace a failing arm with baseline output and call it success.",
+        "Evidence: S03:106-113, S06:15-19, S05:135-137"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Growth slots · E20",
+      "items": [
+        "E20 proposed rank-8 clone / child",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Approved allocation cap and method-specific identity test; train only allowed new weights with logged causal exposure. E19 zero-init residual differs from E20 cloning; no claim that core freezing proves retention.",
+        "Boundary: Trainable candidate, bounded replay and causal keys only; no development/final data access.",
+        "Failure: Stop unsafe/nonfinite/over-budget candidate work, preserve partial logs and report failed/incomplete seed. No replacement seed or score-driven tuning.",
+        "Evidence: S03:98-113, S03:183-201, S05:70-80, S01:40-41"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Replay control · E20",
+      "items": [
+        "E20 R24 training-only reservoir",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Training-only bounded reservoir; log repeats, bytes and fresh-data tradeoff; charge replay work. Never replay development/final examples or silently add extra updates.",
+        "Boundary: Trainable candidate, bounded replay and causal keys only; no development/final data access.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S05:125-133, S05:203-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Evaluator · E20",
+      "items": [
+        "Proposed independent sealed custodian",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Separate custodian, real access isolation, immutable all-arm artifacts, one locked final transaction, no adaptive final queries, no post-hoc checkpoint/threshold choice. E19 official-test scoring was not a demonstrated ACL-enforced custodian seal.",
+        "Boundary: Independent custodian owns final data/evaluator; model artifacts cross read-only, never trainer-accessible final text or adaptive score queries.",
+        "Failure: Deny suspect input/metadata, quarantine offending record and stop the relevant arm; preserve evidence. Exposed-final integrity correction requires a fresh experiment/test, not test repair.",
+        "Evidence: S03:133-136, S04:20-21, S05:229-242, S02:213-223"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Cost ledger · E20",
+      "items": [
+        "Proposed end-to-end cost ledger",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Cost collector outside candidate write authority; count data, detector, routing, training and generation; reject NaN/missing/zero counts; equal steps do not prove equal compute. E19 records limited adaptation wall time, not full LLM/GPU cost.",
+        "Boundary: Protected measurement/record collector can observe candidates but candidates cannot rewrite measurement or outcome records.",
+        "Failure: Mark missing/malformed cost or scoring evidence INCOMPLETE; do not invent estimates or publish a pass.",
+        "Evidence: S03:116-130, S03:241-260, S06:15-17, S02:217-219, S05:203-213"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Public record · E20",
+      "items": [
+        "E20 planned separate result section",
+        "E20 PROPOSED; NOT LOCKED/RUN",
+        "Gate: Per-EXX raw/protocol/source/verdict; preserve failures; separate task/model classes; sanitize licensed corpus/test content; human website PR and desktop/mobile/live-byte verification. A proposed graph is not a measured EXX result.",
+        "Boundary: Reviewed export -> public log; no raw sealed/licensed text, credentials or model-control channel.",
+        "Failure: Keep prior verified result release; correct/version the new export through review. A deployment failure means not live; old negative records remain visible.",
+        "Evidence: S01:24-25, S01:122-122, S08:3-12"
+      ]
+    }
+  ]
+}
