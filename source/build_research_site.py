@@ -421,7 +421,8 @@ def build(source=HERE, out=None):
     (progress_dir / "index.html").write_text(progress_page, encoding="utf-8")
     shutil.copyfile(source / "results/PROGRESS/status.json", data / "progress.json")
     shutil.copyfile(source / "status_update_2026_10_06.json", data / "status-2026-10-06.json")
-    for name in ("e21-public-v02-command.json", "e21-independent-pinned-suite.json"):
+    for name in ("e21-public-v02-command.json", "e21-independent-pinned-suite.json",
+                 "e21-approved-preparation-readback.json"):
         shutil.copyfile(source.parent / "data" / name, data / name)
     for key in PUBLISHED_SUMMARIES:
         shutil.copyfile(source / "results" / key / "summary.json", data / (key.lower() + ".json"))
@@ -442,7 +443,9 @@ def build(source=HERE, out=None):
                      "NEW_AI_PRINCIPIA_FULL_READING_2026_10_05.md",
                      "NEW_AI_ARXIV_2609_00006_KR8_APPLICATION_REVIEW_2026_10_05.md",
                      "E21_PUBLIC_CONTRACT_V02_REPORT.md",
-                     "NEW_AI_E21_INDEPENDENT_CONTRACT_REVIEW_2026_10_06_PUBLIC.md"):
+                     "NEW_AI_E21_INDEPENDENT_CONTRACT_REVIEW_2026_10_06_PUBLIC.md",
+                     "NEW_AI_E20_E21_APPROVED_CANDIDATE_LOCK_2026_10_06.md",
+                     "E21_APPROVED_PREPARATION_REPORT_2026_10_06.md"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'
