@@ -1,0 +1,8 @@
+# Keep reviewed report and receipt bytes intact in the public source archive.
+/source/NEW_AI_ATTRACTOR_FULL_READING_2026_10_05.md -text
+/source/NEW_AI_PRINCIPIA_FULL_READING_2026_10_05.md -text
+/source/NEW_AI_ARXIV_2609_00006_KR8_APPLICATION_REVIEW_2026_10_05.md -text
+/source/NEW_AI_E21_INDEPENDENT_CONTRACT_REVIEW_2026_10_06_PUBLIC.md -text
+/source/E21_PUBLIC_CONTRACT_V02_REPORT.md -text
+/data/e21-public-v02-command.json -text
+/data/e21-independent-pinned-suite.json -text

@@ -1,0 +1,44 @@
+{
+  "schema": "new-ai-reviewed-development-update-v1",
+  "as_of_utc": "2026-10-06T11:56:55Z",
+  "scientific_status": {
+    "e19": "FAILED",
+    "e20_language": "NOT_RUN_BLOCKED",
+    "e21_language": "NOT_RUN_BLOCKED",
+    "e22_validity": "REVIEW_OPEN",
+    "official_benchmark_lanes": "9_NOT_RUN",
+    "e9": "ASSIGNED_PROVIDER_RECOVERY_UNVERIFIED"
+  },
+  "model_fixture": "PUBLIC_DEVELOPMENT_ONLY_QUERY_ONLY_MEMORY_SHORTCUT_OPEN",
+  "approval": {
+    "event_id": "875101f24904db17a0c2b5f9bb0592d3a9077e01ce5be85590fb77dd5dcd7bd3",
+    "decision_sheet_sha256": "4aa92eda05be3bfd6e5c9d6ff2717207f1339996a6f93293bdbb5fec6e9a3b31",
+    "scope": "PREPARATION_FOR_FULL_E20_PROXY_AND_SEPARATE_E21_STUDY",
+    "e20_gpu_hour_ceiling": 24,
+    "e20_development_hour_ceiling": 1,
+    "e21_gpu_hour_ceiling": 4,
+    "e21_development_hour_ceiling": 1,
+    "custodian_named": false,
+    "language_outcomes_run": false,
+    "allowance_consumed_by_this_update_hours": 0
+  },
+  "e21": {
+    "implementer_source_revision": "12d86de2c6c94334f237c12fad02883e414598c1",
+    "implementer_archive_revision": "b7e3c6656d4ead02d81c523431a5df34fcdf0315",
+    "implementer_suite": "62 passed / 62 discovered, zero skipped (unrestricted development suite)",
+    "independent_suite": "61 passed / 62 discovered, one explicit no-corpus-read skip",
+    "independent_review_revision": "draft r1.1; unchanged historical evaluator HEAD 0cdc379b2cd43d24780318becf9cae55af26c814",
+    "code_review": "OPEN; three additive boundaries: malformed external aggregate rows, nonfinite K0 logits, overflowing radial projection",
+    "status": "v0.2 public parser corrections only; evaluator unadopted; no language training",
+    "command_receipt_sha256": "3935007aa8f4e624d09eb51aaa4b6a3f5ddeba1fb9f70ab5702eb0649b13e1e1",
+    "independent_pinned_receipt_sha256": "0408d6ce2e021d25601d4b1a4df86c598ad212bdc05e6b223dabc3764845e5d0"
+  },
+  "reports": {
+    "attractor": {"path": "NEW_AI_ATTRACTOR_FULL_READING_2026_10_05.md", "sha256": "50eea99c44e445b2fdffa6e76a8af3dd1aeb609dfde4c0c668a1e06cc7bb715a", "revision": "1.1.0; archived copy only"},
+    "principia": {"path": "NEW_AI_PRINCIPIA_FULL_READING_2026_10_05.md", "sha256": "205bac31f1dcd4ae8360a62e8b1874851af23d0df0eec8d6749383f44e4a84fe", "revision": "1.1.0; archived copy only"},
+    "harness": {"path": "NEW_AI_ARXIV_2609_00006_KR8_APPLICATION_REVIEW_2026_10_05.md", "sha256": "ce4f5c1f808ba46a720b918fd2220b3c093721457d07dbce7c91d0f51242f8e3", "revision": "R1; read-only pilot proposed, not run"},
+    "e21_implementer": {"path": "E21_PUBLIC_CONTRACT_V02_REPORT.md", "sha256": "e4565fe51083c4e1ffe854642a5300fa64cfb49a6f8edb994f147ed5b38c2b8c", "revision": "v0.2 public proposal, archived at b7e3c6656d4ead02d81c523431a5df34fcdf0315"},
+    "e21_evaluator": {"path": "NEW_AI_E21_INDEPENDENT_CONTRACT_REVIEW_2026_10_06_PUBLIC.md", "sha256": "686dbe3258365618060ef57ef1604cbc3571347bab560f033c93dbfff063c686", "original_sha256": "6457c4de49ea0ad8bd98d4cb9dc1f9bd78e79354c800cf82a8edc4fb6d02a036", "revision": "draft r1.1; public copy redacts one Windows SID"}
+  },
+  "limits": "Owner approved bounded study preparation, not a custody seal or language outcome. Source-reading closure does not establish scientific truth, current-version identity or rights; E21 checks are public development, not adopted gates. E21 QA/difficulty quantities and hard cutoff remain unspecified. No benchmark model result or pilot execution."
+}

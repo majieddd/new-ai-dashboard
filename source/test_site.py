@@ -98,7 +98,7 @@ class SiteTests(unittest.TestCase):
         p.feed(page)
         for link in p.links:
             if link and not link.startswith("#"):
-                self.assertTrue((dest / link).is_file(), link)
+                self.assertTrue((dest / link.split("#", 1)[0]).is_file(), link)
         progress = (dest / "progress/index.html").read_text(encoding="utf-8")
         self.assertIn('href="../benchmarks/index.html"', progress)
         self.assertIn("No confirmed LLM result", progress)
