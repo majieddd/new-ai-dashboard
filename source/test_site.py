@@ -97,7 +97,7 @@ class SiteTests(unittest.TestCase):
         p = Tags()
         p.feed(page)
         for link in p.links:
-            if link and not link.startswith("#"):
+            if link and not link.startswith(("#", "https://")):
                 self.assertTrue((dest / link.split("#", 1)[0]).is_file(), link)
         progress = (dest / "progress/index.html").read_text(encoding="utf-8")
         self.assertIn('href="../benchmarks/index.html"', progress)

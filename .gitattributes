@@ -9,3 +9,13 @@
 /data/e21-public-v02-command.json -text
 /data/e21-independent-pinned-suite.json -text
 /data/e21-approved-preparation-readback.json -text
+/source/NEW_AI_E20_CPU_CLOCK_PREFLIGHT_2026_10_06.md -text
+/source/NEW_AI_E20_E21_GPU_RESERVATION_RIGHTS_RECONCILIATION_2026_10_06.md -text
+/source/NEW_AI_E20_E21_GPU_COMMAND_ENVELOPE_RECOVERY_2026_10_06.md -text
+/source/NEW_AI_ORIGINAL_GOAL_REQUIREMENTS_TRACE_2026_10_06.md -text
+/data/e20-cpu-preflight.json -text
+/data/e20-cpu-readback.json -text
+/data/e20-gpu-profile.json -text
+/data/e20-gpu-stream.json -text
+/data/e20-gpu-stream-recheck.json -text
+/data/e20-gpu-integrated.json -text

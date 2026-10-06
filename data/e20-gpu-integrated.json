@@ -1,0 +1,61 @@
+{
+  "scope": "DEV_SYNTHETIC_GPU_STREAM_ONLY; NOT E20 model/capability/acceptance outcome",
+  "weights": "random local Llama; no pretrained model",
+  "data": "toy token IDs only; no corpus or final split",
+  "seed": 101,
+  "versions": {
+    "python": "3.11.9",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.17.0",
+    "peft": "0.21.0"
+  },
+  "device": "NVIDIA GeForce RTX 5090 Laptop GPU",
+  "dtype": "bfloat16 core and adapters; float32 loss",
+  "geometry": {
+    "blocks": 4,
+    "windows_per_block": 2,
+    "prefix": 2,
+    "suffix": 3,
+    "vocab": 16,
+    "layers": 1,
+    "hidden": 32,
+    "lora_rank": 8
+  },
+  "cuda_free_preflight_bytes": 24172822528,
+  "cuda_total_bytes": 25650855936,
+  "cuda_peak_allocated_bytes_demo": 17091584,
+  "cuda_peak_reserved_bytes_demo": 23068672,
+  "test_count": 41,
+  "import_wall_seconds": 3.8101924000075087,
+  "test_wall_seconds": 1.423097399994731,
+  "demo_wall_seconds": 0.21909689996391535,
+  "total_wall_seconds": 5.46910069999285,
+  "max_wall_seconds": 120,
+  "audit_events": 79,
+  "adapter_updates": 8,
+  "training_targets": 24,
+  "scored_targets": 16,
+  "system_sum_nll": 44.67676903368812,
+  "active_sum_nll": 44.667851174168405,
+  "audit_sha256": "72f005bbc7d5217a27e855bfa102e3346f862e8e7be0f622a9a2f6cbe03cab86",
+  "checks": {
+    "stream_completed": true,
+    "clone_after_block_two": true,
+    "core_unchanged": true,
+    "A0_unchanged": true,
+    "frozen_parent": true,
+    "active_child_differs": true,
+    "mask_count": true,
+    "updates": true,
+    "training_targets": true,
+    "NLL_reconstructed": true
+  },
+  "source_sha256": {
+    "e20_gpu_backend.py": "45eebb4636ea8a6ab5bdc645f3e15e96fd01d9201d100b0a382cb043fc61387f",
+    "test_e20_gpu_backend.py": "a536f7f98f0042ac098ecc21522232c07eca6921474f54a3aac12e4385e5c12c",
+    "e20_stream.py": "6ed56c7a75a55c91cfec3e2c2246f5e0791e845fad45102869405bae12552eef",
+    "e20_fixture.py": "28655a90a90e1a8e0ef6698e74cc95ca9622816fd658fca4824b1939f0c13a85",
+    "run_e20_gpu_checks.py": "c29c6556637821fd60c3c06cf3e61a97c7708903a367b07bb0358534ae267b05"
+  },
+  "limitations": "Tiny randomly initialized model, original ToyRouter, synthetic 4x2x3 stream; not SmolLM2-1.7B fit, real corpus, rights clearance, independent final custody, or confirmatory E20. In-process cap excludes interpreter launch."
+}

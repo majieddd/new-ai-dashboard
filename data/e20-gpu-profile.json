@@ -1,0 +1,70 @@
+{
+  "scope": "DEV_SYNTHETIC_GPU_ONLY; NOT E20 model/capability/acceptance outcome",
+  "base_commit": "7eb56feac6d341b3094764cec2563aa4c0271dd3",
+  "weights": "locally random; no pretrained download",
+  "data": "synthetic token IDs only",
+  "device": "NVIDIA GeForce RTX 5090 Laptop GPU",
+  "torch": "2.11.0+cu128",
+  "geometry": {
+    "batch": 2,
+    "tokens": 512,
+    "vocab": 256,
+    "layers": 2,
+    "hidden": 128,
+    "dtype": "bfloat16",
+    "lora_rank": 8
+  },
+  "initial_free_bytes": 24275582976,
+  "initial_total_bytes": 25650855936,
+  "peak_cuda_allocated_bytes": 72701952,
+  "peak_cuda_reserved_bytes": 100663296,
+  "core_unchanged": true,
+  "A0_unchanged": true,
+  "active_adapter_updated": true,
+  "future_token_leak": false,
+  "max_prefix_vs_full_logprob_delta": 0.0,
+  "training_targets_per_step": 1022,
+  "time_limit_seconds": 120,
+  "total_wall_seconds": 0.7446301999734715,
+  "timing": [
+    {
+      "phase": "forward_512_batch2_0",
+      "wall_seconds": 0.0033607000950723886,
+      "cuda_event_seconds": 0.0033126399517059324
+    },
+    {
+      "phase": "forward_512_batch2_1",
+      "wall_seconds": 0.0032310999231413007,
+      "cuda_event_seconds": 0.00321068811416626
+    },
+    {
+      "phase": "forward_512_batch2_2",
+      "wall_seconds": 0.0035380000481382012,
+      "cuda_event_seconds": 0.0035068159103393555
+    },
+    {
+      "phase": "sixteen_prefixes_batch2",
+      "wall_seconds": 0.051298500038683414,
+      "cuda_event_seconds": 0.05127881622314453
+    },
+    {
+      "phase": "optimizer_step_511_targets_batch2_0",
+      "wall_seconds": 0.10959520004689693,
+      "cuda_event_seconds": 0.10956063842773438,
+      "synthetic_loss": 5.5835371017456055
+    },
+    {
+      "phase": "optimizer_step_511_targets_batch2_1",
+      "wall_seconds": 0.0075240000151097775,
+      "cuda_event_seconds": 0.007502463817596436,
+      "synthetic_loss": 5.583417892456055
+    },
+    {
+      "phase": "optimizer_step_511_targets_batch2_2",
+      "wall_seconds": 0.006848299992270768,
+      "cuda_event_seconds": 0.006830848217010498,
+      "synthetic_loss": 5.583174228668213
+    }
+  ],
+  "limitations": "Tiny random 2-layer model and synthetic tokens; not a SmolLM2-1.7B fit, throughput extrapolation, real router, rights check or approved confirmatory run."
+}

@@ -7,6 +7,7 @@ import hashlib
 import html
 import json
 from pathlib import Path
+from goal_status import verify as verify_goal
 
 REPORT_LABELS = {
     "attractor": "Archived Attractor 1.1.0 reading",
@@ -69,13 +70,13 @@ def load(source, data):
     for key, filename in RECEIPTS.items():
         if _sha(data / filename) != record["e21"][key]:
             raise ValueError(f"Changed raw receipt: {filename}")
+    record["_goal_evidence"] = verify_goal(record, source, data)
     return record
 
 
 def home_section(record):
-    date = html.escape(record["as_of_utc"])
     return (f'<section id="review-update"><h2>October 6 · reviewed evidence, not a new result</h2>'
-            f'<p class="lede">As of {date}: archived-source reviews and the E21 public CPU contract review '
+            '<p class="lede">Earlier October 6 public-preparation snapshot: archived-source reviews and the E21 public CPU contract review '
             'have advanced. The owner approved bounded E20/E21 preparation, not a study outcome. '
             'An approval-bound candidate now specifies E21 methods and a proposed 704-item QA workload, '
             'but is <strong>NOT FINAL-LOCKED</strong>. '
@@ -95,14 +96,15 @@ def progress_section(record):
         links.append(f'<li><a href="{html.escape(url, quote=True)}">{html.escape(label)}</a> '
                      f'— {html.escape(item["revision"])}; SHA-256 <code>{item["sha256"]}</code></li>')
     e21 = record["e21"]
-    return (f'<section id="updates"><h2>October 6 · review and source-reading update</h2>'
-            f'<p class="muted">As of {html.escape(record["as_of_utc"])}. '
+    return (f'<section id="updates"><h2>October 6 · earlier review and source-reading update</h2>'
+            '<p class="muted">This earlier preparation snapshot is dated, not the current model-delivery status. '
             'These are source and public software reviews—not new model trials, accepted evaluator gates, '
             'current-version or reuse-rights clearance.</p>'
             '<div class="block"><h3>Scientific and instrument status</h3><ul>'
             '<li>E19 <strong>FAILED</strong>; E20 and E21 pretrained language studies <strong>NOT RUN</strong>. '
-            'The last E20 public readiness checker reported BLOCKED/41 missing evidence predicates, not failed trials. '
-            'That receipt predates the owner approval; authorization alone does not clear its remaining checks.</li>'
+            'An October 5 E20 public readiness checker reported BLOCKED/41 missing evidence predicates, not failed trials. '
+            'That historical checklist predates owner approval and is not a fresh current blocker count; '
+            'approval alone does not establish rights, custody, fit or a GPU opening balance.</li>'
             '<li>Owner approval on October 6 authorizes preparation toward the full E20 SmolLM2-1.7B '
             'fresh-prose/grounded-QA proxy (NLL-only is a fallback), 192/64/512 human-verified QA targets '
             'subject to rights and lineage review, and separate exclusive GPU ceilings: E20 24h total '
