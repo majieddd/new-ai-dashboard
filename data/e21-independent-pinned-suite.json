@@ -1,0 +1,33 @@
+{
+  "name": "full_cpu_suite",
+  "args": [
+    "C:\\Users\\Majied\\jev-alt-bench\\envs\\main\\Scripts\\python.exe",
+    "-B",
+    "-c",
+    "import unittest\ns=unittest.defaultTestLoader.discover(\".\")\ndef walk(s):\n for x in s:\n  if isinstance(x,unittest.TestSuite): walk(x)\n  elif x.id().endswith(\"E19Tests.test_corpus_hash_counts_and_disjoint_splits\"):\n   n=x._testMethodName; setattr(x,n,unittest.skip(\"Scope: no corpus or final-data reads\")(getattr(x,n)))\nwalk(s)\nr=unittest.TextTestRunner(verbosity=2).run(s)\nraise SystemExit(not r.wasSuccessful())\n"
+  ],
+  "cwd": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-public-contract",
+  "returncode": 0,
+  "wall_seconds": 4.018687499999942,
+  "stdout_sha256": "b6d98af0665358e119bd1e69e19ab3fd6ed633c2bd07df30acb302a5db1d9266",
+  "stderr_sha256": "ff1271b223194bda92e3a42df8a5b2168f2cb5e9992f54326fc541d6d680c4bd",
+  "producing_revision_before": "12d86de2c6c94334f237c12fad02883e414598c1",
+  "revision_after": "12d86de2c6c94334f237c12fad02883e414598c1",
+  "source_sha256": {
+    "e21_mechanism.py": "6cab294da2fcb8588d385f0d119cafe7daa2394bfe34dcd7632d99daaf691f66",
+    "e21_scoring.py": "bc70b7c08f4037339da2039ab8bf8deae0c51b19a9ada7ba5e99f257496d31d1",
+    "run_e21_dev.py": "c9017b2adc616a9995a6af7b41afe24ada192eac7482e90e7d99a4ce2ddf6be9",
+    "e21_dev_config.json": "020eb15b447d5495e7bc550f1092abcc213453615c5e8326be86ba7758bee0a0",
+    "PROTOCOL_E21_V1.md": "671787a04a403b9342d3e9cf587626323367485e76e9a6f19760f0c5b2c96a64",
+    "e21_public_adversarial.py": "adbe037c5804669487ba6babb9e3ce8f793d2f1c98c2e20d372c2023b8764860",
+    "public_contract_v02.py": "23f5cc062e60731389f1dcb4e091dccd705177d7691285568071e460d908724b",
+    "test_e16.py": "1df5cadbed71f6432d56e2306e4af9e4fcc07198fcbde5d5ca935129c9e53e4f",
+    "test_e18.py": "f6b5083711572976e586ff42b3aa9eef102da5f7e5dd05aa223c9e79e5fb306d",
+    "test_e19.py": "18234b7c40ffbef35d7f4198ccf4b7e0f08e175eea82151808cc779a3997e1d0",
+    "test_e21.py": "c5b4336da934084bb6070bac7965db93a190fd7e26ecc28a5f82d79c45ea0f2c",
+    "test_e21_public_adversarial.py": "09b905d501604ed1b0295dea020b84627cdf5606f9f965723d123c4db8d0152d",
+    "test_public_contract_v02.py": "9eb0c3f2c2edd95850a4d0c67dd19c11e8df28593b3742c44b04c862e1605dbc",
+    "test_site.py": "949c0f91b9b7bda6edf5e44f25dc937603c2400a43b8a1172b28e2b1babe2ebf"
+  },
+  "all_checked_source_bytes_unchanged": true
+}
