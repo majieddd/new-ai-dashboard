@@ -1,6 +1,6 @@
 """Render the reviewed October 6 development update, never a scientific verdict.
 
-The reviewed report copies and two CPU receipts are pinned by byte hash. Report
+The reviewed report copies and three CPU receipts are pinned by byte hash. Report
 links point to GitHub's Markdown viewer because Pages/Jekyll changes .md routes.
 """
 import hashlib
@@ -14,10 +14,13 @@ REPORT_LABELS = {
     "harness": "Harness Engineering R1 application review",
     "e21_implementer": "E21 v0.2 implementer report",
     "e21_evaluator": "E21 independent contract review (SID-redacted public copy)",
+    "candidate_lock": "E20/E21 approval-bound candidate r0.1 (not final lock)",
+    "e21_approved_preparation": "E21 public CPU preparation r1.0.1",
 }
 RECEIPTS = {
     "command_receipt_sha256": "e21-public-v02-command.json",
     "independent_pinned_receipt_sha256": "e21-independent-pinned-suite.json",
+    "approved_preparation_readback_sha256": "e21-approved-preparation-readback.json",
 }
 OWNER_APPROVAL = "875101f24904db17a0c2b5f9bb0592d3a9077e01ce5be85590fb77dd5dcd7bd3"
 DECISION_SHEET_SHA256 = "4aa92eda05be3bfd6e5c9d6ff2717207f1339996a6f93293bdbb5fec6e9a3b31"
@@ -47,6 +50,16 @@ def load(source, data):
             approval["language_outcomes_run"]) != (
             OWNER_APPROVAL, DECISION_SHEET_SHA256, 24, 1, 4, 1, False, False):
         raise ValueError("Approval scope or unfulfilled boundary changed")
+    candidate = record["candidate_lock"]
+    if (candidate["status"], candidate["report_sha256"],
+            candidate["gpu_allowance_seconds_added_by_audit"]) != (
+            "APPROVAL_BOUND_PREPARATION_NOT_FINAL_LOCKED",
+            record["reports"]["candidate_lock"]["sha256"], 0):
+        raise ValueError("Candidate cannot become a final lock or model result")
+    if (record["e21"]["approved_preparation_suite"] !=
+            "70 passed / 71 discovered, one explicit no-corpus-read skip; 158 protected files unchanged"
+            or record["e21"]["approved_preparation_gpu_seconds_added"] != 0):
+        raise ValueError("E21 preparation scope changed")
     if set(record["reports"]) != set(REPORT_LABELS):
         raise ValueError("Missing or unexpected report")
     for key, report in record["reports"].items():
@@ -64,6 +77,8 @@ def home_section(record):
     return (f'<section id="review-update"><h2>October 6 · reviewed evidence, not a new result</h2>'
             f'<p class="lede">As of {date}: archived-source reviews and the E21 public CPU contract review '
             'have advanced. The owner approved bounded E20/E21 preparation, not a study outcome. '
+            'An approval-bound candidate now specifies E21 methods and a proposed 704-item QA workload, '
+            'but is <strong>NOT FINAL-LOCKED</strong>. '
             'E19 stays <strong>FAILED</strong>; E20/E21 language and all nine official '
             'benchmark lanes remain <strong>NOT RUN</strong>. The E22 validity review remains open. '
             'A public memory-fixture shortcut can reconstruct answers without retrieval.</p>'
@@ -95,6 +110,16 @@ def progress_section(record):
             'No pretrained fit, GPU reservation, model/data download, license clearance or allowance '
             f'consumption is established by this review. Approval event <code>{OWNER_APPROVAL}</code>; '
             f'original decision-sheet SHA-256 <code>{DECISION_SHEET_SHA256}</code>.</li>'
+            '<li>Evaluator candidate r0.1 is <strong>preparation only; NOT FINAL-LOCKED</strong>. '
+            'It proposes 128 E21 train, 64 dev and 256-new + 256-old final human-verified QA '
+            '(<strong>704 items</strong>), an adjudicated minimal essential-depth ≥3 hard cutoff, '
+            'k6/7/8 projected-stationarity checks, comparators and keyed paired aggregation. '
+            'No items are claimed curated and these new fields are not adopted. Owner disposition '
+            'of the new 704-QA nomination remains needed; the approved caps are not being reopened. '
+            f'Candidate SHA-256 <code>{html.escape(record["candidate_lock"]["report_sha256"])}</code>; '
+            f'audit receipt SHA-256 <code>{html.escape(record["candidate_lock"]["audit_receipt_sha256"])}</code>. '
+            'Audit: 14 wording checks, 119 protected files unchanged, 47 deduplicated public custody '
+            'events; zero GPU seconds added by this audit, not a project-wide cumulative ledger.</li>'
             '<li>All nine official benchmark lanes <strong>NOT RUN</strong>. The five-seed memory-fixture '
             'answer can be reconstructed from query-only cues: public grader validity is <strong>open</strong>, '
             'not a model accuracy result. Repair stays with its existing owner.</li>'
@@ -111,14 +136,26 @@ def progress_section(record):
             'Three boundaries remain in the existing code review: malformed aggregate rows, K0 nonfinite logits, '
             'and overflowing radial projection. Defect-characterization tests being green do not clear them. '
             'Matched token exposure did not match measured training work (energy/direct CPU fixture ≈1.84×); '
-            'a prospective E21 QA/difficulty and scoring lock, rights/lineage review, measured fit, and '
+            'disposition of the now-specified prospective E21 QA/difficulty and scoring fields, '
+            'rights/lineage review, measured fit, and '
             'independent final custody are still required. No separate-principal/off-host custodian has '
             'been named or denied-read canary check accepted; no final-data release is authorized. '
             'Five-seed consistency remains exploratory, not significance.</p>'
+            f'<p>Separate E21 public preparation at producing/verifying source '
+            f'<code>{html.escape(e21["approved_preparation_source_revision"])}</code>: '
+            f'<strong>{html.escape(e21["approved_preparation_suite"])}</strong>, '
+            'zero failures/errors; fresh CPU suite wall 1.1873071s excluding imports. '
+            'Keyed-join and one-dimensional quadratic stationarity checks are software fixtures, '
+            'not language reasoning evidence. The helper does not implement the candidate’s '
+            'vector-relative all-context k6/7/8 criterion or authenticate engine completion. '
+            'This milestone adds zero GPU seconds; cumulative usage remains to be reconciled. '
+            'Its model-card metadata declares Apache-2.0 but a standalone LICENSE URL returned 404; '
+            'rights/fit are not thereby cleared. Report and source revision are linked below.</p>'
             '<p><a href="../data/e21-public-v02-command.json">Raw implementer command receipt</a> '
             '· <a href="../data/e21-independent-pinned-suite.json">Raw independent pinned-suite receipt</a> '
+            '· <a href="../data/e21-approved-preparation-readback.json">Raw E21 CPU readback receipt</a> '
             '· <a href="../data/progress.json">Original five-seed fixture projection</a></p></div>'
-            '<div class="block"><h3>Accepted, bounded reading closures</h3><p>Archived Attractor and '
+            '<div class="block"><h3>Source readings and public preparation artifacts</h3><p>Archived Attractor and '
             'Principia II have coordinate and citation-accounting closures, not validated physics/model claims; '
             'their current versions and complete reuse rights remain unverified. The Harness Engineering '
             'survey supports a proposed read-only kr8 handoff pilot, not model self-improvement. The pilot '

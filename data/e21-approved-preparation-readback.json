@@ -1,0 +1,38 @@
+{
+  "scope": "READBACK_PUBLIC_CPU_ONLY_NOT_LANGUAGE_OUTCOME",
+  "producing_and_verifying_revision": "eedfb0928e3a3fb4a1cbd501a652238f06645c26",
+  "original_receipt_sha256": "2c48802e7c8ca609008157cf3b3847bd86e0a337a25f298254ef7cb153ada96b",
+  "candidate_r01_sha256": "db2e3341411f569271920e16fe526941286c005d21eb8650d024c632c7a9a2f7",
+  "candidate_is_not_adopted_by_this_check": true,
+  "source_sha256": {
+    "E21_APPROVED_PREPARATION_SCOPE_2026_10_06.md": "d3aada32d07c19c039afd31078fb114565dc03c7648a081136fe7e3219f3cbc4",
+    "e21_public_lock_checks.py": "00d76f738ee82ea13d78881b167d304d1ac0ac84df2b6799097637d526ba42a5",
+    "test_e21_public_lock_checks.py": "28033bdced7100bcba36aeb15679cccc0b787a762d253fd778e5402dc5f72825",
+    "run_e21_approved_preparation.py": "e035fd39718b4a3515799ce2f9d75508d29ed44bae238648139003f64b3e140a"
+  },
+  "metadata_raw_hashes_equal": true,
+  "protected_file_count": 158,
+  "protected_bytes_unchanged": true,
+  "historical_master_prefixes_verified": [
+    75752,
+    77324
+  ],
+  "cpu_checks": {
+    "tests_discovered": 71,
+    "tests_passed": 70,
+    "tests_skipped": [
+      {
+        "test": "test_e19.E19Tests.test_corpus_hash_counts_and_disjoint_splits",
+        "reason": "Scope: no historic AG News corpus/test-text reads during public preparation"
+      }
+    ],
+    "failures": 0,
+    "errors": 0,
+    "success": true,
+    "cpu_suite_wall_seconds_excluding_imports": 1.1873071000009077,
+    "log_sha256": "81b9c3760e9d6aacb8d630ba22fdae0ba4cb457d38e44d9f4cb3c065cec8edb0",
+    "unit_optimizer_assertions_are_not_new_experiment_training": true
+  },
+  "gpu_allowance_seconds_added": 0,
+  "model_tokenizer_corpus_final_download_or_access": false
+}

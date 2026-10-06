@@ -27,7 +27,7 @@ class Links(HTMLParser):
 class UpdateTests(unittest.TestCase):
     def test_pinned_reports_and_receipts(self):
         record = load(HERE, HERE.parent / "data")
-        self.assertEqual(len(record["reports"]), 5)
+        self.assertEqual(len(record["reports"]), 7)
         self.assertEqual(record["scientific_status"]["official_benchmark_lanes"], "9_NOT_RUN")
         for key in REPORT_LABELS:
             report = record["reports"][key]
@@ -40,6 +40,10 @@ class UpdateTests(unittest.TestCase):
         self.assertNotIn("S-1-5-21-", (HERE / record["reports"]["e21_evaluator"]["path"]).read_text())
         self.assertNotEqual(record["reports"]["e21_evaluator"]["sha256"],
                             record["reports"]["e21_evaluator"]["original_sha256"])
+        self.assertEqual(record["candidate_lock"]["report_sha256"],
+                         record["reports"]["candidate_lock"]["sha256"])
+        self.assertEqual(record["e21"]["approved_preparation_source_revision"],
+                         "eedfb0928e3a3fb4a1cbd501a652238f06645c26")
 
     def test_status_is_bounded_and_links_to_existing_artifacts(self):
         record = load(HERE, HERE.parent / "data")
@@ -53,6 +57,10 @@ class UpdateTests(unittest.TestCase):
         self.assertIn("E9 is assigned", progress)
         self.assertIn("Owner approval on October 6", progress)
         self.assertIn("No separate-principal/off-host custodian", progress)
+        self.assertIn("704 items", progress)
+        self.assertIn("NOT FINAL-LOCKED", progress)
+        self.assertIn("70 passed / 71 discovered", progress)
+        self.assertIn("1.1873071s", progress)
         self.assertNotIn("scientific PASS", progress)
         tags = Links()
         tags.feed(progress)
@@ -83,6 +91,11 @@ class UpdateTests(unittest.TestCase):
             (source / "status_update_2026_10_06.json").write_text(json.dumps(alternate), encoding="utf-8")
             with self.assertRaises(ValueError):
                 load(source, HERE.parent / "data")
+            alternate = copy.deepcopy(record)
+            alternate["candidate_lock"]["status"] = "FINAL_LOCKED"
+            (source / "status_update_2026_10_06.json").write_text(json.dumps(alternate), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load(source, HERE.parent / "data")
 
     def test_built_local_routes_and_bytes(self):
         build()
@@ -91,6 +104,8 @@ class UpdateTests(unittest.TestCase):
         progress = (out / "progress/index.html").read_text(encoding="utf-8")
         self.assertIn('id="review-update"', index)
         self.assertIn('id="updates"', progress)
+        self.assertIn("704 items", progress)
+        self.assertIn("70 passed / 71 discovered", progress)
         self.assertIn('href="progress/index.html#updates"', index)
         self.assertIn('budget later approved, independent custody still open', index)
         self.assertEqual(index.count('<section id="text-pilot">'), 1)
