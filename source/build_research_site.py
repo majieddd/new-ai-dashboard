@@ -382,6 +382,10 @@ def build(source=HERE, out=None):
     progress = json.loads((source / "results/PROGRESS/status.json").read_text(encoding="utf-8"))
     page = page.replace('<section id="text-pilot">', home_section(progress) + '<section id="text-pilot">')
     review = load_review_update(source, source.parent / "data")
+    historical_home = home_section(progress).replace(
+        'No approved budget or independent final custody.',
+        'October 5 snapshot; budget later approved, independent custody still open.')
+    page = page.replace(home_section(progress), historical_home)
     page = page.replace('<section id="progress">', home_review_update(review) + '<section id="progress">')
     page = page.replace('<a href="#text-pilot">Latest · E19</a>',
                         '<a href="#progress">Progress</a><a href="#text-pilot">Result · E19</a>')
@@ -396,6 +400,21 @@ def build(source=HERE, out=None):
     progress_dir = dest / "progress"
     progress_dir.mkdir(exist_ok=True)
     progress_page = render_progress(progress)
+    progress_page = progress_page.replace(
+        'Pending: owner decisions on scope, proposed compute and human QA/rights;',
+        'October 5 snapshot: owner scope/compute approvals were pending then; the October 6 '
+        'preparation approval below supersedes that part. Still pending: human QA/rights;')
+    progress_page = progress_page.replace(
+        'The proposed 24 exclusive GPU-hour E20 cap (up to 1 development hour) is a request, not an allocation.',
+        'The E20 24-hour/at-most-1-hour ceiling was approved for preparation on October 6; '
+        'no GPU window is reserved.')
+    progress_page = progress_page.replace(
+        'Language-model scope, independent scorer/code review, rights, custody, difficulty calibration, uncertainty design, cap and GPU slot remain unresolved.',
+        'October 5 snapshot: language scope/cap were pending then and were approved for preparation '
+        'October 6; independent scorer/code review, rights, custody, difficulty calibration, '
+        'uncertainty design and GPU slot remain unresolved.')
+    progress_page = progress_page.replace('</head>',
+        '<style>#updates li{overflow-wrap:anywhere;word-break:break-word}</style></head>')
     progress_page = progress_page.replace('</main>', review_progress_section(review) + '</main>')
     progress_page = progress_page.replace('<a href="#evidence">Evidence</a>',
                                           '<a href="#evidence">Evidence</a><a href="#updates">October 6 update</a>')

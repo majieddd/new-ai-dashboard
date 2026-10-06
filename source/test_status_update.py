@@ -92,7 +92,11 @@ class UpdateTests(unittest.TestCase):
         self.assertIn('id="review-update"', index)
         self.assertIn('id="updates"', progress)
         self.assertIn('href="progress/index.html#updates"', index)
+        self.assertIn('budget later approved, independent custody still open', index)
         self.assertEqual(index.count('<section id="text-pilot">'), 1)
+        self.assertIn('owner scope/compute approvals were pending then', progress)
+        self.assertIn('no GPU window is reserved', progress)
+        self.assertIn('#updates li{overflow-wrap:anywhere', progress)
         for name in ("status-2026-10-06.json", *RECEIPTS.values()):
             self.assertEqual((out / "data" / name).read_bytes(),
                              (HERE / "status_update_2026_10_06.json").read_bytes() if name == "status-2026-10-06.json"
