@@ -11,6 +11,7 @@ from pathlib import Path
 from statistics import mean
 from progress_site import home_section, render as render_progress
 from status_update import home_section as home_review_update, load as load_review_update, progress_section as review_progress_section
+from goal_status import STYLE as GOAL_STYLE, home_section as goal_home_section, results_section as goal_results_section
 from benchmark_preview import build as build_benchmark
 
 HERE = Path(__file__).resolve().parent
@@ -385,12 +386,20 @@ def build(source=HERE, out=None):
     historical_home = home_section(progress).replace(
         'No approved budget or independent final custody.',
         'October 5 snapshot; budget later approved, independent custody still open.')
+    historical_home = historical_home.replace('Current work · preparation, not a model win',
+                                              'October 5 evidence snapshot · not a model win')
+    historical_home = historical_home.replace('E20 language benchmark readiness', 'E20 October 5 checklist')
     page = page.replace(home_section(progress), historical_home)
     page = page.replace('<section id="progress">', home_review_update(review) + '<section id="progress">')
+    page = page.replace('<section id="review-update">',
+                        goal_home_section(review, review['_goal_evidence']) + '<section id="review-update">')
+    page = page.replace('</head>', f'<style>{GOAL_STYLE}</style></head>')
     page = page.replace('<a href="#text-pilot">Latest · E19</a>',
                         '<a href="#progress">Progress</a><a href="#text-pilot">Result · E19</a>')
     page = page.replace('<a href="#progress">Progress</a>',
                         '<a href="#review-update">Latest review</a><a href="#progress">Progress</a>')
+    page = page.replace('<a href="#review-update">Latest review</a>',
+                        '<a href="#goal">Original goal</a><a href="#review-update">Preparation</a>')
     page = page.replace('<a href="#progress">Progress</a>',
                         '<a href="#progress">Progress</a><a href="benchmarks/index.html">Benchmarks · proposal</a>')
     assert '<section id="text-pilot">' in page and page.count('<svg') == 3
@@ -413,8 +422,14 @@ def build(source=HERE, out=None):
         'October 5 snapshot: language scope/cap were pending then and were approved for preparation '
         'October 6; independent scorer/code review, rights, custody, difficulty calibration, '
         'uncertainty design and GPU slot remain unresolved.')
+    progress_page = progress_page.replace('<b class="coral">E20 · blocked</b>',
+                                          '<b class="coral">E20 · October 5 checklist</b>')
+    progress_page = progress_page.replace('<h2>E20 · language-study readiness</h2>',
+                                          '<h2>E20 · October 5 readiness snapshot</h2>')
+    progress_page = progress_page.replace('<main class="wrap">',
+                                          '<main class="wrap">' + goal_results_section(review, review['_goal_evidence']), 1)
     progress_page = progress_page.replace('</head>',
-        '<style>#updates li{overflow-wrap:anywhere;word-break:break-word}</style></head>')
+        '<style>#updates li{overflow-wrap:anywhere;word-break:break-word}' + GOAL_STYLE + '</style></head>')
     progress_page = progress_page.replace('</main>', review_progress_section(review) + '</main>')
     progress_page = progress_page.replace('<a href="#evidence">Evidence</a>',
                                           '<a href="#evidence">Evidence</a><a href="#updates">October 6 update</a>')
@@ -424,6 +439,10 @@ def build(source=HERE, out=None):
     for name in ("e21-public-v02-command.json", "e21-independent-pinned-suite.json",
                  "e21-approved-preparation-readback.json"):
         shutil.copyfile(source.parent / "data" / name, data / name)
+    e20_public = review["e20_verified_preparation"]
+    for item in (e20_public["cpu_receipt"], e20_public["cpu_readback"],
+                 *e20_public["gpu_receipts"].values()):
+        shutil.copyfile(source.parent / "data" / item["path"], data / item["path"])
     for key in PUBLISHED_SUMMARIES:
         shutil.copyfile(source / "results" / key / "summary.json", data / (key.lower() + ".json"))
     (data / "e14.json").write_text(json.dumps(e14, indent=2), encoding="utf-8")
@@ -439,6 +458,11 @@ def build(source=HERE, out=None):
                      "benchmark_preview_template.html", "benchmark_suite_v0_1.json",
                      "BENCHMARK_PREVIEW_PROTOCOL.md", "test_benchmark_preview.py",
                      "status_update.py", "status_update_2026_10_06.json", "test_status_update.py",
+                     "goal_status.py", "test_goal_status.py",
+                     "NEW_AI_E20_CPU_CLOCK_PREFLIGHT_2026_10_06.md",
+                     "NEW_AI_E20_E21_GPU_RESERVATION_RIGHTS_RECONCILIATION_2026_10_06.md",
+                     "NEW_AI_E20_E21_GPU_COMMAND_ENVELOPE_RECOVERY_2026_10_06.md",
+                     "NEW_AI_ORIGINAL_GOAL_REQUIREMENTS_TRACE_2026_10_06.md",
                      "NEW_AI_ATTRACTOR_FULL_READING_2026_10_05.md",
                      "NEW_AI_PRINCIPIA_FULL_READING_2026_10_05.md",
                      "NEW_AI_ARXIV_2609_00006_KR8_APPLICATION_REVIEW_2026_10_05.md",

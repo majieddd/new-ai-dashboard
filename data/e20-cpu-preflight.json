@@ -1,0 +1,127 @@
+{
+  "timestamp_utc": "2026-10-06T12:54:41.326641+00:00",
+  "scope": "CPU synthetic one-window full-vocabulary sidecar only; not model fit/outcome",
+  "source_commit": "f9e3a7ad82916ef158397c2c42396201f32b4913",
+  "protected_sha256": {
+    "e20_stream.py": "6ed56c7a75a55c91cfec3e2c2246f5e0791e845fad45102869405bae12552eef",
+    "bench/e20_fastpath/reference/e20_stream.py": "2480f4c037d226001eef73a89d14b2df062b7fcd1146728f48f0f7679ed450f1",
+    "profile_e20_fastpath.py": "6297d812ba857ddca4456ee6a295fe41f206f9f0ca25db7ebe54ed92d6bceb33",
+    "e20_profile_support.py": "039cfe08b19c6bc3346b090148496057f963ea0712899765bb083132012612eb"
+  },
+  "commands": [
+    {
+      "argv": [
+        "C:/Users/Majied/jev-alt-bench/envs/main/Scripts/python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "-q",
+        "test_e20_stream",
+        "test_e20_fastpath"
+      ],
+      "exit_code": 1,
+      "elapsed_wall_s": 14.727025099993625,
+      "stdout": "",
+      "stderr": "======================================================================\nERROR: test_sidecar_exact_trace_independent_readback_and_corruption_rejection (test_e20_fastpath.E20FastpathTests.test_sidecar_exact_trace_independent_readback_and_corruption_rejection)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e20-integrated\\test_e20_fastpath.py\", line 200, in test_sidecar_exact_trace_independent_readback_and_corruption_rejection\n    with tempfile.TemporaryDirectory(dir=os.environ[\"TMPDIR\"]) as directory:\n                                         ~~~~~~~~~~^^^^^^^^^^\n  File \"<frozen os>\", line 679, in __getitem__\nKeyError: 'TMPDIR'\n\n----------------------------------------------------------------------\nRan 46 tests in 14.554s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "argv": [
+        "C:/Users/Majied/jev-alt-bench/envs/main/Scripts/python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "-q",
+        "test_e20_stream",
+        "test_e20_fastpath"
+      ],
+      "exit_code": 0,
+      "elapsed_wall_s": 15.211970800002746,
+      "stdout": "",
+      "stderr": "----------------------------------------------------------------------\nRan 46 tests in 15.078s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:/Users/Majied/jev-alt-bench/envs/main/Scripts/python.exe",
+        "-B",
+        "profile_e20_fastpath.py",
+        "--arm",
+        "reference",
+        "--case",
+        "full_vocab",
+        "--measurement",
+        "timing",
+        "--out",
+        "C:\\Users\\Majied\\AppData\\Local\\hermes\\profiles\\cloudaigeneralist\\cache\\scratch\\E20_CPU_PREFLIGHT_2026_10_06\\reference"
+      ],
+      "exit_code": 0,
+      "elapsed_wall_s": 25.032756000000518,
+      "stdout": "{\n  \"scope\": \"BOUNDED_SYNTHETIC_CPU_ONLY; no LM or outcome claims\",\n  \"arm\": \"reference\",\n  \"case\": \"full_vocab\",\n  \"measurement\": \"timing\",\n  \"pid\": 30572,\n  \"python\": \"3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]\",\n  \"platform\": \"Windows-10-10.0.26200-SP0\",\n  \"cpu_logical_count\": 24,\n  \"source_path\": \"C:\\\\Users\\\\Majied\\\\.kr8\\\\REPOS\\\\new-ai-e20-integrated\\\\bench\\\\e20_fastpath\\\\reference\\\\e20_stream.py\",\n  \"source_sha256\": \"2480f4c037d226001eef73a89d14b2df062b7fcd1146728f48f0f7679ed450f1\",\n  \"base_commit\": \"7eb56feac6d341b3094764cec2563aa4c0271dd3\",\n  \"config\": {\n    \"cooldown_streak\": \"reset\",\n    \"terminal_event\": \"record_without_clone\",\n    \"blocks\": 1,\n    \"windows\": 1,\n    \"prefix_tokens\": 128,\n    \"suffix_tokens\": 384,\n    \"updates\": 1,\n    \"confirmation\": 2,\n    \"cooldown\": 8,\n    \"max_additions\": 2,\n    \"key_warm_prefixes\": 32,\n    \"logprob_tolerance\": 1e-06\n  },\n  \"vocab\": 49152,\n  \"wall_seconds\": 24.727551100004348,\n  \"cpu_seconds\": 24.453125,\n  \"stage_timings\": {},\n  \"memory\": {\n    \"rss_baseline_bytes\": 30216192,\n    \"rss_sampled_peak_bytes\": 35352576,\n    \"rss_sampled_delta_bytes\": 5136384,\n    \"windows_process_peak_working_set_bytes\": 38473728,\n    \"sampling_interval_seconds\": 0.01\n  },\n  \"reconstruction_seconds\": 0.10772490000090329,\n  \"reconstruction\": {\n    \"predictions\": 384,\n    \"scored_targets\": 329,\n    \"system_sum_nll\": 3554.086050084962,\n    \"active_sum_nll\": 3554.086050084962\n  },\n  \"system_loss\": {\n    \"sum_nll\": 3554.086050084962,\n    \"count\": 329\n  },\n  \"active_loss\": {\n    \"sum_nll\": 3554.086050084962,\n    \"count\": 329\n  },\n  \"audit_events\": 775,\n  \"audit_jsonl_bytes\": 407967,\n  \"audit_sha256\": \"cd424608c3e2e0cc47a795115435ca6aa0db9b0f7e09fc0c5a6ae4968afaf4e8\",\n  \"predict_calls\": 384,\n  \"updates\": 1,\n  \"snapshot_sink_calls\": 768,\n  \"unique_snapshots\": 8,\n  \"unique_snapshot_bytes\": 7864328,\n  \"snapshot_dedup_caveat\": \"ideal synthetic repeated distributions, not LM storage\",\n  \"excluded\": [\n    \"fixture/setup allocations and setup time\",\n    \"audit JSONL export\",\n    \"reconstruction\",\n    \"real inference\",\n    \"real tensor fingerprints\",\n    \"GPU\",\n    \"training\",\n    \"corpus\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:/Users/Majied/jev-alt-bench/envs/main/Scripts/python.exe",
+        "-B",
+        "profile_e20_fastpath.py",
+        "--arm",
+        "candidate",
+        "--case",
+        "full_vocab",
+        "--measurement",
+        "timing",
+        "--out",
+        "C:\\Users\\Majied\\AppData\\Local\\hermes\\profiles\\cloudaigeneralist\\cache\\scratch\\E20_CPU_PREFLIGHT_2026_10_06\\candidate"
+      ],
+      "exit_code": 0,
+      "elapsed_wall_s": 9.527427699998952,
+      "stdout": "{\n  \"scope\": \"BOUNDED_SYNTHETIC_CPU_ONLY; no LM or outcome claims\",\n  \"arm\": \"candidate\",\n  \"case\": \"full_vocab\",\n  \"measurement\": \"timing\",\n  \"pid\": 35388,\n  \"python\": \"3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]\",\n  \"platform\": \"Windows-10-10.0.26200-SP0\",\n  \"cpu_logical_count\": 24,\n  \"source_path\": \"C:\\\\Users\\\\Majied\\\\.kr8\\\\REPOS\\\\new-ai-e20-integrated\\\\e20_stream.py\",\n  \"source_sha256\": \"6ed56c7a75a55c91cfec3e2c2246f5e0791e845fad45102869405bae12552eef\",\n  \"base_commit\": \"7eb56feac6d341b3094764cec2563aa4c0271dd3\",\n  \"config\": {\n    \"cooldown_streak\": \"reset\",\n    \"terminal_event\": \"record_without_clone\",\n    \"blocks\": 1,\n    \"windows\": 1,\n    \"prefix_tokens\": 128,\n    \"suffix_tokens\": 384,\n    \"updates\": 1,\n    \"confirmation\": 2,\n    \"cooldown\": 8,\n    \"max_additions\": 2,\n    \"key_warm_prefixes\": 32,\n    \"logprob_tolerance\": 1e-06\n  },\n  \"vocab\": 49152,\n  \"wall_seconds\": 9.251519400000689,\n  \"cpu_seconds\": 9.15625,\n  \"stage_timings\": {},\n  \"memory\": {\n    \"rss_baseline_bytes\": 29937664,\n    \"rss_sampled_peak_bytes\": 35446784,\n    \"rss_sampled_delta_bytes\": 5509120,\n    \"windows_process_peak_working_set_bytes\": 37072896,\n    \"sampling_interval_seconds\": 0.01\n  },\n  \"reconstruction_seconds\": 0.12136750000354368,\n  \"reconstruction\": {\n    \"predictions\": 384,\n    \"scored_targets\": 329,\n    \"system_sum_nll\": 3554.086050084962,\n    \"active_sum_nll\": 3554.086050084962\n  },\n  \"system_loss\": {\n    \"sum_nll\": 3554.086050084962,\n    \"count\": 329\n  },\n  \"active_loss\": {\n    \"sum_nll\": 3554.086050084962,\n    \"count\": 329\n  },\n  \"audit_events\": 775,\n  \"audit_jsonl_bytes\": 407967,\n  \"audit_sha256\": \"cd424608c3e2e0cc47a795115435ca6aa0db9b0f7e09fc0c5a6ae4968afaf4e8\",\n  \"predict_calls\": 384,\n  \"updates\": 1,\n  \"snapshot_sink_calls\": 768,\n  \"unique_snapshots\": 8,\n  \"unique_snapshot_bytes\": 7864328,\n  \"snapshot_dedup_caveat\": \"ideal synthetic repeated distributions, not LM storage\",\n  \"excluded\": [\n    \"fixture/setup allocations and setup time\",\n    \"audit JSONL export\",\n    \"reconstruction\",\n    \"real inference\",\n    \"real tensor fingerprints\",\n    \"GPU\",\n    \"training\",\n    \"corpus\"\n  ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "measurements": {
+    "reference": {
+      "source_sha256": "2480f4c037d226001eef73a89d14b2df062b7fcd1146728f48f0f7679ed450f1",
+      "wall_seconds": 24.727551100004348,
+      "cpu_seconds": 24.453125,
+      "audit_sha256": "cd424608c3e2e0cc47a795115435ca6aa0db9b0f7e09fc0c5a6ae4968afaf4e8",
+      "audit_jsonl_bytes": 407967,
+      "predict_calls": 384,
+      "snapshot_sink_calls": 768,
+      "unique_snapshots": 8,
+      "unique_snapshot_bytes": 7864328,
+      "reconstruction": {
+        "predictions": 384,
+        "scored_targets": 329,
+        "system_sum_nll": 3554.086050084962,
+        "active_sum_nll": 3554.086050084962
+      }
+    },
+    "candidate": {
+      "source_sha256": "6ed56c7a75a55c91cfec3e2c2246f5e0791e845fad45102869405bae12552eef",
+      "wall_seconds": 9.251519400000689,
+      "cpu_seconds": 9.15625,
+      "audit_sha256": "cd424608c3e2e0cc47a795115435ca6aa0db9b0f7e09fc0c5a6ae4968afaf4e8",
+      "audit_jsonl_bytes": 407967,
+      "predict_calls": 384,
+      "snapshot_sink_calls": 768,
+      "unique_snapshots": 8,
+      "unique_snapshot_bytes": 7864328,
+      "reconstruction": {
+        "predictions": 384,
+        "scored_targets": 329,
+        "system_sum_nll": 3554.086050084962,
+        "active_sum_nll": 3554.086050084962
+      }
+    }
+  },
+  "audit_bytes_identical": true,
+  "reconstruction_identical": true,
+  "source_unchanged": true,
+  "worktree_clean_after": true,
+  "caveats": [
+    "one trial per arm is not a robust speed estimate",
+    "only repeated synthetic distributions; real LM snapshots could be unique",
+    "no GPU/model/tensor fingerprints/corpus/QA used",
+    "timed span excludes setup, audit export and reconstruction"
+  ]
+}

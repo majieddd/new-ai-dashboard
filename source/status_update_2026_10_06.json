@@ -1,6 +1,33 @@
 {
   "schema": "new-ai-reviewed-development-update-v1",
-  "as_of_utc": "2026-10-06T12:15:04Z",
+  "as_of_utc": "2026-10-06T17:38:19Z",
+  "original_goal": {
+    "runnable_real_language_bot_meeting_spec": false,
+    "e8_composition": "NOT_STARTED",
+    "e20_pretrained_language": "NOT_RUN",
+    "e21_pretrained_language": "NOT_RUN",
+    "next_checkpoint": "E20 measured development fit on the pinned pretrained core, followed by an independently reviewable frozen-core language adaptation/control run; only after rights, custody and chargeable GPU opening balance are resolved"
+  },
+  "e20_verified_preparation": {
+    "source_revision": "f9e3a7ad82916ef158397c2c42396201f32b4913",
+    "cpu_receipt": {"path": "e20-cpu-preflight.json", "sha256": "58d49f9cd9384606433ebdbfd9b800ce2d4b00f03ecb979df8226c96b7ba93a2"},
+    "cpu_readback": {"path": "e20-cpu-readback.json", "sha256": "2736f4b630bfb58a515bedac7d2b3b10eeee20a4a213e4cba14d42db346c402d"},
+    "gpu_receipts": {
+      "profile": {"path": "e20-gpu-profile.json", "sha256": "45d5d5b6dd4530db6c46c46ce0147d66d027d62429a3e054345ebe1e86ec128f"},
+      "stream": {"path": "e20-gpu-stream.json", "sha256": "af193b81c28be1be7a76c596a66ea0f11ae510defce55717eba0229532532988"},
+      "recheck": {"path": "e20-gpu-stream-recheck.json", "sha256": "958c34dddd724a6a65c14cacde9fd7485b1e02982d5021b96ff395a8530038d7"},
+      "integrated": {"path": "e20-gpu-integrated.json", "sha256": "b128cac0b775e400f4828cc045d2f51c10d6f5e010a9cfb158118d95e6e3ee9c"}
+    },
+    "reports": {
+      "cpu": {"path": "NEW_AI_E20_CPU_CLOCK_PREFLIGHT_2026_10_06.md", "sha256": "62c247049d41c323bad6b396469c19beea0a27d255d289c39baf4049a3579062"},
+      "gpu_accounting": {"path": "NEW_AI_E20_E21_GPU_RESERVATION_RIGHTS_RECONCILIATION_2026_10_06.md", "sha256": "b723fdcc641f416f6911a4ee89dc4d2ed87a60d385b6d956eaf32fc47b0c1307"},
+      "gpu_envelopes": {"path": "NEW_AI_E20_E21_GPU_COMMAND_ENVELOPE_RECOVERY_2026_10_06.md", "sha256": "0dc455f2c7462beb6b9685d870b645fb82c9e5fffbc2cf22fc988595bf8b1f7c"},
+      "goal_trace": {"path": "NEW_AI_ORIGINAL_GOAL_REQUIREMENTS_TRACE_2026_10_06.md", "sha256": "a7cbcb0c1651fa3217744a16c2b8567a1e9a2cc6378db329139f25d40c4877c6"}
+    },
+    "gpu_chargeable_balance": "UNKNOWN",
+    "rights_cleared_articles": 0,
+    "gpu_booking": "HELD"
+  },
   "scientific_status": {
     "e19": "FAILED",
     "e20_language": "NOT_RUN_BLOCKED",

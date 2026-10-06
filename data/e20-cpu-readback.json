@@ -1,0 +1,35 @@
+{
+  "scope": "read-only offline artifact reconstruction of two fresh CPU synthetic arms",
+  "source_commit": "f9e3a7ad82916ef158397c2c42396201f32b4913",
+  "rows": [
+    {
+      "arm": "reference",
+      "audit_sha256": "cd424608c3e2e0cc47a795115435ca6aa0db9b0f7e09fc0c5a6ae4968afaf4e8",
+      "audit_events": 775,
+      "snapshots_checked": 8,
+      "reconstruction": {
+        "predictions": 384,
+        "scored_targets": 329,
+        "system_sum_nll": 3554.086050084962,
+        "active_sum_nll": 3554.086050084962
+      },
+      "audit_bytes": 407967
+    },
+    {
+      "arm": "candidate",
+      "audit_sha256": "cd424608c3e2e0cc47a795115435ca6aa0db9b0f7e09fc0c5a6ae4968afaf4e8",
+      "audit_events": 775,
+      "snapshots_checked": 8,
+      "reconstruction": {
+        "predictions": 384,
+        "scored_targets": 329,
+        "system_sum_nll": 3554.086050084962,
+        "active_sum_nll": 3554.086050084962
+      },
+      "audit_bytes": 407967
+    }
+  ],
+  "all_hashes_and_counts_match": true,
+  "exact_before_after_audit_bytes": true,
+  "note": "no GPU/model/corpus/final data or outcome proof"
+}
