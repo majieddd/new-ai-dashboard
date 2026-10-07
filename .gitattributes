@@ -19,3 +19,17 @@
 /data/e20-gpu-stream.json -text
 /data/e20-gpu-stream-recheck.json -text
 /data/e20-gpu-integrated.json -text
+/source/PROSPECTIVE_CONTROL_REPORT_2026_10_07.md -text
+/source/E21_CORRECTION_REPORT_2026_10_07.md -text
+/source/HYBRID_CPU_DEV_REPORT_2026_10_07.md -text
+/source/HYBRID_SCHEDULED_CONTROL_REPORT_2026_10_07.md -text
+/data/oct7-prospective_summary.json -text
+/data/oct7-e21_suite_receipt.json -text
+/data/oct7-e21_reconstruction.json -text
+/data/oct7-e21_mutation_receipt.json -text
+/data/oct7-e21_preservation_receipt.json -text
+/data/oct7-hybrid_cpu_receipt.json -text
+/data/oct7-feedback_receipt.json -text
+/data/oct7-matched_control_receipt.json -text
+/data/oct7-manifest.json -text
+/source/results/OCT7/*.json -text

@@ -1,0 +1,135 @@
+[
+  {
+    "name": "review_missing_arm",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\review_missing_arm",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "seed_records.jsonl consistency"
+  },
+  {
+    "name": "review_fabricated_summary",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\review_fabricated_summary",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "config hash"
+  },
+  {
+    "name": "review_divergent_receipts",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\review_divergent_receipts",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "seed_records.jsonl consistency"
+  },
+  {
+    "name": "raw_nll_positive_rejection_control",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\raw_nll_positive_rejection_control",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "raw NLL: mismatch"
+  },
+  {
+    "name": "fixture_only",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\fixture_only",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "serialized fixture: dev_targets"
+  },
+  {
+    "name": "fixture_hash_only",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\fixture_hash_only",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "fixture tensor hash: dev_targets"
+  },
+  {
+    "name": "record_only",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\record_only",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "record.json consistency"
+  },
+  {
+    "name": "mean_only",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\mean_only",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "summary mean projections"
+  },
+  {
+    "name": "delta_only",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\delta_only",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "summary paired deltas"
+  },
+  {
+    "name": "wall_only",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\wall_only",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "summary training costs"
+  },
+  {
+    "name": "source_hash",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\source_hash",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "producing source hash: e21_mechanism.py"
+  },
+  {
+    "name": "source_omission",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\source_omission",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "producing source inventory"
+  },
+  {
+    "name": "unsupported_revision",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\unsupported_revision",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "unsupported producing revision"
+  },
+  {
+    "name": "config_change",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\config_change",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "producing config"
+  },
+  {
+    "name": "missing_arm_synchronized",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\missing_arm_synchronized",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "locked arm/depth coverage"
+  },
+  {
+    "name": "extra_depth_synchronized",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\extra_depth_synchronized",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "locked arm/depth coverage"
+  },
+  {
+    "name": "duplicate_seed",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\duplicate_seed",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "ordered seed coverage"
+  },
+  {
+    "name": "aggregate_synchronized",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\aggregate_synchronized",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "arm aggregate perplexity: mismatch"
+  },
+  {
+    "name": "negative_cost_synchronized",
+    "directory": "C:\\Users\\Majied\\.kr8\\REPOS\\new-ai-e21-correction\\correction_checks\\run-002\\mutations\\negative_cost_synchronized",
+    "rejected": true,
+    "type": "ValueError",
+    "reason": "training cost training_wall_seconds_including_logging: invalid number"
+  }
+]

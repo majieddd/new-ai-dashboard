@@ -2,6 +2,7 @@
 import copy
 import json
 import hashlib
+import shutil
 import tempfile
 import unittest
 from html.parser import HTMLParser
@@ -11,6 +12,7 @@ from xml.etree import ElementTree
 from benchmark_preview import public_protocol
 from build_research_site import (HERE, build, check_publication, e19_accuracy_chart,
                                  e19_timing_chart, load_results, render, summarise)
+from oct7_update import DATA_NAMES, load as load_oct7
 
 
 class Tags(HTMLParser):
@@ -162,6 +164,87 @@ class SiteTests(unittest.TestCase):
             future.write_text('{"experiment":"E20"}', encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "E20"):
                 check_publication(source, 'data/e15.json data/e16.json data/e17.json data/e18.json data/e19.json')
+
+    def test_oct7_home_publishes_the_negative_verdict(self):
+        dest = HERE / "research-site"
+        build(out=dest)
+        page = (dest / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(page.count('<section id="oct7">'), 1)
+        self.assertIn("no advantage established", page)
+        self.assertIn("-0.1302", page)          # mean paired difference, points
+        self.assertIn("4/12", page)             # strict feedback wins
+        self.assertIn("45/46", page)            # E21 correction suite
+        self.assertIn("0.98046875", page)       # seed-23 old accuracy after promotion
+        self.assertIn("0.99609375", page)       # seed-23 new accuracy after promotion
+        self.assertIn("NOT RUN", page)
+        self.assertIn("HELD", page)
+        self.assertIn('<a href="#oct7">Latest · Oct 7</a>', page)
+        self.assertIn('href="data/oct7-prospective_summary.json"', page)
+
+    def test_oct7_progress_numbers_match_archived_bytes(self):
+        dest = HERE / "research-site"
+        build(out=dest)
+        progress = (dest / "progress/index.html").read_text(encoding="utf-8")
+        record = load_oct7(HERE, HERE / "results" / "OCT7")
+        s = record["_raw"]["summary"]
+        self.assertEqual(progress.count('<section id="oct7-updates">'), 1)
+        self.assertIn("no advantage established", progress)
+        # Every displayed per-seed row equals the archived receipt entry.
+        for e in s["entries"]:
+            row = (f'<tr><th scope="row">{e["seed"]}</th>'
+                   f'<td>{100*e["feedback"]["new_test"]["accuracy"]:.6f}</td>'
+                   f'<td>{100*e["schedule"]["new_test"]["accuracy"]:.6f}</td>'
+                   f'<td>{100*e["paired_new_test_difference"]:+.6f}</td>')
+            self.assertIn(row, progress)
+        self.assertIn("6e8d71b", progress)      # protocol committed before execution
+        self.assertIn("307c02884538d4ddf1481dd06d972e49c36b297c", progress)
+        self.assertIn("86610ff3935009ecb204310b955a3402e651ca0c", progress)
+        self.assertIn("3f1be602cf1d8cfbd6bbf8dae7ee1d736611c5f1", progress)  # reviewed pin
+        self.assertIn("40224ff1a5aa27a32bf29d7f7d9664415dba290eb3190d155bb190b2fb4b47df", progress)
+        self.assertIn("19/19 receipt mutations rejected", progress)
+        self.assertIn("2,880 predictions", progress)
+        self.assertIn("64 revealed labels and 7,680 growth presentations", progress)
+        self.assertIn("96 and 11,520", progress)
+        # The chart is generated from raw entries and parses as XML.
+        start = progress.index('<svg class="chart" viewBox="0 0 960 420"')
+        chart = progress[start:progress.index("</svg>", start) + len("</svg>")]
+        ElementTree.fromstring(chart)
+        self.assertEqual(chart.count("seed 101"), 1)   # axis label
+        self.assertIn("Seed 101: feedback minus schedule +1.758 points", chart)  # tooltip
+        self.assertIn("feedback minus schedule", chart)
+        self.assertIn("required >= +2 pts", chart)
+        # Archived data files are published and hash-verified by the loader.
+        for name, expected in record["data_sha256"].items():
+            path = dest / "data" / ("oct7-" + name)
+            self.assertTrue(path.is_file(), name)
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), expected)
+        self.assertTrue((dest / "data/oct7-manifest.json").is_file())
+
+    def test_oct7_archived_bytes_are_immutable(self):
+        with tempfile.TemporaryDirectory() as temp:
+            temp = Path(temp)
+            for name in DATA_NAMES:
+                shutil.copyfile(HERE / "results/OCT7" / name, temp / name)
+            manifest = json.loads((HERE / "results/OCT7/oct7_manifest.json").read_text(encoding="utf-8"))
+            (temp / "oct7_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            for key, filename in manifest["report_paths"].items():
+                shutil.copyfile(HERE / filename, temp / filename)
+            # Baseline: the intact copy loads.
+            self.assertEqual(load_oct7(temp, temp)["schema"],
+                             "new-ai-oct7-verified-development-record-v1")
+            # One mutated archived byte fails the build.
+            with (temp / "prospective_summary.json").open("ab") as handle:
+                handle.write(b" ")
+            with self.assertRaisesRegex(ValueError, "Changed archived record"):
+                load_oct7(temp, temp)
+            # A manifest that no longer matches the bytes also fails.
+            shutil.copyfile(HERE / "results/OCT7/prospective_summary.json",
+                            temp / "prospective_summary.json")
+            good = json.loads((HERE / "results/OCT7/oct7_manifest.json").read_text(encoding="utf-8"))
+            good["data_sha256"]["prospective_summary.json"] = "0" * 64
+            (temp / "oct7_manifest.json").write_text(json.dumps(good), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Changed archived record"):
+                load_oct7(temp, temp)
 
 
 if __name__ == "__main__":

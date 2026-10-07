@@ -1,0 +1,45 @@
+{
+  "data_sha256": {
+    "e21_mutation_receipt.json": "1e3df00e75759fe398dc94f69a06e1659c1d89420ddef56f3cb4b3c05589e833",
+    "e21_preservation_receipt.json": "1c8fbc2c01b3968dd64747957d09502e52a82523819da1e6748213dad3ea3b25",
+    "e21_reconstruction.json": "1a9ebc4ed90d2a7cd15ce25bd451f1bbda93eedff9567d19e27976f0738bf9af",
+    "e21_suite_receipt.json": "2a769d66cd23d9f928be9ed6abddffcb31c7a5b91c1b54a34b9cff37732c9880",
+    "feedback_receipt.json": "156df16327d9d1d2b80a7d71171dc8eb7920e8850fced1e600c8652180df253c",
+    "hybrid_cpu_receipt.json": "b4241df90c39dbe91d813ee9c628761be327547513c9d49a99cb30da05d7a547",
+    "matched_control_receipt.json": "c3c9e57fdea251120280ba597e1004dc16f33f35635b11b5f7cc2db050596d95",
+    "prospective_summary.json": "6d29bb01c4b581e17a5cf1b7d509515f94378c90f2277fe1791a7a6e7edfa957"
+  },
+  "date": "2026-10-07",
+  "git_pins": {
+    "e21_correction_protocol_commit": "7b8f829",
+    "e21_evidence_commit": "48a8c5fcae82f48d73c556f60fe519dcf1a88624",
+    "e21_review_report_sha256": "40224ff1a5aa27a32bf29d7f7d9664415dba290eb3190d155bb190b2fb4b47df",
+    "e21_reviewed_pin": "3f1be602cf1d8cfbd6bbf8dae7ee1d736611c5f1",
+    "e21_tested_source_commit": "514d97645246de162be187a446536c2771746318",
+    "hybrid_dev_matched_control_head": "990f6ad855aec7fdacb8b138f76c5cd29284f1df",
+    "hybrid_dev_prototype_commit": "c394fc1",
+    "prospective_clean_head": "86610ff3935009ecb204310b955a3402e651ca0c",
+    "prospective_producing_commit": "307c02884538d4ddf1481dd06d972e49c36b297c",
+    "prospective_protocol_commit": "6e8d71b",
+    "release_foundation_commit": "a6bba80"
+  },
+  "report_paths": {
+    "e21_correction_report": "E21_CORRECTION_REPORT_2026_10_07.md",
+    "hybrid_cpu_report": "HYBRID_CPU_DEV_REPORT_2026_10_07.md",
+    "prospective_report": "PROSPECTIVE_CONTROL_REPORT_2026_10_07.md",
+    "scheduled_control_report": "HYBRID_SCHEDULED_CONTROL_REPORT_2026_10_07.md"
+  },
+  "report_sha256": {
+    "e21_correction_report": "f14eb6fdc3091a207d6017ead6ccd8739def6088383fe73417cdec37612f861a",
+    "hybrid_cpu_report": "968f6522012e747963976039fafd240b037e73ba366e47bd158a4988d868be45",
+    "prospective_report": "f1e49b2b94c1c757f1f4a59a0b57e007f2c796945c06c22560ebab60e181249f",
+    "scheduled_control_report": "3a15cf6e87c11d24aa44cee4dd8de6f9f0370cae609df6bd4a8d6e56052a9f26"
+  },
+  "schema": "new-ai-oct7-verified-development-record-v1",
+  "status": {
+    "e20_language": "NOT RUN",
+    "e21_language": "NOT RUN",
+    "gpu_ledger": "HELD",
+    "release_pr": "PR #1 accepted, merge pending owner word"
+  }
+}
