@@ -1,0 +1,31 @@
+{
+  "data_sha256": {
+    "probe_gpt-5.5.jsonl": "fe185db8e7c2adb17f6796858de1744302a3401abef21e2258082bd3d09c5287",
+    "probe_gpt-5.6-luna.jsonl": "bd3b4300c146abfd65a70dbc76c995943efc4ca0d089af601cdbc214346417f7",
+    "probe_gpt-5.6-sol.jsonl": "22f3d1a2715347ca3a42e49fb001fd1241a1f954e3de273982d53871d890217d",
+    "probe_gpt-5.6-terra.jsonl": "b2bd8a592f1335a15be4bc9e28cbf49f59d0ddbde23618ead35f9ddc2cbd0cb6",
+    "probe_manifest.json": "21fc053facef1bbc49cf3ab7e442ada218066bc61becb43e2d59b3372cb5d663",
+    "s_b_pilot_manifest.json": "69ff310ed4d1c4a277361a2d8d2ad7e0d710e051515fc0d7cd97865cbcaf166e"
+  },
+  "date": "2026-10-07",
+  "git_pins": {
+    "openai_baseline_head": "1d787df5af0dd8adf4313a968e0217e329026e47"
+  },
+  "report_paths": {
+    "openai_amendment": "OPENAI_PILOT_AMENDMENT_2026_10_07.md",
+    "openai_prep_report": "OPENAI_BASELINE_PREP_2026_10_07.md",
+    "openai_protocol": "OPENAI_BASELINE_PROTOCOL_2026_10_07.md"
+  },
+  "report_sha256": {
+    "openai_amendment": "d83a830e34f584bc634b99bfe67b1e9410118c3e17d8da4a51c0946efc1ea7d7",
+    "openai_prep_report": "973823560e3641459f04aa552e1616c46af8915b923a9544bf2bde12f6962a78",
+    "openai_protocol": "2c1b0464a08806c78f3171b985423b6a8a9ada3280031ae1d8c06ca0578595ee"
+  },
+  "schema": "new-ai-openai-prep-record-v1",
+  "status": {
+    "benchmark_calls": 0,
+    "cost_readback": "UNAVAILABLE",
+    "pilot": "CLEARED exploratory amendment, receipts to lead QA",
+    "plots": "NOT PUBLISHED \u2014 land only after pilot receipts pass lead QA"
+  }
+}

@@ -15,6 +15,9 @@ from goal_status import STYLE as GOAL_STYLE, home_section as goal_home_section, 
 from benchmark_preview import build as build_benchmark
 from oct7_update import (DATA_NAMES, load as load_oct7, home_section as oct7_home_section,
                          progress_section as oct7_progress_section)
+from openai_prep import (DATA_NAMES as OPENAI_DATA_NAMES, load as load_openai,
+                         home_section as openai_home_section,
+                         progress_section as openai_progress_section)
 
 HERE = Path(__file__).resolve().parent
 ARMS = (("self_assembly", "Readout-only (historically named self-assembly)", "#71d7bf"),
@@ -374,6 +377,8 @@ def build(source=HERE, out=None):
     page = render(e14, e15, e16, e17, e18)
     e19 = json.loads((source / "results/E19/summary.json").read_text(encoding="utf-8"))
     oct7 = load_oct7(source, source / "results" / "OCT7")
+    openai = load_openai(source, source / "results" / "OPENAI")
+    page = page.replace('<section id="rounds">', openai_home_section(openai) + '<section id="rounds">')
     page = page.replace('<section id="rounds">', oct7_home_section(oct7) + '<section id="rounds">')
     page = page.replace('<section id="rounds">', e19_section(e19) + '<section id="rounds">')
     page = page.replace('<a href="#rounds">Rounds</a>',
@@ -408,6 +413,8 @@ def build(source=HERE, out=None):
                         '<a href="#progress">Progress</a><a href="benchmarks/index.html">Benchmarks · proposal</a>')
     page = page.replace('<a href="#goal">Original goal</a><a href="#review-update">Preparation</a>',
                         '<a href="#oct7">Latest · Oct 7</a><a href="#goal">Original goal</a><a href="#review-update">Preparation</a>')
+    page = page.replace('<a href="#oct7">Latest · Oct 7</a><a href="#goal">Original goal</a><a href="#review-update">Preparation</a>',
+                        '<a href="#oct7">Latest · Oct 7</a><a href="#openai-prep">OpenAI · 0 runs</a><a href="#goal">Original goal</a><a href="#review-update">Preparation</a>')
     assert '<section id="text-pilot">' in page and page.count('<svg') == 3
     check_publication(source, page)
     build_benchmark(dest / "benchmarks")
@@ -439,8 +446,10 @@ def build(source=HERE, out=None):
     progress_page = progress_page.replace('</main>', review_progress_section(review) + '</main>')
     progress_page = progress_page.replace('<section id="updates">',
                                           oct7_progress_section(oct7) + '<section id="updates">')
-    progress_page = progress_page.replace('<a href="#evidence">Evidence</a>',
-                                          '<a href="#oct7-updates">October 7 record</a><a href="#evidence">Evidence</a>')
+    progress_page = progress_page.replace('<section id="updates">',
+                                          openai_progress_section(openai) + '<section id="updates">')
+    progress_page = progress_page.replace('<a href="#oct7-updates">October 7 record</a><a href="#evidence">Evidence</a>',
+                                          '<a href="#oct7-updates">October 7 record</a><a href="#openai-updates">OpenAI prep</a><a href="#evidence">Evidence</a>')
     (progress_dir / "index.html").write_text(progress_page, encoding="utf-8")
     shutil.copyfile(source / "results/PROGRESS/status.json", data / "progress.json")
     shutil.copyfile(source / "status_update_2026_10_06.json", data / "status-2026-10-06.json")
@@ -448,6 +457,10 @@ def build(source=HERE, out=None):
     for name in DATA_NAMES:
         shutil.copyfile(oct7_dir / name, data / ("oct7-" + name))
     shutil.copyfile(oct7_dir / "oct7_manifest.json", data / "oct7-manifest.json")
+    openai_dir = source / "results" / "OPENAI"
+    for name in OPENAI_DATA_NAMES:
+        shutil.copyfile(openai_dir / name, data / ("openai-" + name))
+    shutil.copyfile(openai_dir / "openai_manifest.json", data / "openai-manifest.json")
     for name in ("e21-public-v02-command.json", "e21-independent-pinned-suite.json",
                  "e21-approved-preparation-readback.json"):
         shutil.copyfile(source.parent / "data" / name, data / name)
@@ -486,7 +499,11 @@ def build(source=HERE, out=None):
                      "E21_CORRECTION_REPORT_2026_10_07.md",
                      "HYBRID_CPU_DEV_REPORT_2026_10_07.md",
                      "HYBRID_SCHEDULED_CONTROL_REPORT_2026_10_07.md",
-                     "oct7_update.py"):
+                     "OPENAI_BASELINE_PROTOCOL_2026_10_07.md",
+                     "OPENAI_PILOT_AMENDMENT_2026_10_07.md",
+                     "OPENAI_BASELINE_PREP_2026_10_07.md",
+                     "oct7_update.py",
+                     "openai_prep.py"):
         shutil.copyfile(source / filename, public_source / filename)
     method = ('<!doctype html><html lang="en"><meta charset="utf-8"><title>Method and limitations</title>'
               '<body style="font:1.2em/1.6 system-ui;max-width:850px;margin:40px auto;padding:18px;background:#0b1020;color:#f3f6ff">'

@@ -13,6 +13,7 @@ from benchmark_preview import public_protocol
 from build_research_site import (HERE, build, check_publication, e19_accuracy_chart,
                                  e19_timing_chart, load_results, render, summarise)
 from oct7_update import DATA_NAMES, load as load_oct7
+from openai_prep import DATA_NAMES as OPENAI_DATA_NAMES, load as load_openai
 
 
 class Tags(HTMLParser):
@@ -164,6 +165,66 @@ class SiteTests(unittest.TestCase):
             future.write_text('{"experiment":"E20"}', encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "E20"):
                 check_publication(source, 'data/e15.json data/e16.json data/e17.json data/e18.json data/e19.json')
+
+    def test_openai_prep_publishes_zero_runs_honestly(self):
+        dest = HERE / "research-site"
+        build(out=dest)
+        page = (dest / "index.html").read_text(encoding="utf-8")
+        progress = (dest / "progress/index.html").read_text(encoding="utf-8")
+        record = load_openai(HERE, HERE / "results" / "OPENAI")
+        self.assertEqual(page.count('<section id="openai-prep">'), 1)
+        self.assertEqual(progress.count('<section id="openai-updates">'), 1)
+        self.assertIn("0 benchmark runs", page)
+        self.assertIn("Actual benchmark calls: 0", progress)
+        self.assertIn("Cost readback: unavailable", progress)
+        self.assertIn("NOT temperature 0", progress)
+        self.assertIn("exploratory calibration", progress)
+        self.assertIn("2c1b0464a08806c78f3171b985423b6a8a9ada3280031ae1d8c06ca0578595ee", page)
+        self.assertIn("d83a830e34f584bc634b99bfe67b1e9410118c3e17d8da4a51c0946efc1ea7d7", page)
+        self.assertIn("69ff310ed4d1c4a277361a2d8d2ad7e0d710e051515fc0d7cd97865cbcaf166e", page)
+        self.assertIn("1d787df5af0dd8adf4313a968e0217e329026e47", page)
+        self.assertIn("51/51", page)
+        # Every probe row equals the archived manifest entry.
+        for m in record["_raw"]["probe"]["models"]:
+            row = (f'<tr><th scope="row">{m["id"]}</th>'
+                   f'<td>{m["cli"]}</td>'
+                   f'<td>{m["completed_at_file_mtime_utc"]}</td>'
+                   f'<td>{m["usage"]["input_tokens"]}</td>'
+                   f'<td>{m["usage"].get("cached_input_tokens", 0)}</td>'
+                   f'<td>{m["usage"]["output_tokens"]}</td>'
+                   f'<td><code>{m["source_jsonl_sha256"]}</code></td></tr>')
+            self.assertIn(row, progress)
+        # Published data files are byte-identical to the archived originals.
+        for name, expected in record["data_sha256"].items():
+            path = dest / "data" / ("openai-" + name)
+            self.assertTrue(path.is_file(), name)
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), expected)
+        self.assertTrue((dest / "data/openai-manifest.json").is_file())
+        # No plot is published from probes: the OpenAI section has no chart.
+        start = progress.index('<section id="openai-updates">')
+        end = progress.index('<section id="oct7-updates">')
+        self.assertNotIn("<svg", progress[start:end])
+
+    def test_openai_archived_bytes_are_immutable(self):
+        with tempfile.TemporaryDirectory() as temp:
+            temp = Path(temp)
+            for name in OPENAI_DATA_NAMES:
+                shutil.copyfile(HERE / "results/OPENAI" / name, temp / name)
+            manifest = json.loads((HERE / "results/OPENAI/openai_manifest.json").read_text(encoding="utf-8"))
+            (temp / "openai_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            for key, filename in manifest["report_paths"].items():
+                shutil.copyfile(HERE / filename, temp / filename)
+            self.assertEqual(load_openai(temp, temp)["schema"], "new-ai-openai-prep-record-v1")
+            with (temp / "probe_gpt-5.5.jsonl").open("ab") as handle:
+                handle.write(b" ")
+            with self.assertRaisesRegex(ValueError, "Changed archived record"):
+                load_openai(temp, temp)
+            shutil.copyfile(HERE / "results/OPENAI/probe_gpt-5.5.jsonl", temp / "probe_gpt-5.5.jsonl")
+            good = json.loads((HERE / "results/OPENAI/openai_manifest.json").read_text(encoding="utf-8"))
+            good["data_sha256"]["s_b_pilot_manifest.json"] = "0" * 64
+            (temp / "openai_manifest.json").write_text(json.dumps(good), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Changed archived record"):
+                load_openai(temp, temp)
 
     def test_oct7_home_publishes_the_negative_verdict(self):
         dest = HERE / "research-site"

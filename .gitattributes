@@ -33,3 +33,10 @@
 /data/oct7-matched_control_receipt.json -text
 /data/oct7-manifest.json -text
 /source/results/OCT7/*.json -text
+/source/OPENAI_BASELINE_PROTOCOL_2026_10_07.md -text
+/source/OPENAI_PILOT_AMENDMENT_2026_10_07.md -text
+/source/OPENAI_BASELINE_PREP_2026_10_07.md -text
+/data/openai-*.json -text
+/data/openai-*.jsonl -text
+/source/results/OPENAI/*.json -text
+/source/results/OPENAI/*.jsonl -text
