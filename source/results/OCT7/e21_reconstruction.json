@@ -1,0 +1,113 @@
+{
+  "reader_version": "E21-CPU-v1-audit-v2",
+  "verified": true,
+  "software_only": true,
+  "paired_seeds": 5,
+  "arms_per_seed": 9,
+  "prediction_records": 2880,
+  "training_step_records": 900,
+  "total_scored_training_token_exposure": 28800,
+  "training_head_evaluations": {
+    "energy": 1200,
+    "direct": 1200,
+    "one_step": 300
+  },
+  "training_candidate_gradient_calls": {
+    "energy": 1200,
+    "direct": 0,
+    "one_step": 0
+  },
+  "max_checkpoint_vs_raw_logit_error": 0.0,
+  "run_code_commit": "973914722c16967b1a219e329e7df231afe48278",
+  "verification_code_commit": "514d97645246de162be187a446536c2771746318",
+  "verification_tracked_changes": "",
+  "compatibility_rule": "pinned-producing-Git-blobs-LF-or-CRLF-v1; corrected-reconstruction-v2",
+  "producing_canonical_git_blob_sha256": {
+    "PROTOCOL_E21_V1.md": "53ad554e5badaab7a79c23fed68df056ea9497039d4007005b703d4b90e2d247",
+    "e21_dev_config.json": "427d298612ffafb2e9e0fffc9367215a1dd025d4d9e840faac1b8a72d4156ae8",
+    "e21_mechanism.py": "a000c2d0d5bd4c402ff6ca726d35c3af64bbdaf823ca462845b5a70bc1f842ab",
+    "e21_scoring.py": "2c1dfdf36864fe9b748c56ad3007cb3701fe9d2b46a0d441f1e07f7f0aa89d44",
+    "run_e21_dev.py": "322dae090679def78872de8a962826baeec2b795a3b5570ce56d316ebbf8cad8",
+    "test_e21.py": "b6de4b1bac21946d3ed398c0b5e4ec01cc27e60a0132119d76866fa9c82020b4"
+  },
+  "reconstruction_source_sha256": {
+    "PROTOCOL_E21_V1.md": "671787a04a403b9342d3e9cf587626323367485e76e9a6f19760f0c5b2c96a64",
+    "e21_dev_config.json": "020eb15b447d5495e7bc550f1092abcc213453615c5e8326be86ba7758bee0a0",
+    "e21_mechanism.py": "b514033695a68b29eb7bf95a4b5f5e56dda4c77dc8ebba6ca42f95cf843f3c65",
+    "e21_scoring.py": "2e834124d736ac8e14ee904767ec5fc7d72f91457248f8dc973181184da389de",
+    "run_e21_dev.py": "c9017b2adc616a9995a6af7b41afe24ada192eac7482e90e7d99a4ce2ddf6be9",
+    "test_e21.py": "c5b4336da934084bb6070bac7965db93a190fd7e26ecc28a5f82d79c45ea0f2c",
+    "verify_e21_dev_v2.py": "67e4f9af8a0bd35e1d050ae9014fb87b5e15fa3a69448b4ce2d45df2e590eb01"
+  },
+  "all_serialized_fixtures_and_redundant_records_consistent": true,
+  "prior_results_changed_since_base": false,
+  "fresh_optimizer_replay": false,
+  "recomputed_mean_fixture_scores": {
+    "frozen_k0": {
+      "nll_nats_per_token": 1.5217263994885044,
+      "accuracy": 0.275,
+      "inference_scoring_telemetry_wall_seconds": 0.00036764002870768306
+    },
+    "random_energy_k4": {
+      "nll_nats_per_token": 1.5168114347707382,
+      "accuracy": 0.284375,
+      "inference_scoring_telemetry_wall_seconds": 0.002051900001242757
+    },
+    "energy_k1": {
+      "nll_nats_per_token": 1.2299633168500401,
+      "accuracy": 0.496875,
+      "inference_scoring_telemetry_wall_seconds": 0.0008467600215226412
+    },
+    "energy_k4": {
+      "nll_nats_per_token": 0.9267260288272446,
+      "accuracy": 0.671875,
+      "inference_scoring_telemetry_wall_seconds": 0.002003359980881214
+    },
+    "energy_k8": {
+      "nll_nats_per_token": 0.931724869031713,
+      "accuracy": 0.665625,
+      "inference_scoring_telemetry_wall_seconds": 0.003654000023379922
+    },
+    "direct_k1": {
+      "nll_nats_per_token": 1.1979814957077852,
+      "accuracy": 0.509375,
+      "inference_scoring_telemetry_wall_seconds": 0.0004202400101348758
+    },
+    "direct_k4": {
+      "nll_nats_per_token": 0.9376331269966351,
+      "accuracy": 0.659375,
+      "inference_scoring_telemetry_wall_seconds": 0.0008579000132158399
+    },
+    "direct_k8": {
+      "nll_nats_per_token": 0.9520449788369915,
+      "accuracy": 0.671875,
+      "inference_scoring_telemetry_wall_seconds": 0.00134139999281615
+    },
+    "one_step_k1": {
+      "nll_nats_per_token": 1.0318766546908604,
+      "accuracy": 0.615625,
+      "inference_scoring_telemetry_wall_seconds": 0.0004124999977648258
+    }
+  },
+  "recomputed_paired_deltas": {
+    "direct_k4": [
+      -0.019103673257468645,
+      0.00731682166221459,
+      0.010094988900857249,
+      0.04146228059024892,
+      0.014765072951100633
+    ],
+    "one_step_k1": [
+      0.14154870973017397,
+      0.048762628944566844,
+      0.12992049636894465,
+      0.10801981241216774,
+      0.09750148186222563
+    ]
+  },
+  "historical_training_wall_seconds_by_arm": {
+    "energy": 1.1318998999195173,
+    "direct": 0.6138554001227021,
+    "one_step": 0.32368530007079244
+  }
+}

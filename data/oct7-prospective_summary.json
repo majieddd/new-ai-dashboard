@@ -1,0 +1,751 @@
+{
+  "kind": "prospective_synthetic_cpu_control_summary",
+  "protocol_sha256": "82821f72ad1429a40c9e14f95817ef8c9f250d3587cfdffabcdde769e174cf2a",
+  "seed_range": [
+    101,
+    112
+  ],
+  "completed": 12,
+  "errored": 0,
+  "mean_paired_new_test_difference": -0.0013020833333333333,
+  "strict_feedback_wins": 4,
+  "mean_feedback_old_retention_loss": 0.01318359375,
+  "feedback_inclusive_process_cpu_seconds": 4.625,
+  "schedule_inclusive_process_cpu_seconds": 4.484375,
+  "cpu_ratio": 1.0313588850174216,
+  "criteria": {
+    "mean_new_test_diff_at_least_0_02": false,
+    "strict_feedback_wins_at_least_9": false,
+    "mean_old_retention_loss_at_most_0_02": true,
+    "total_inclusive_cpu_ratio_at_most_1_10": true
+  },
+  "verdict": "no advantage established",
+  "entries": [
+    {
+      "seed": 101,
+      "receipt_sha256": "d87c846c149454b863e993ca68d76b23d8273ae3638cb9a54037f8a91ea36049",
+      "status": "complete",
+      "paired_new_test_difference": 0.017578125,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01171875,
+        "old_test": {
+          "nll": 0.09565831154330354,
+          "accuracy": 0.984375
+        },
+        "new_test": {
+          "nll": 0.10138396617897977,
+          "accuracy": 0.986328125
+        },
+        "inclusive_totals": {
+          "wall_seconds": 1.0852067000523675,
+          "process_cpu_seconds": 0.96875,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01171875,
+        "old_test": {
+          "nll": 0.09318921452728904,
+          "accuracy": 0.984375
+        },
+        "new_test": {
+          "nll": 0.10757667488928191,
+          "accuracy": 0.96875
+        },
+        "inclusive_totals": {
+          "wall_seconds": 1.0741741000092588,
+          "process_cpu_seconds": 0.984375,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 102,
+      "receipt_sha256": "49344dea9ec908334afd4fa8ad33d989db9c5264af56f48d5766e3c3562466dc",
+      "status": "complete",
+      "paired_new_test_difference": -0.01953125,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.009765625,
+        "old_test": {
+          "nll": 0.062284552939237126,
+          "accuracy": 0.982421875
+        },
+        "new_test": {
+          "nll": 0.18692365182979037,
+          "accuracy": 0.962890625
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.29163129997323267,
+          "process_cpu_seconds": 0.28125,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.009765625,
+        "old_test": {
+          "nll": 0.06411142137302289,
+          "accuracy": 0.982421875
+        },
+        "new_test": {
+          "nll": 0.17686404012277757,
+          "accuracy": 0.982421875
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3015324000152759,
+          "process_cpu_seconds": 0.265625,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 103,
+      "receipt_sha256": "b3ec340f6cc01332d08c5e724195f5ff4d620096658df6a6147e8343bb246497",
+      "status": "complete",
+      "paired_new_test_difference": -0.009765625,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.017578125,
+        "old_test": {
+          "nll": 0.1222203479571155,
+          "accuracy": 0.97265625
+        },
+        "new_test": {
+          "nll": 0.1460331699134969,
+          "accuracy": 0.984375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.35288970003603026,
+          "process_cpu_seconds": 0.375,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.015625,
+        "old_test": {
+          "nll": 0.11982639070472083,
+          "accuracy": 0.974609375
+        },
+        "new_test": {
+          "nll": 0.1478515545702781,
+          "accuracy": 0.994140625
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3314731000282336,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 104,
+      "receipt_sha256": "1f94e682b5fecf1273b3271bdcd972fe5af5f24e51720e10c10ff97d40c7e337",
+      "status": "complete",
+      "paired_new_test_difference": -0.00390625,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01171875,
+        "old_test": {
+          "nll": 0.11566899367102168,
+          "accuracy": 0.962890625
+        },
+        "new_test": {
+          "nll": 0.16364411586498145,
+          "accuracy": 0.96484375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.34315790006075986,
+          "process_cpu_seconds": 0.34375,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01171875,
+        "old_test": {
+          "nll": 0.11632265373760203,
+          "accuracy": 0.962890625
+        },
+        "new_test": {
+          "nll": 0.16040510418272125,
+          "accuracy": 0.96875
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.33825890003936365,
+          "process_cpu_seconds": 0.3125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 105,
+      "receipt_sha256": "1b5781bc1bca6f0ff183e3753fde78d5ca48cff449e31917b782ae9be594785c",
+      "status": "complete",
+      "paired_new_test_difference": 0.017578125,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01953125,
+        "old_test": {
+          "nll": 0.08814274038234597,
+          "accuracy": 0.98046875
+        },
+        "new_test": {
+          "nll": 0.12806294253500927,
+          "accuracy": 0.99609375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3472052000288386,
+          "process_cpu_seconds": 0.34375,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01953125,
+        "old_test": {
+          "nll": 0.08754842552340925,
+          "accuracy": 0.98046875
+        },
+        "new_test": {
+          "nll": 0.13598777215142405,
+          "accuracy": 0.978515625
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3450124000373762,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 106,
+      "receipt_sha256": "409e6124cbb065506015abc46faebf7dcbcfa0a6d8152603a4e2918b1960e01b",
+      "status": "complete",
+      "paired_new_test_difference": -0.01953125,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.00390625,
+        "old_test": {
+          "nll": 0.07053663091519265,
+          "accuracy": 0.98828125
+        },
+        "new_test": {
+          "nll": 0.15824871707423316,
+          "accuracy": 0.970703125
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.34725739996065386,
+          "process_cpu_seconds": 0.34375,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.00390625,
+        "old_test": {
+          "nll": 0.07128087315763187,
+          "accuracy": 0.98828125
+        },
+        "new_test": {
+          "nll": 0.15372010437664058,
+          "accuracy": 0.990234375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.34468599993851967,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 107,
+      "receipt_sha256": "7c4f586f12cf4b6e257d759e2c3844b713736189defd040206158fd50503c7c2",
+      "status": "complete",
+      "paired_new_test_difference": 0.01171875,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.009765625,
+        "old_test": {
+          "nll": 0.06238148335287785,
+          "accuracy": 0.986328125
+        },
+        "new_test": {
+          "nll": 0.18726983033743788,
+          "accuracy": 0.990234375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.34898769995197654,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.009765625,
+        "old_test": {
+          "nll": 0.0622530638583577,
+          "accuracy": 0.986328125
+        },
+        "new_test": {
+          "nll": 0.18449793178576004,
+          "accuracy": 0.978515625
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.33670289992005564,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 108,
+      "receipt_sha256": "f058535f25d16b4d94503ec5ffa0c96a2d6b0bcd4cb6f4a9c672997990e94597",
+      "status": "complete",
+      "paired_new_test_difference": 0.0,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01171875,
+        "old_test": {
+          "nll": 0.071160129077458,
+          "accuracy": 0.982421875
+        },
+        "new_test": {
+          "nll": 0.14728458894281635,
+          "accuracy": 0.984375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.33156680001411587,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.01171875,
+        "old_test": {
+          "nll": 0.07056116995620182,
+          "accuracy": 0.982421875
+        },
+        "new_test": {
+          "nll": 0.14634427271718495,
+          "accuracy": 0.984375
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.33898479997878894,
+          "process_cpu_seconds": 0.3125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 109,
+      "receipt_sha256": "96f91ad5f6e86501bff21bf492a1c231adfc7e31f5185308442c434156f6fa2a",
+      "status": "complete",
+      "paired_new_test_difference": -0.013671875,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.017578125,
+        "old_test": {
+          "nll": 0.125699380009813,
+          "accuracy": 0.974609375
+        },
+        "new_test": {
+          "nll": 0.13382824793300332,
+          "accuracy": 0.986328125
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.32750350004062057,
+          "process_cpu_seconds": 0.3125,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.017578125,
+        "old_test": {
+          "nll": 0.12931438157661485,
+          "accuracy": 0.974609375
+        },
+        "new_test": {
+          "nll": 0.13103897787626628,
+          "accuracy": 1.0
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.32422690000385046,
+          "process_cpu_seconds": 0.3125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 110,
+      "receipt_sha256": "7020410609d99260084cec1841b083527c82a9e1546b09204214089c4a9d1e0a",
+      "status": "complete",
+      "paired_new_test_difference": 0.0,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.017578125,
+        "old_test": {
+          "nll": 0.10656992258178871,
+          "accuracy": 0.974609375
+        },
+        "new_test": {
+          "nll": 0.14517030407238732,
+          "accuracy": 0.98828125
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.33760690002236515,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.017578125,
+        "old_test": {
+          "nll": 0.1077545394290512,
+          "accuracy": 0.974609375
+        },
+        "new_test": {
+          "nll": 0.14183468746427652,
+          "accuracy": 0.98828125
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.34618180003599264,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 111,
+      "receipt_sha256": "8fa894f6546e1a11af2d6bc0136c2d88136af4cf74434ede84a52032dcd43504",
+      "status": "complete",
+      "paired_new_test_difference": 0.0,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.013671875,
+        "old_test": {
+          "nll": 0.10778116924856052,
+          "accuracy": 0.98046875
+        },
+        "new_test": {
+          "nll": 0.14586004985497542,
+          "accuracy": 0.98046875
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.353292199986754,
+          "process_cpu_seconds": 0.34375,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.013671875,
+        "old_test": {
+          "nll": 0.104943177067192,
+          "accuracy": 0.98046875
+        },
+        "new_test": {
+          "nll": 0.14634763659432323,
+          "accuracy": 0.98046875
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3355619000212755,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    },
+    {
+      "seed": 112,
+      "receipt_sha256": "cf10cfc91e1803dfabc46b668866f0ea6754b2b0e0620708ac360cca92ddf67a",
+      "status": "complete",
+      "paired_new_test_difference": 0.00390625,
+      "feedback": {
+        "trigger_block": 2,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.013671875,
+        "old_test": {
+          "nll": 0.09968930400436528,
+          "accuracy": 0.984375
+        },
+        "new_test": {
+          "nll": 0.12087351893482717,
+          "accuracy": 0.982421875
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3358046999492217,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 322,
+          "forward_examples": 30464,
+          "candidate_gradient_steps": 696,
+          "candidate_gradient_example_steps": 65472,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 24960,
+          "calibration_examples": 320,
+          "observation_examples": 64,
+          "checkpoint_written_bytes": 23047,
+          "checkpoint_read_bytes": 23047
+        }
+      },
+      "schedule": {
+        "trigger_block": 3,
+        "decision": "PROMOTE",
+        "old_retention_loss": 0.013671875,
+        "old_test": {
+          "nll": 0.0974490987600222,
+          "accuracy": 0.984375
+        },
+        "new_test": {
+          "nll": 0.12531653354886005,
+          "accuracy": 0.978515625
+        },
+        "inclusive_totals": {
+          "wall_seconds": 0.3359966999560129,
+          "process_cpu_seconds": 0.328125,
+          "forward_calls": 310,
+          "forward_examples": 33920,
+          "candidate_gradient_steps": 660,
+          "candidate_gradient_example_steps": 75840,
+          "optimizer_steps": 300,
+          "optimizer_example_presentations": 28800,
+          "calibration_examples": 0,
+          "observation_examples": 96,
+          "checkpoint_written_bytes": 22983,
+          "checkpoint_read_bytes": 22983
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Public synthetic known-shift gate; supervised observations, not general novelty discovery.",
+    "The fixed schedule gets 96 labels; feedback uses only labels revealed through its alert.",
+    "One thread, sequential timing; not a hardware-independent speed benchmark.",
+    "No language, pretrained model, E20/E21 outcome, GPU, or resident-model change."
+  ]
+}

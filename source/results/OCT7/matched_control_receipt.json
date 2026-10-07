@@ -1,0 +1,97 @@
+{
+  "kind": "synthetic_cpu_matched_schedule_control",
+  "seed": 23,
+  "device": "cpu",
+  "schedule_block_fixed_by_caller": 2,
+  "feedback_alert_block_verified_for_matching_only": 2,
+  "trigger_rule": "scheduled at caller-specified block, no feedback detection",
+  "post_hoc_limitation": "Block 2 was chosen after the seed-23 alert was already known; this pairing cannot estimate a causal trigger-timing advantage.",
+  "source_receipt_sha256": "156df16327d9d1d2b80a7d71171dc8eb7920e8850fced1e600c8652180df253c",
+  "source_pre_growth_sha256": "3fbd4b155d31cb33a37ebf226c749ff03588655e6a2b5640b737941189a0055c",
+  "source_promoted_sha256": "9a341a9f1e978ecc7fe20b83a1718bf75fd9cecd146a817ebfa7d4f6c2a5c1a0",
+  "data": {
+    "old_train": {
+      "examples": 512,
+      "x_sha256": "21d35ed39b1590933d5794e2d8ab32284f33c1210e4f8042bc9afd5341d7bd35",
+      "y_sha256": "bbbc986e8c004ac951dc766b17de8c4b6e299d095827fe106daf2cbca9f50ea1"
+    },
+    "old_calibration": {
+      "examples": 320,
+      "x_sha256": "dea92232f104bdaec5f3fbb5b73de1e88ca055c92b3135389f643a228720dc22",
+      "y_sha256": "188eeb00a60b9adc8395bd324216b9479af99a96f59c49ff6363bd4e4987b03a"
+    },
+    "old_dev": {
+      "examples": 512,
+      "x_sha256": "d44d58b3bfc05c2f78ad6accb52d9f263d927b0a80f2fb139bf715db0fedc4d9",
+      "y_sha256": "b0901a05d4c11cb5f9e1f66402f78cc77089d1acb70daa4ee1d1c1267d73a5b3"
+    },
+    "new_train": {
+      "examples": 512,
+      "x_sha256": "eb4036430f2065c2a31fa4870ef9013fddd7721cbac0cc71dc44ec2ad0bb465f",
+      "y_sha256": "b816100ff81656019a46c3479e1058ae0bbc46ed96edfe6c6b65f353f1d5b0b7"
+    },
+    "new_dev": {
+      "examples": 512,
+      "x_sha256": "ccb4b60dc480e3a69f21f534352c260928c80a8bea66bd807476aef27be25bfc",
+      "y_sha256": "b1a1e87362752a6430872f863657386227831acf489627a80870b3c748705438"
+    }
+  },
+  "observed_examples": 64,
+  "training": {
+    "stage": "growth",
+    "steps": 120,
+    "lr": 0.06,
+    "batch_size": 64,
+    "batch_size_ceiling": 96,
+    "examples_seen_by_optimizer": 7680,
+    "elapsed_wall_seconds": 0.12470420000317972,
+    "loss_trace": [
+      {
+        "step": 1,
+        "nll": 4.7268981874238705
+      },
+      {
+        "step": 61,
+        "nll": 0.10632468427312913
+      },
+      {
+        "step": 120,
+        "nll": 0.08243188040902871
+      }
+    ]
+  },
+  "baseline_old": {
+    "nll": 0.053496765457424496,
+    "accuracy": 0.9921875
+  },
+  "baseline_new": {
+    "nll": 5.056873862029484,
+    "accuracy": 0.51953125
+  },
+  "scheduled_old": {
+    "nll": 0.11216944925569258,
+    "accuracy": 0.98046875
+  },
+  "scheduled_new": {
+    "nll": 0.10194681564024874,
+    "accuracy": 0.99609375
+  },
+  "feedback_old": {
+    "nll": 0.11216944925569258,
+    "accuracy": 0.98046875
+  },
+  "feedback_new": {
+    "nll": 0.10194681564024874,
+    "accuracy": 0.99609375
+  },
+  "matched_full_state_hash": "250684c8292081b20e5a0114675234cb92dc379e51a940c1a27c6b5d319f21b2",
+  "matched_old_logit_hash": "ca49fd3fda7797644d8ea96793c582f10e4620b84cf91b4254d9c050b8297acf",
+  "matched_new_logit_hash": "c61d61993f019db101a9070524ae9080ad97784ef000329c2235581cff498def",
+  "matched_grad_updates": 120,
+  "matched_example_presentations": 7680,
+  "matched_optimizer_state": true,
+  "matched_logits": true,
+  "scheduled_checkpoint_reload_matches": true,
+  "scheduled_checkpoint_sha256": "2a30f3e4daa49cb50194c759f99d91d5d69bb7d7d3b935692ed024dd82a2fc90",
+  "conclusion": "exact parity on one synthetic seed; no causal benefit of feedback timing shown"
+}
