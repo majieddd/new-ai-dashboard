@@ -1,0 +1,11 @@
+{
+  "scope": "ChatGPT-account Codex CLI one-word readback only; not benchmark items",
+  "prompt": "Reply with exactly one word: READY. Do not use tools.",
+  "models": [
+    {"id":"gpt-5.5","cli":"codex-cli 0.130.0-alpha.5","completed_at_file_mtime_utc":"2026-10-07T10:23:17.058673+00:00","answer":"READY","usage":{"input_tokens":18324,"cached_input_tokens":2432,"output_tokens":5,"reasoning_output_tokens":0},"source_jsonl_sha256":"fe185db8e7c2adb17f6796858de1744302a3401abef21e2258082bd3d09c5287"},
+    {"id":"gpt-5.6-luna","cli":"codex-cli 0.160.1 (scratch install)","completed_at_file_mtime_utc":"2026-10-07T10:31:50.393041+00:00","answer":"READY","usage":{"input_tokens":17625,"cached_input_tokens":6912,"cache_write_input_tokens":0,"output_tokens":5,"reasoning_output_tokens":0},"source_jsonl_sha256":"bd3b4300c146abfd65a70dbc76c995943efc4ca0d089af601cdbc214346417f7"},
+    {"id":"gpt-5.6-sol","cli":"codex-cli 0.160.1 (scratch install)","completed_at_file_mtime_utc":"2026-10-07T10:32:06.092906+00:00","answer":"READY","usage":{"input_tokens":18513,"cached_input_tokens":11520,"cache_write_input_tokens":0,"output_tokens":5,"reasoning_output_tokens":0},"source_jsonl_sha256":"22f3d1a2715347ca3a42e49fb001fd1241a1f954e3de273982d53871d890217d"},
+    {"id":"gpt-5.6-terra","cli":"codex-cli 0.160.1 (scratch install)","completed_at_file_mtime_utc":"2026-10-07T10:32:23.544158+00:00","answer":"READY","usage":{"input_tokens":18513,"cached_input_tokens":11008,"cache_write_input_tokens":0,"output_tokens":5,"reasoning_output_tokens":0},"source_jsonl_sha256":"b2bd8a592f1335a15be4bc9e28cbf49f59d0ddbde23618ead35f9ddc2cbd0cb6"}
+  ],
+  "limitations": ["Four successful readbacks, no benchmark calls", "Subscription path exposes token usage but no per-call dollar cost", "Codex CLI 0.160.1 --strict-config rejects model_temperature=0; temperature=0 is not verified"]
+}
