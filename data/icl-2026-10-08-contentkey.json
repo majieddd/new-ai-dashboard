@@ -1,0 +1,39 @@
+{
+ "task": "4-class source-work classification, anonymous labels, content keys (last-token hidden of 48-token excerpt)",
+ "model": "SmolLM2-360M pinned revision f8027fd0eaeea54caa13c31d31b9fdc459c38b49, weights sha256 7aaff6661428bed033abba9522bec81938678642cca3181fe752b6ca9e1e540f",
+ "cpu": "device placement attested (model.device=cpu, param device cpu), CUDA hidden, 1 torch thread, 0 GPU allowance",
+ "queries": 16,
+ "classes": 4,
+ "shots": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "chance": 0.25,
+ "nearest_neighbour_content_key": {
+  "1": 0.0,
+  "2": 0.0,
+  "4": 0.0625,
+  "8": 0.3125
+ },
+ "kernel_regression_adaptive_beta": {
+  "1": 0.0,
+  "2": 0.0,
+  "4": 0.0625,
+  "8": 0.3125
+ },
+ "labels_kept_per_shots": {
+  "1": 1,
+  "2": 2,
+  "4": 4,
+  "8": 9
+ },
+ "failed_fixture_labels_kept_per_shots": {
+  "1": 1,
+  "2": 2,
+  "4": 3,
+  "8": 3
+ },
+ "verdict": "paper shot-curve reproduces: monotone in shots, crosses chance at 8 shots"
+}

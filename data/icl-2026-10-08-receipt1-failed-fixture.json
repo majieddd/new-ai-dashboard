@@ -1,0 +1,60 @@
+{
+ "results": {
+  "K0_frozen": {
+   "1": 0.0,
+   "2": 0.375,
+   "4": 0.0625,
+   "8": 0.0625
+  },
+  "mosaic_adaptive_beta": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.0
+  },
+  "mosaic_fixed_beta": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.0
+  },
+  "energy_head_trained": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0,
+   "8": 0.0
+  },
+  "direct_head_trained": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0,
+   "8": 0.0
+  }
+ },
+ "verdict": {
+  "mosaic_adaptive_monotone_in_shots": false,
+  "mosaic_adaptive_gain_1_to_8": 0.0,
+  "K0_range_across_shots": 0.375,
+  "acceptance_energy_improves_shots_direct_does_not": false
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "shots": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "max_tokens": 512,
+ "weights_sha256_16": "7aaff6661428bed0",
+ "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+ "cpu": {
+  "model_device": "cpu",
+  "param_device": "cpu"
+ }
+}
