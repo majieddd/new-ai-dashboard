@@ -1,0 +1,68 @@
+{
+ "results": {
+  "energy_adaptive_beta": {
+   "1": 0.8125,
+   "2": 0.625,
+   "4": 0.625,
+   "8": 0.75
+  },
+  "direct_adaptive_beta": {
+   "1": 0.75,
+   "2": 0.5625,
+   "4": 0.5625,
+   "8": 0.6875
+  }
+ },
+ "verdict": {
+  "energy_monotone_in_shots": false,
+  "energy_ge_direct_at_matched_steps": true,
+  "energy_beats_no_retrieval_baseline_0p5625": true,
+  "acceptance": false
+ },
+ "baselines_no_retrieval": {
+  "energy_head": 0.5625,
+  "direct_head": 0.625
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "shots": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "train_n": 4,
+ "energy_schedule": {
+  "b1": 1.0,
+  "alpha": 1.0,
+  "b0": 0.5,
+  "beta_at_shots": {
+   "1": 1.5,
+   "2": 2.5,
+   "4": 4.5,
+   "8": 8.5
+  }
+ },
+ "direct_schedule": {
+  "b1": 1.0,
+  "alpha": 1.0,
+  "b0": 0.5,
+  "beta_at_shots": {
+   "1": 1.5,
+   "2": 2.5,
+   "4": 4.5,
+   "8": 8.5
+  }
+ },
+ "weights_sha256_16": "7aaff6661428bed0",
+ "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+ "cpu": {
+  "model_device": "cpu",
+  "param_device": "cpu"
+ }
+}
