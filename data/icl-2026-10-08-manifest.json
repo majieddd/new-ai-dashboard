@@ -1,0 +1,41 @@
+{
+ "generated": "2026-10-08",
+ "data_files": {
+  "data/icl-2026-10-08-receipt3.json": "2692c9935b65c2efe5ea3364142031138cf702e280368a8e81dfb4a677600160",
+  "data/icl-2026-10-08-receipt1-failed-fixture.json": "5aa77199822d3c8a92f16421db9adf58e1ae3dc303662c9fb8080e6973f07b8d",
+  "data/icl-2026-10-08-contentkey.json": "173f42360378ca58124c5c396856bb1b7cf5f42fa60116d4d4d6f5d0dcccb3bc"
+ },
+ "arms_side_by_side": {
+  "K0_frozen": {
+   "1": 0.125,
+   "2": 0.125,
+   "4": 0.125,
+   "8": 0.125
+  },
+  "mosaic_adaptive_beta": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.375
+  },
+  "mosaic_fixed_beta": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.375
+  },
+  "energy_head_trained": {
+   "1": 0.5625,
+   "2": 0.5625,
+   "4": 0.5625,
+   "8": 0.5625
+  },
+  "direct_head_trained": {
+   "1": 0.625,
+   "2": 0.625,
+   "4": 0.625,
+   "8": 0.625
+  }
+ },
+ "verdict": "acceptance PASSED: mosaic with adaptive bandwidth improves monotonically with shots, K0 flat, mosaic crosses chance at 8 shots; energy head trails direct head (0.5625 vs 0.625), recorded"
+}

@@ -1,0 +1,61 @@
+{
+ "results": {
+  "K0_frozen": {
+   "1": 0.125,
+   "2": 0.125,
+   "4": 0.125,
+   "8": 0.125
+  },
+  "mosaic_adaptive_beta": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.375
+  },
+  "mosaic_fixed_beta": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.375
+  },
+  "energy_head_trained": {
+   "1": 0.5625,
+   "2": 0.5625,
+   "4": 0.5625,
+   "8": 0.5625
+  },
+  "direct_head_trained": {
+   "1": 0.625,
+   "2": 0.625,
+   "4": 0.625,
+   "8": 0.625
+  }
+ },
+ "verdict": {
+  "mosaic_adaptive_monotone_in_shots": true,
+  "mosaic_adaptive_gain_1_to_8": 0.375,
+  "mosaic_adaptive_beats_chance_at_8": true,
+  "K0_range_across_shots": 0.0,
+  "acceptance": true
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "shots": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "key_space": "content (last-token hidden of 48-token excerpt)",
+ "weights_sha256_16": "7aaff6661428bed0",
+ "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+ "cpu": {
+  "model_device": "cpu",
+  "param_device": "cpu"
+ }
+}
