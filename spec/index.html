@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New AI — Built-System Spec (what actually runs)</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#151d32;--line:#35415a;--ink:#f3f6ff;--muted:#b3bfd4;--mint:#71d7bf;--coral:#f4a393;--blue:#88a9fb}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#213151 0%,transparent 45%),var(--bg);color:var(--ink);font:16px/1.6 system-ui,sans-serif}
+a{color:#a9c0ff}a:focus-visible{outline:3px solid var(--mint);outline-offset:3px}main{width:min(1060px,calc(100% - 32px));margin:auto}
+header{border-bottom:1px solid var(--line);padding:16px 0}h2{margin:0 0 10px;font-size:1.8rem}section{padding:42px 0;border-bottom:1px solid var(--line)}p{max-width:920px}.muted{color:var(--muted)}.pill{display:inline-block;border-radius:20px;background:#443528;color:#ffcf92;padding:6px 12px;font-weight:700}
+.block{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}.block h4{margin:0 0 10px}
+.chartbox{overflow-x:auto}.chart,.diagram{display:block;min-width:730px;width:100%;height:auto}
+.note{border-left:3px solid var(--coral);padding:12px 0 12px 16px;color:var(--muted)}
+li{margin:6px 0}
+</style></head><body>
+<header><a href="../index.html">&larr; Dashboard</a> <strong>New AI &middot; Built-System Spec</strong> <span class="pill">current technical specification &middot; 2026-10-08</span></header>
+<main>
+<section id="scope"><h2>What this page is</h2><p>This is the technical spec of the system that <strong>actually runs today</strong>, verified from source and receipts. It is deliberately separate from the proposed full architecture (L2 distillation/growth, two-model freeze/swap, ternary kernels, tiered paging), which is listed under &ldquo;Not delivered&rdquo; below. Every number here comes from the pinned source files and receipts linked in the <a href="../trials/index.html">trial index</a>; parameter counts were computed from the exact source, not inferred from a model nickname.</p></section>
+
+<section id="pipeline"><h2>The running pipeline</h2>
+<div class="block"><h4>Frozen content encoder</h4><ul>
+<li>Model: pinned SmolLM2-360M, float32, CPU-only, device placement attested in every receipt. Weights SHA-256 <code>7aaff6661428bed0&hellip;</code> (full 16-char prefix in every receipt; 361,821,120 parameters, all frozen).</li>
+<li>Content key = last-token hidden state of a 48-token excerpt of a passage. Dimension: 960 (model hidden size, read from model config).</li>
+<li>Encoder output cached per token-id SHA-256 (<code>encP_&lt;hash&gt;.pt</code> files); cache is persistence of encoder work, not the memory store.</li></ul></div>
+<div class="block"><h4>Memory store</h4><ul>
+<li>Store = growing set of (content key, label) pairs. Per entry: 960 float32 = 3,840 bytes plus label. Zero prompt tokens at inference.</li>
+<li>Today's fixture store: 64 passages from 4 source works, anonymous labels; 16 held-out queries; shots n = 1/2/4/8; chance = 25%.</li></ul></div>
+<div class="block"><h4>Kernel retrieval with adaptive bandwidth</h4><ul>
+<li>Distances d&sub2;<sub>i</sub> = &Vert;key<sub>i</sub> &minus; query key&Vert;&sup2;; normalised d&#770;&sup2;<sub>i</sub> = d&sub2;<sub>i</sub> / mean(d&sub2;) (the normalisation is the measured fix for softmax saturation at 960-dim distances, receipt8).</li>
+<li>Weights w<sub>i</sub> = softmax(&minus;&beta;&middot;d&#770;&sup2;<sub>i</sub>); retrieval feature r = &Sigma; w<sub>i</sub>&middot;key<sub>i</sub>.</li>
+<li>&beta; = &beta;<sub>1</sub>&middot;n^&alpha; + &beta;<sub>0</sub>, with &beta;<sub>1</sub>, &alpha;, &beta;<sub>0</sub> learnable scalars. Trained values (receipt8, energy arm): &beta;<sub>1</sub> 0.5847, &alpha; 0.5948, &beta;<sub>0</sub> 0.0761 &rarr; &beta; = 0.66 / 0.96 / 1.41 / 2.09 at n = 1/2/4/8.</li></ul></div>
+<div class="block"><h4>Energy head (E21 mechanism, unrolled differentiably)</h4><ul>
+<li>Latent z (&ell; = 4), feature ff = tanh(h &middot; Fc), s = head(z + ff), v = s &middot; qv.</li>
+<li>Energy E(z) = s&middot;(1 + z&middot;qv + &frac12;&Vert;z&Vert;&sup2;) + z&middot;v + &frac12;&lambda;&Vert;z&Vert;&sup2;.</li>
+<li>K = 4 unrolled descent steps z &larr; z + step&middot;(v + s&middot;(z + qv) + &lambda;&middot;z), step = 0.1, &lambda; = 0.1, norm clamp radius 2.0 (safe at z = 0). Each step carries create_graph=True so the classification loss reaches Fc/qv/head.</li>
+<li>Prediction = out_head(concat(h, z + ff, r)) &rarr; 4 classes.</li></ul></div>
+<div class="block"><h4>Parameter counts (computed from the exact source)</h4>
+<table><thead><tr><th>Component</th><th>Shape</th><th>Parameters</th><th>Learned / frozen</th></tr></thead><tbody>
+<tr><th scope="row">SmolLM2-360M encoder</th><td>361.8M</td><td>361,821,120</td><td>frozen</td></tr>
+<tr><th scope="row">Fc (feature map)</th><td>960&times;4</td><td>3,840</td><td>learned</td></tr>
+<tr><th scope="row">qv (value vector)</th><td>4</td><td>4</td><td>learned</td></tr>
+<tr><th scope="row">head layer 0</th><td>(960+4)&times;16 + 16</td><td>15,440</td><td>learned</td></tr>
+<tr><th scope="row">head layer 1</th><td>16&times;(4+1) + 5</td><td>85</td><td>learned</td></tr>
+<tr><th scope="row">out_head</th><td>(960+4+960)&times;4 + 4</td><td>7,700</td><td>learned</td></tr>
+<tr><th scope="row">&beta; scalars (&beta;<sub>1</sub>, &alpha;, &beta;<sub>0</sub>)</th><td>3</td><td>3</td><td>learned</td></tr>
+<tr><th scope="row">Trainable total</th><td></td><td><strong>27,072</strong></td><td>vs 361,821,120 frozen</td></tr></tbody></table></div>
+<div class="block"><h4>Training and timing boundaries (receipt8, measured)</h4><ul>
+<li>Training: 60 Adam steps, lr 0.02, 8 passages per step, at n = 4. Energy arm: 2,176 head evals + 2,176 second-order gradient calls, 2.0 s wall. Direct arm: 2,176 head evals, 0 gradient calls, 0.7 s wall. Equal Adam steps is NOT equal compute.</li>
+<li>Input: passage text &rarr; 48-token ids &rarr; 960-dim key. Output: one of 4 class labels. No text generation.</li></ul></div></section>
+
+<section id="notdelivered"><h2>Not delivered (proposed, not built)</h2><p class="note">The original design intent (owner's Google Doc, 2026) is a two-model freeze/swap system: a frozen model codes a live model, then they swap roles, ping-ponging recursively; plus engram-style inactive states rewritten at inference, growing self-assembly with checkpoints, ternary CPU kernels, and tiered VRAM/RAM/NVMe paging. <strong>None of these is delivered.</strong> What runs today is a classifier fixture on top of a frozen encoder: retrieval + trainable heads. Marked explicitly: expert grafting &mdash; not delivered; freeze/swap &mdash; not delivered; ternary kernels &mdash; not delivered; tiered paging &mdash; not delivered; L2 growing-store distillation loop &mdash; not delivered; L3 matched-compute fine-tune comparison &mdash; not run. The zero prompt-token figure applies to the retrieval arm's inference path only, not to a total system cost.</p></section>
+
+<section id="limitations"><h2>Limitations of the current system</h2><p>16 queries, 4 classes, one fixture, one 360M model, CPU. Best measured arm: 68.75% at 8 shots (receipt8) &mdash; margin over the direct head is 2 queries on 16. The shot curve is non-monotone (open defect). No language generation, no retention test, no held-out same-size superiority claim. External paper results (Memory Mosaics, VCNet, EBT, EB-JEPA) are source context, not our results.</p></section>
+</main></body></html>

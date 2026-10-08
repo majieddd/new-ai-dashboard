@@ -1,0 +1,29 @@
+{
+ "results": {
+  "Qwen3-0.6B": {
+   "accuracy": {
+    "1": 0.0,
+    "2": 0.375,
+    "4": 0.0,
+    "8": 0.0
+   },
+   "prompt_tokens_per_query": {
+    "1": 137.7,
+    "2": 176.7,
+    "4": 300.7,
+    "8": 591.7
+   },
+   "params_M": 596.0
+  }
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "fixture": "16 queries, 4 source works, anonymous labels a/b/c/d, 48-token excerpts",
+ "cpu": true,
+ "elapsed_s": 264.0
+}
