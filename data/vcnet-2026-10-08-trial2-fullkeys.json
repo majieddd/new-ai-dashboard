@@ -1,0 +1,89 @@
+{
+ "results": {
+  "mosaic_baseline": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.375
+  },
+  "predictive_coding": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.125
+  },
+  "gated_predictive_coding": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.125
+  },
+  "recurrent_predictive_coding": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0625,
+   "8": 0.0
+  }
+ },
+ "verdict": {
+  "pc_at_8_ge_mosaic_baseline": false,
+  "gated_pc_ge_pc": true,
+  "recurrent_pc_ge_pc": false,
+  "pc_monotone_in_shots": true,
+  "gain_actually_trained": false,
+  "acceptance": false
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "shots": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "chance": 0.25,
+ "key_space": "full 960-dim content keys",
+ "gain_min": 0.6931,
+ "gain_max": 0.6931,
+ "gain_mean": 0.6931,
+ "first_trial_32dim": {
+  "mosaic_baseline": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.1875,
+   "8": 0.0625
+  },
+  "predictive_coding": {
+   "1": 0.125,
+   "2": 0.125,
+   "4": 0.25,
+   "8": 0.25
+  },
+  "gated_pc": {
+   "1": 0.125,
+   "2": 0.125,
+   "4": 0.25,
+   "8": 0.25
+  },
+  "recurrent_pc": {
+   "1": 0.0,
+   "2": 0.0625,
+   "4": 0.1875,
+   "8": 0.1875
+  },
+  "gain_min": 0.6931,
+  "gain_max": 0.6931,
+  "note": "32-dim projection lossy; gain loss degenerate at n=1 (zero gradient)"
+ },
+ "weights_sha256_16": "7aaff6661428bed0",
+ "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+ "cpu": {
+  "model_device": "cpu",
+  "param_device": "cpu"
+ }
+}
