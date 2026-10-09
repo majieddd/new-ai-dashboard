@@ -1,0 +1,61 @@
+{
+ "results": {
+  "Qwen2.5-0.5B": {
+   "accuracy": {
+    "1": 0.0,
+    "2": 0.0,
+    "4": 0.0,
+    "8": 0.0
+   },
+   "prompt_tokens_per_query": {
+    "1": 137.7,
+    "2": 176.7,
+    "4": 300.7,
+    "8": 591.7
+   },
+   "params_M": 494.0,
+   "single_token_letters": true,
+   "snapshot": "060db6499f32faf8b98477b0a26969ef7d8b9987"
+  },
+  "kev-0.5b": {
+   "accuracy": {
+    "1": 0.0625,
+    "2": 0.125,
+    "4": 0.125,
+    "8": 0.0625
+   },
+   "prompt_tokens_per_query": {
+    "1": 137.7,
+    "2": 176.7,
+    "4": 300.7,
+    "8": 591.7
+   },
+   "params_M": 502.8,
+   "single_token_letters": true,
+   "snapshot": "C:/Users/Majied/jev-alt-bench/hf_cache/hub/models--jaredpalmer--kev-0.5b/snapshots\\edf1dc6d7f8d983c0adfd251e80a686e5539fc61"
+  }
+ },
+ "notes": {
+  "laya-typed-decisions": "FAILED to load/run: ValueError: Couldn't instantiate the backend tokenizer from one of: \n(1) a `tokenizers` library serialization file, \n(2) a slow tokenizer instance to convert or \n(3) an equivalent slow tokenizer class to instantiate and convert. \nYou need to have sentencepiece or tiktoken installed to convert a slow tokenizer to a fast one.",
+  "NanoJev-bf16": "not cached as a snapshot dir (hub cache holds refs/main only, no snapshots/ directory; model weights not downloaded, no run attempted)",
+  "NanoJev-bf16_note_provenance": "recorded after the run completed: the run's own dump missed this entry because the not-cached branch did not write the receipt (script bug fixed in test_baseline_remaining.py after this run; the fix writes the receipt on the not-cached path)"
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "fixture": "16 queries, 4 source works, anonymous labels a/b/c/d, 260-character excerpts (matches receipt7 source behaviour; receipt7's own label said 48-token excerpts, which misdescribed its source)",
+ "cpu": true,
+ "elapsed_s": 376.4,
+ "source": {
+  "script": "test_baseline_remaining.py",
+  "sha256": "2953419e42037bb1013d093c26b0d8340e3aafafc1905fe2613e996ec4b1f10c"
+ },
+ "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+ "device_attestation": "CPU only: CUDA_VISIBLE_DEVICES='' set, torch.set_num_threads(1), float32 weights, no GPU allocation",
+ "comparability": "Same fixture, shot schedule, prompt format, and 260-character excerpts as receipt7 (Qwen3-0.6B). Our arm reference: receipt8 repaired energy arm 56.25/68.75/62.5/68.75% at shots 1/2/4/8, ~0 prompt tokens.",
+ "verdict": "Best remaining competitor on the 16-query dev fixture: kev-0.5b 12.5% max (502.8M params, 137.7-591.7 prompt tokens/query). Qwen2.5-0.5B 0% at all shots. This is a development-fixture comparison, NOT held-out same-size superiority; acceptance requires the pre-registered held-out split."
+}
