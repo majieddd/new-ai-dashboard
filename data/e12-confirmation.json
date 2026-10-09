@@ -1,0 +1,21 @@
+{
+ "experiment": "E12 \u2014 confirmation of the E11 growth-config sweep on the full 5-seed set [1,7,42,123,999]",
+ "objective_declared_before_run": "Re-run top-3 E11 configs on the full pre-registered seed set; score = gain_pts / (thaw_steps_used/100); hard retention gate retention_drop_pts <= max.",
+ "results": [],
+ "confirmed_winner": {
+  "config": [
+   "router",
+   "midpoint",
+   "large",
+   100
+  ],
+  "mean_score": 20.556,
+  "gated_frac": 0.8
+ },
+ "verdict": "CONFIRMED (gated) on synthetic toy tasks; not a language-model result",
+ "provenance": {
+  "source_log": "REPOS/new-ai-e22-candidate/e12_run.log",
+  "source_sha256": "97fa9958522bfc6ea387e69f59b357d960fb56b0beb95ecdc62224912a87869e",
+  "published": "2026-10-08"
+ }
+}

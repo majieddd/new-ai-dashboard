@@ -1,0 +1,174 @@
+{
+ "results": {
+  "energy_adaptive_beta": {
+   "1": 0.5625,
+   "2": 0.6875,
+   "4": 0.625,
+   "8": 0.6875
+  },
+  "direct_adaptive_beta": {
+   "1": 0.4375,
+   "2": 0.625,
+   "4": 0.5,
+   "8": 0.5625
+  }
+ },
+ "verdict": {
+  "energy_head_gradients_finite_nonzero": true,
+  "energy_head_parameters_actually_updated": true,
+  "energy_monotone_in_shots": false,
+  "energy_ge_direct_at_matched_steps": true,
+  "energy_beats_no_retrieval_baseline_0p5625": true,
+  "acceptance": true
+ },
+ "baselines_no_retrieval": {
+  "energy_head": 0.5625,
+  "direct_head": 0.625
+ },
+ "compute_accounting": {
+  "energy_arm": {
+   "head_evals": 2176,
+   "grad_calls": 2176,
+   "wall_s": 2.4
+  },
+  "direct_arm": {
+   "head_evals": 2176,
+   "grad_calls": 0,
+   "wall_s": 0.8
+  },
+  "note": "energy arm pays K extra second-order gradient calls per forward (unrolled energy); matched Adam steps is NOT matched compute"
+ },
+ "grad_gate_step0": {
+  "energy": [
+   {
+    "param": "Fc",
+    "grad_norm": 0.6771537661552429,
+    "finite": true
+   },
+   {
+    "param": "qv",
+    "grad_norm": 0.0009183171787299216,
+    "finite": true
+   },
+   {
+    "param": "head0",
+    "grad_norm": 0.11185625195503235,
+    "finite": true
+   },
+   {
+    "param": "head1",
+    "grad_norm": 0.0018147951923310757,
+    "finite": true
+   },
+   {
+    "param": "head2",
+    "grad_norm": 0.009533210657536983,
+    "finite": true
+   },
+   {
+    "param": "head3",
+    "grad_norm": 0.005910907406359911,
+    "finite": true
+   }
+  ],
+  "direct": [
+   {
+    "param": "Fc",
+    "grad_norm": 0.6735395193099976,
+    "finite": true
+   },
+   {
+    "param": "qv",
+    "grad_norm": 0.001064276322722435,
+    "finite": true
+   },
+   {
+    "param": "head0",
+    "grad_norm": 0.12611670792102814,
+    "finite": true
+   },
+   {
+    "param": "head1",
+    "grad_norm": 0.002024398185312748,
+    "finite": true
+   },
+   {
+    "param": "head2",
+    "grad_norm": 0.01043440867215395,
+    "finite": true
+   },
+   {
+    "param": "head3",
+    "grad_norm": 0.006426501553505659,
+    "finite": true
+   }
+  ]
+ },
+ "param_deltas_after_training": {
+  "energy": {
+   "Fc": 7.720121,
+   "qv": 0.239135,
+   "head0": 16.145695,
+   "head1": 0.503092,
+   "head2": 1.048676,
+   "head3": 0.273682,
+   "b1": 0.415277,
+   "al": 0.405187,
+   "b0": 0.423908
+  },
+  "direct": {
+   "Fc": 8.014136,
+   "qv": 0.226945,
+   "head0": 14.91326,
+   "head1": 0.460821,
+   "head2": 1.065032,
+   "head3": 0.233615,
+   "b1": 0.42421,
+   "al": 0.413505,
+   "b0": 0.433321
+  }
+ },
+ "queries": 16,
+ "classes": [
+  "pg1342",
+  "pg1661",
+  "pg2701",
+  "pg3207"
+ ],
+ "shots": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "train_n": 4,
+ "energy_schedule": {
+  "b1": 0.5847,
+  "alpha": 0.5948,
+  "b0": 0.0761,
+  "beta_at_shots": {
+   "1": 0.6608,
+   "2": 0.9592,
+   "4": 1.4098,
+   "8": 2.0904
+  }
+ },
+ "direct_schedule": {
+  "b1": 0.5758,
+  "alpha": 0.5865,
+  "b0": 0.0667,
+  "beta_at_shots": {
+   "1": 0.6425,
+   "2": 0.9313,
+   "4": 1.365,
+   "8": 2.0162
+  }
+ },
+ "historical_receipt6_preserved": true,
+ "weights_sha256_16": "7aaff6661428bed0",
+ "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+ "cpu": {
+  "model_device": "cpu",
+  "param_device": "cpu"
+ }
+}

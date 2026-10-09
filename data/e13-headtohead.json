@@ -1,0 +1,102 @@
+{
+ "experiment": "E13 \u2014 head-to-head: frozen-core self-assembly vs full fine-tune at equal optimizer budget, 5 seeds [1,7,42,123,999]",
+ "results": [
+  {
+   "seed": 1,
+   "A_self_assembly": {
+    "acc_f2": 0.344,
+    "gain_pts": 16.7,
+    "retention_drop_pts": -2.78,
+    "gated": true
+   },
+   "B_finetune": {
+    "acc_f2": 0.322,
+    "gain_pts": 14.4,
+    "retention_drop_pts": -2.78,
+    "gated": true
+   },
+   "delta_acc_pts": 2.2,
+   "delta_ret_pts": 0.0
+  },
+  {
+   "seed": 7,
+   "A_self_assembly": {
+    "acc_f2": 0.328,
+    "gain_pts": 20.6,
+    "retention_drop_pts": 7.22,
+    "gated": false
+   },
+   "B_finetune": {
+    "acc_f2": 0.317,
+    "gain_pts": 19.4,
+    "retention_drop_pts": 6.67,
+    "gated": false
+   },
+   "delta_acc_pts": 1.1,
+   "delta_ret_pts": 0.56
+  },
+  {
+   "seed": 42,
+   "A_self_assembly": {
+    "acc_f2": 0.283,
+    "gain_pts": 10.0,
+    "retention_drop_pts": 4.44,
+    "gated": false
+   },
+   "B_finetune": {
+    "acc_f2": 0.306,
+    "gain_pts": 12.2,
+    "retention_drop_pts": 0.0,
+    "gated": true
+   },
+   "delta_acc_pts": -2.2,
+   "delta_ret_pts": 4.44
+  },
+  {
+   "seed": 123,
+   "A_self_assembly": {
+    "acc_f2": 0.372,
+    "gain_pts": 23.9,
+    "retention_drop_pts": -1.67,
+    "gated": true
+   },
+   "B_finetune": {
+    "acc_f2": 0.317,
+    "gain_pts": 18.3,
+    "retention_drop_pts": 1.11,
+    "gated": true
+   },
+   "delta_acc_pts": 5.5,
+   "delta_ret_pts": -2.78
+  },
+  {
+   "seed": 999,
+   "A_self_assembly": {
+    "acc_f2": 0.25,
+    "gain_pts": 18.9,
+    "retention_drop_pts": 1.67,
+    "gated": true
+   },
+   "B_finetune": {
+    "acc_f2": 0.322,
+    "gain_pts": 26.1,
+    "retention_drop_pts": 0.56,
+    "gated": true
+   },
+   "delta_acc_pts": -7.2,
+   "delta_ret_pts": 1.11
+  }
+ ],
+ "means": {
+  "A_self_assembly_acc_f2": 0.3154,
+  "B_finetune_acc_f2": 0.3168,
+  "mean_delta_acc_pts": -0.12,
+  "mean_delta_ret_pts": 0.666
+ },
+ "verdict": "No capability advantage for self-assembly over fine-tune on the synthetic stream (mean delta_acc -0.12 pts); retention slightly better for self-assembly (mean delta_ret 0.67 pts). Synthetic toy tasks, not language.",
+ "provenance": {
+  "source_log": "REPOS/new-ai-e22-candidate/e13_b500.log",
+  "source_sha256": "219d1429d3493bf800ecba5af0c9b389f5473eced6a63071bd85ebf1581e1279",
+  "published": "2026-10-08"
+ }
+}

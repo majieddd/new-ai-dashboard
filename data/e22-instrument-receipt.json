@@ -1,0 +1,195 @@
+{
+ "version": "e22-instrument-v0.1.1-dev",
+ "status": "PUBLIC_DEVELOPMENT_INSTRUMENT_ONLY",
+ "timestamp_utc": "2026-10-05T08:26:26.698085+00:00",
+ "config": {
+  "per_cell": 16,
+  "seed_start": 41000
+ },
+ "git_base_commit": "0cdc379b2cd43d24780318becf9cae55af26c814",
+ "git_candidate_status": "?? e22_candidate/",
+ "source_sha256": {
+  "__init__.py": "da4d001e382419ea9a0b2bbaf10f639b64dff79a99bb28faa165f49b3b8b4970",
+  "audit_dev.py": "c2e06038be4112bd580c00eabc3ab423c49049a042e8130af61b7066462db31d",
+  "generator.py": "ef1e2ca7110fbe84d99cc6c6f1ba7a965b6e3cb25ee249a1c8350c86b3d0071c",
+  "oracle.py": "f01d40b86181d744a097e1ee96c7b48fcdb26f17e40e2ebe272de1ff0e79dfaa",
+  "run_dev.py": "e58429f89825c280134fafc5a74470b2693c17c9105eb98fcc992b8e8eb89044",
+  "test_instrument.py": "6f6987c0b3e2a363652ac4e6a2d24c0ccd0a9ab403028ea00432546f5ece14d7"
+ },
+ "git_provenance_status": "GIT_HEAD_AND_STATUS_RECORDED",
+ "runtime": {
+  "executable": "C:\\Users\\Majied\\AppData\\Local\\hermes\\installs\\3288429eb58690bd\\environments\\7986b5b5da4442719198191d45216b13\\venv\\Scripts\\python.exe",
+  "python": "3.14.7 (main, Sep  1 2026, 14:17:30) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "device": "CPU (stdlib only)"
+ },
+ "cells": {
+  "depth1_arity1_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 2,
+   "prompt_characters_min": 267,
+   "prompt_characters_max": 278,
+   "prompt_characters_mean": 270.6875
+  },
+  "depth1_arity1_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 2,
+   "prompt_characters_min": 336,
+   "prompt_characters_max": 370,
+   "prompt_characters_mean": 355.1875
+  },
+  "depth1_arity2_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 2,
+   "prompt_characters_min": 309,
+   "prompt_characters_max": 314,
+   "prompt_characters_mean": 312.3125
+  },
+  "depth1_arity2_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 2,
+   "prompt_characters_min": 379,
+   "prompt_characters_max": 405,
+   "prompt_characters_mean": 394.3958333333333
+  },
+  "depth2_arity1_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 4,
+   "prompt_characters_min": 318,
+   "prompt_characters_max": 339,
+   "prompt_characters_mean": 328.0833333333333
+  },
+  "depth2_arity1_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 4,
+   "prompt_characters_min": 387,
+   "prompt_characters_max": 428,
+   "prompt_characters_mean": 410.0833333333333
+  },
+  "depth2_arity2_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 5,
+   "prompt_characters_min": 497,
+   "prompt_characters_max": 506,
+   "prompt_characters_mean": 500.375
+  },
+  "depth2_arity2_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 4,
+   "prompt_characters_min": 571,
+   "prompt_characters_max": 599,
+   "prompt_characters_mean": 587.7083333333334
+  },
+  "depth4_arity1_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 10,
+   "prompt_characters_min": 430,
+   "prompt_characters_max": 451,
+   "prompt_characters_mean": 442.4583333333333
+  },
+  "depth4_arity1_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 14,
+   "prompt_characters_min": 491,
+   "prompt_characters_max": 552,
+   "prompt_characters_mean": 522.3958333333334
+  },
+  "depth4_arity2_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 16,
+   "prompt_characters_min": 1707,
+   "prompt_characters_max": 1725,
+   "prompt_characters_mean": 1716.0208333333333
+  },
+  "depth4_arity2_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 16,
+   "prompt_characters_min": 1783,
+   "prompt_characters_max": 1816,
+   "prompt_characters_mean": 1801.3541666666667
+  },
+  "depth6_arity1_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 14,
+   "prompt_characters_min": 543,
+   "prompt_characters_max": 573,
+   "prompt_characters_mean": 556.375
+  },
+  "depth6_arity1_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 13,
+   "prompt_characters_min": 609,
+   "prompt_characters_max": 654,
+   "prompt_characters_mean": 636.6041666666666
+  },
+  "depth6_arity2_distractors0": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 16,
+   "prompt_characters_min": 6682,
+   "prompt_characters_max": 6733,
+   "prompt_characters_mean": 6710.145833333333
+  },
+  "depth6_arity2_distractors4": {
+   "base_examples": 16,
+   "variants": 48,
+   "distinct_structural_groups": 16,
+   "prompt_characters_min": 6780,
+   "prompt_characters_max": 6818,
+   "prompt_characters_mean": 6795.645833333333
+  }
+ },
+ "base_examples": 256,
+ "variants": 768,
+ "distinct_structural_groups": 117,
+ "counterfactual_directions": {
+  "1": 128,
+  "-1": 128
+ },
+ "equation_agreements": 768,
+ "proof_checks": 768,
+ "text_roundtrips": 768,
+ "retained_validation_failures": 0,
+ "seconds": 1.2735178000293672,
+ "per_variant_audit_p50_seconds": 0.00019064999651163816,
+ "per_variant_audit_p95_seconds": 0.009275999967940152,
+ "answer_min": "1/2",
+ "answer_max": "20140",
+ "output_sha256": {
+  "model_inputs.jsonl": "a0c6d4cc5a55ab661468c83910f84b9ab1e013784176d5324eafdb911778cea7",
+  "references.jsonl": "54958e8db412d11c9f80c99f2f8cb052ff2e753ac423d9be38d8eb6af8744b62"
+ },
+ "claims_not_made": [
+  "model learnability",
+  "model accuracy",
+  "E22 approval",
+  "preregistration",
+  "train/final split",
+  "final custody",
+  "internal geometry",
+  "minimum proof depth",
+  "independent human review",
+  "E20/E21 result"
+ ],
+ "published_provenance": {
+  "source_file": "REPOS/new-ai-e22-candidate/e22_candidate/dev_runs/SWEEP_2026_10_05_B/RECEIPT.json",
+  "source_sha256": "cfa24e4ef129aa4e0a657848fca21234d71c0455e04794fe86e4f47d476573c0",
+  "published": "2026-10-08",
+  "note": "E22 is a public development instrument (oracle-backed geometry checks on generated prompts), NOT a model prediction and NOT a scientific E22 outcome. Status field is the researcher's own: PUBLIC_DEVELOPMENT_INSTRUMENT_ONLY. Validity review open; shortcut audit pending."
+ }
+}
