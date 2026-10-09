@@ -1,0 +1,247 @@
+{
+ "kind": "correction sidecar \u2014 disclosures appended WITHOUT modifying any historical receipt file",
+ "date": "2026-10-09",
+ "preservation": "Every historical receipt in /data/ is byte-for-byte unchanged. This sidecar records the original published pins and appends disclosures; no historical JSON was edited.",
+ "original_published_pins": {
+  "receipt7_deployed_sha256": "c198cb7dd5a1cecdd6b71727ee3b989bf9d22d41a553f96e817c2ce4a1c7e171",
+  "receipt8_deployed_sha256": "4eab187f8d3ab8332c4b89e4055e42577764efc1fb37133a41cfd89a9794fddf",
+  "receipt9_deployed_sha256": "426dd6b9d33350ed02427c6519ddd7982436fafadae36ab878a0f5415f2f7a94",
+  "receipt10_deployed_sha256": "3e6831400efae190a0606c54c99e1abe158c225c5ad34c3cb9a7d63881cf4488",
+  "passages_manifest_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b"
+ },
+ "disclosures": [
+  {
+   "id": "D1_single_class_dev_fixture",
+   "affects": [
+    "receipt7",
+    "receipt8",
+    "receipt9",
+    "receipt10",
+    "R3",
+    "R4",
+    "R5",
+    "R7",
+    "R8",
+    "R9"
+   ],
+   "finding": "Reconstructing the dev queries from passages.json (indices 0-15, the first 16 passages with a class assignment) gives Counter({2: 16}): ALL 16 dev queries are class 2 = pg2701. The four candidate labels a/b/c/d are four possible answers, not four evaluated classes. An always-c baseline scores 100.0% on this fixture. Every dev-fixture number (energy 68.75%, direct 56.25%, Qwen3 37.5%, Qwen2.5 0%, kev 12.5%) measures performance on a single-class set and cannot establish four-class capability or same-size superiority.",
+   "independently_confirmed_by": "Generalist Hermes (2026-10-09, WORK_LOGS/NEW_AI_RECEIPT9_QA_3B485CD.md) and Strata Generalist (reconstruction, 2026-10-09).",
+   "numbers_unchanged": "Raw receipt numbers are preserved verbatim; only their interpretation is scoped."
+  },
+  {
+   "id": "D2_competitor_wording",
+   "affects": [
+    "R9 row",
+    "paper R5 section"
+   ],
+   "finding": "'Best competitor on the dev fixture: 12.5% max' is corrected to 'best newly measured receipt9 competitor: 12.5% max'. Qwen3-0.6B reached 37.5% (receipt7), recorded in the same paper, and is the best measured competitor overall on the dev fixture."
+  },
+  {
+   "id": "D3_receipt9_source_provenance",
+   "affects": [
+    "receipt9 source pin"
+   ],
+   "finding": "receipt9's source pin (test_baseline_remaining.py, SHA-256 2953419e42037bb1013d093c26b0d8340e3aafafc1905fe2613e996ec4b1f10c) is the CURRENT source, which includes the not-cached write-path fix made AFTER the run. It is not an exact pre-run source pin. The run's own notes admit the fix post-dates the run; the receipt's own text should not be read as attesting a pre-run source snapshot."
+  },
+  {
+   "id": "D4_heldout_preregistration",
+   "finding": "A balanced/disjoint held-out split is preregistered and committed BEFORE any held-out run: 8 queries, 2 per class, fully disjoint from dev queries and dev pool; shot pool, per-class counts, overlap checks, majority/no-memory baselines, per-query prediction reporting, and the four-part acceptance threshold are frozen in the manifest. The run executes only the frozen protocol; the result is published verbatim whichever way it lands."
+  }
+ ],
+ "heldout_manifest": {
+  "protocol": "held-out split, preregistered 2026-10-09 before any run",
+  "classes_order": [
+   "pg1342",
+   "pg1661",
+   "pg2701",
+   "pg3207"
+  ],
+  "label_to_work": {
+   "0": "pg1342",
+   "1": "pg1661",
+   "2": "pg2701",
+   "3": "pg3207"
+  },
+  "heldout_queries": [
+   17,
+   19,
+   21,
+   23,
+   39,
+   41,
+   51,
+   53
+  ],
+  "heldout_labels": [
+   2,
+   2,
+   0,
+   0,
+   1,
+   1,
+   3,
+   3
+  ],
+  "heldout_per_class": {
+   "0": 2,
+   "1": 2,
+   "2": 2,
+   "3": 2
+  },
+  "dev_queries": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15
+  ],
+  "dev_queries_labels": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "dev_pool": [
+   16,
+   18,
+   20,
+   22,
+   24,
+   26,
+   28,
+   30,
+   32,
+   34,
+   36,
+   38,
+   40,
+   42,
+   44,
+   46,
+   48,
+   50,
+   52,
+   54,
+   56,
+   58,
+   60,
+   62
+  ],
+  "overlap_heldout_dev_queries": 0,
+  "overlap_heldout_dev_pool": 0,
+  "shot_pool": [
+   16,
+   18,
+   20,
+   22,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   40,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   52,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   60,
+   61,
+   62,
+   63
+  ],
+  "shot_pool_per_class": {
+   "0": 15,
+   "1": 11,
+   "2": 3,
+   "3": 11
+  },
+  "shot_pool_overlap_dev_queries": 0,
+  "shot_pool_overlap_dev_pool": 24,
+  "shots": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "shot_schedule": "shots_for(n, q): round-robin over classes k = c % 4, taking candidate j = len(out)//4 from the class-k pool; identical to the dev source (test_baseline_remaining.py / test_l1_adaptive_beta3.py)",
+  "excerpt": "260 characters of the passage text (the actual receipt7 source behaviour; its '48-token' label misdescribed it)",
+  "prompt_format": "Passage: <excerpt> -> <letter>\\n ... then 'Passage: <excerpt> -> ' ; competitor letters a/b/c/d must be single tokens (asserted)",
+  "arms": {
+   "energy": "beta3 repaired arm, seed 101, 60 Adam steps, trained on the DEV pool (24 passages) \u2014 training set identical to the dev protocol; evaluation on the held-out queries only",
+   "direct": "same architecture and training, direct (non-energy) update, seed 101",
+   "competitor": "Qwen3-0.6B (596M, frozen, in-context shots, CPU, float32) \u2014 the best measured same-size competitor on the dev fixture (37.5% max, receipt7)"
+  },
+  "baselines": {
+   "chance": 0.25,
+   "majority_pool_constant": "predict the shot-pool-majority class for every held-out query",
+   "majority_pool_class": "0",
+   "no_retrieval_energy_head": "trained energy arm with the retrieval feature set to zero",
+   "no_retrieval_direct_head": "trained direct arm with the retrieval feature set to zero"
+  },
+  "acceptance_threshold": {
+   "A1_energy_at_8_shots": "energy arm accuracy on the held-out set at 8 shots >= 0.50 (>= 4 of 8)",
+   "A2_beats_best_competitor": "energy arm at 8 shots strictly > Qwen3-0.6B at 8 shots on the same held-out queries",
+   "A3_beats_no_memory": "energy arm at 8 shots strictly > no-retrieval energy head at 8 shots",
+   "A4_per_class_coverage": "at 8 shots, at least 1 correct in EACH of the 4 classes (anti-single-class guard)",
+   "rule": "ALL four must hold to claim held-out superiority. Any failure is published as a negative result; the numbers are reported verbatim either way."
+  },
+  "source_pins": {
+   "passages_file_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
+   "derive_script_sha256": "91cef01f5ffeac7e14d96da35db09a61878c76b37dbe3c296f77746d66c6ed24",
+   "run_script_sha256": "47c6a1635879377629afc7bdb182c5934dc4c0f0840814ad360b6b95481bfaad",
+   "beta3_source_sha256": "22d92d1d6b48edbbedf9f17b297974a67f14df5704a21a51edea5cee3e12b7a3",
+   "weights_sha256": "7aaff6661428bed033abba9522bec81938678642cca3181fe752b6ca9e1e540f"
+  },
+  "original_published_pins_recorded": {
+   "receipt7_deployed_sha256": "c198cb7dd5a1cecdd6b71727ee3b989bf9d22d41a553f96e817c2ce4a1c7e171",
+   "receipt9_deployed_sha256": "426dd6b9d33350ed02427c6519ddd7982436fafadae36ab878a0f5415f2f7a94",
+   "receipt8_deployed_sha256": "4eab187f8d3ab8332c4b89e4055e42577764efc1fb37133a41cfd89a9794fddf",
+   "receipt10_deployed_sha256": "3e6831400efae190a0606c54c99e1abe158c225c5ad34c3cb9a7d63881cf4488"
+  }
+ }
+}
