@@ -29,7 +29,7 @@ HELDOUT = MAN["heldout_queries"]
 POOL = MAN["shot_pool"]
 DEV_POOL = MAN["dev_pool"]
 NS = MAN["shots"]
-assert MAN["passages_file_sha256"] == hashlib.sha256(open(OUT + "/passages.json", "rb").read()).hexdigest()
+assert MAN["source_pins"]["passages_file_sha256"] == hashlib.sha256(open(OUT + "/passages.json", "rb").read()).hexdigest()
 
 def shots_for(n, q_idx):
     out = []; c = 0
