@@ -179,7 +179,7 @@ def eval_arm(Fc, qv, head, out_head, b1, al, b0, kind, use_retrieval):
     preds = {}
     for q in HELDOUT:
         for n in NS:
-            r = retrieval_feat(q, n, b1.detach(), al.detach(), b0.detach(), POOL) if use_retrieval else torch.zeros(LAT)
+            r = retrieval_feat(q, n, b1.detach(), al.detach(), b0.detach(), POOL) if use_retrieval else torch.zeros(hs)
             logits = run_arm(Fc, qv, head, out_head, content_key[q], r, kind, train=False)
             preds[(q, n)] = int(logits.argmax())
     return preds

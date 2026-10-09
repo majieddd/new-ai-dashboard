@@ -183,7 +183,7 @@
  "source_pins": {
   "passages_file_sha256": "fd9f92649d96a855fc945c17d24592225b26537219287ce7908d967a243e616b",
   "derive_script_sha256": "91cef01f5ffeac7e14d96da35db09a61878c76b37dbe3c296f77746d66c6ed24",
-  "run_script_sha256": "c165ec737e6781ff50b9b1840b71dcfa9b26e73e30f2a8f08191b65bccf742f0",
+  "run_script_sha256": "da090328666ecb05eaf15b17ee30a1fa5d32f3efe7f754343780d8a576e35194",
   "beta3_source_sha256": "22d92d1d6b48edbbedf9f17b297974a67f14df5704a21a51edea5cee3e12b7a3",
   "weights_sha256": "7aaff6661428bed033abba9522bec81938678642cca3181fe752b6ca9e1e540f"
  },
