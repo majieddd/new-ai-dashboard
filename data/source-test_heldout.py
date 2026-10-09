@@ -67,7 +67,7 @@ def enc(ids):
 
 content_key = {}
 for i in POOL + HELDOUT + DEV_POOL:
-    content_key[i] = enc(short_ids(i, 48))
+    content_key[i] = enc(short_ids(i, 48))[-1]
 
 TRAIN_N = 4
 LAT, HID, K, STEP, LAM, RAD = 4, 16, 4, 0.1, 0.1, 2.0
