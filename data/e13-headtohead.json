@@ -1,5 +1,5 @@
 {
- "experiment": "E13 \u2014 head-to-head: frozen-core self-assembly vs full fine-tune at equal optimizer budget, 5 seeds [1,7,42,123,999]",
+ "experiment": "E13 — head-to-head: frozen-core self-assembly vs full fine-tune at equal optimizer budget, 5 seeds [1,7,42,123,999]",
  "results": [
   {
    "seed": 1,
@@ -98,5 +98,11 @@
   "source_log": "REPOS/new-ai-e22-candidate/e13_b500.log",
   "source_sha256": "219d1429d3493bf800ecba5af0c9b389f5473eced6a63071bd85ebf1581e1279",
   "published": "2026-10-08"
+ },
+ "verdict_correction_2026_10_09": {
+  "original_verdict_retention_clause": "retention slightly better for self-assembly (mean delta_ret 0.67 pts)",
+  "correction": "delta_ret_pts = A_drop - B_drop, so a POSITIVE delta_ret means self-assembly drops MORE on the old task. Mean old-task drop: self-assembly 1.776 pts vs fine-tune 1.112 pts. Retention favours fine-tune, not self-assembly. Mean of per-seed delta_ret is 0.666; difference of means is 0.664 (rounding). Raw per-seed numbers unchanged.",
+  "corrected_verdict": "No capability advantage for self-assembly over fine-tune (mean delta_acc -0.12 pts), and no retention advantage either: fine-tune retains better on average (mean old-task drop 1.112 vs 1.776 pts). Synthetic toy tasks, not language.",
+  "published": "2026-10-09"
  }
 }

@@ -6,9 +6,9 @@
 a{color:#a9c0ff}a:focus-visible{outline:3px solid var(--mint);outline-offset:3px}main{width:min(1060px,calc(100% - 32px));margin:auto}
 header{border-bottom:1px solid var(--line);padding:16px 0}h2{margin:0 0 10px;font-size:1.8rem}section{padding:42px 0;border-bottom:1px solid var(--line)}p{max-width:920px}.muted{color:var(--muted)}.pill{display:inline-block;border-radius:20px;background:#443528;color:#ffcf92;padding:6px 12px;font-weight:700}
 .block{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}.block h4{margin:0 0 10px}
-.chartbox{overflow-x:auto}.chart,.diagram{display:block;min-width:730px;width:100%;height:auto}
+.chartbox{overflow-x:auto}.scroll{overflow-x:auto}table{min-width:690px;border-collapse:collapse}td{overflow-wrap:anywhere}th{overflow-wrap:anywhere}code{overflow-wrap:anywhere;word-break:break-all}.chart,.diagram{display:block;min-width:730px;width:100%;height:auto}
 .note{border-left:3px solid var(--coral);padding:12px 0 12px 16px;color:var(--muted)}
-li{margin:6px 0}
+li{margin:6px 0}p,li,.note,.lede{overflow-wrap:anywhere;word-break:break-word}
 </style></head><body>
 <header><a href="../index.html">&larr; Dashboard</a> <strong>New AI &middot; Built-System Spec</strong> <span class="pill">current technical specification &middot; 2026-10-08</span></header>
 <main>
@@ -26,14 +26,19 @@ li{margin:6px 0}
 <li>Distances d&sub2;<sub>i</sub> = &Vert;key<sub>i</sub> &minus; query key&Vert;&sup2;; normalised d&#770;&sup2;<sub>i</sub> = d&sub2;<sub>i</sub> / mean(d&sub2;) (the normalisation is the measured fix for softmax saturation at 960-dim distances, receipt8).</li>
 <li>Weights w<sub>i</sub> = softmax(&minus;&beta;&middot;d&#770;&sup2;<sub>i</sub>); retrieval feature r = &Sigma; w<sub>i</sub>&middot;key<sub>i</sub>.</li>
 <li>&beta; = &beta;<sub>1</sub>&middot;n^&alpha; + &beta;<sub>0</sub>, with &beta;<sub>1</sub>, &alpha;, &beta;<sub>0</sub> learnable scalars. Trained values (receipt8, energy arm): &beta;<sub>1</sub> 0.5847, &alpha; 0.5948, &beta;<sub>0</sub> 0.0761 &rarr; &beta; = 0.66 / 0.96 / 1.41 / 2.09 at n = 1/2/4/8.</li></ul></div>
-<div class="block"><h4>Energy head (E21 mechanism, unrolled differentiably) &mdash; as the pinned source actually computes it</h4><ul>
-<li>Latent z (&ell; = 4), feature ff = tanh(h &middot; Fc). One network call: o = head(concat(h, z + ff)); the outputs are <strong>s = o[0] and v = o[1:4] as separate outputs</strong> &mdash; v is NOT s &middot; qv; qv is a separate 4-vector used only inside the energy.</li>
-<li>Energy E(z) = s&middot;(1 + z&middot;qv + &frac12;&Vert;z&Vert;&sup2;) + z&middot;v + &frac12;&lambda;&Vert;z&Vert;&sup2;.</li>
-<li><strong>Energy-arm update: z &larr; z &minus; step &middot; &nabla;<sub>z</sub> E(z)</strong> (gradient descent on E, source :110). The plus update z &larr; z + step&middot;(v + s&middot;(z + qv) + &lambda;&middot;z) is the <strong>DIRECT control arm</strong> (source :121), not the energy arm.</li>
-<li>&nabla;<sub>z</sub> E is computed with create_graph=True, so the gradient itself is differentiable through head, Fc and qv: the classification loss back-propagates through all K unrolled steps into Fc/qv/head. step = 0.1, &lambda; = 0.1, norm clamp radius 2.0 (safe at z = 0).</li>
+<div class="block"><h4>Energy head (E21 mechanism, unrolled differentiably) &mdash; as the pinned source actually computes it</h4><ul>
+
+<li>Latent z (&ell; = 4), feature ff = tanh(h &middot; Fc). One network call: o = head(concat(h, z + ff)); the outputs are <strong>s = o[&hellip;,0] and v = o[&hellip;,1:] (four values, indices 1&ndash;4) as separate outputs</strong> &mdash; v is NOT s &middot; qv; qv is a separate 4-vector used only inside the energy.</li>
+
+<li>Energy E(z) = s&middot;(1 + z&middot;qv + &frac12;&Vert;z&Vert;&sup2;) + z&middot;v + &frac12;&lambda;&Vert;z&Vert;&sup2;.</li>
+
+<li><strong>Energy-arm update: z &larr; z &minus; step &middot; &nabla;<sub>z</sub> E(z)</strong> (gradient descent on E, source :110). The plus update z &larr; z + step&middot;(v + s&middot;(z + qv) + &lambda;&middot;z) is the <strong>DIRECT control arm</strong> (source :121), not the energy arm.</li>
+
+<li>&nabla;<sub>z</sub> E is computed with create_graph=True, so the gradient itself is differentiable through head, Fc and qv: the classification loss back-propagates through all K unrolled steps into Fc/qv/head. step = 0.1, &lambda; = 0.1, norm clamp radius 2.0 (safe at z = 0).</li>
+
 <li>Prediction = out_head(concat(h, z + ff, r)) &rarr; 4 classes.</li></ul></div>
 <div class="block"><h4>Parameter counts (computed from the exact source)</h4>
-<table><thead><tr><th>Component</th><th>Shape</th><th>Parameters</th><th>Learned / frozen</th></tr></thead><tbody>
+<div class="scroll"><table><thead><tr><th>Component</th><th>Shape</th><th>Parameters</th><th>Learned / frozen</th></tr></thead><tbody>
 <tr><th scope="row">SmolLM2-360M encoder</th><td>361.8M</td><td>361,821,120</td><td>frozen</td></tr>
 <tr><th scope="row">Fc (feature map)</th><td>960&times;4</td><td>3,840</td><td>learned</td></tr>
 <tr><th scope="row">qv (value vector)</th><td>4</td><td>4</td><td>learned</td></tr>
@@ -41,7 +46,7 @@ li{margin:6px 0}
 <tr><th scope="row">head layer 1</th><td>16&times;(4+1) + 5</td><td>85</td><td>learned</td></tr>
 <tr><th scope="row">out_head</th><td>(960+4+960)&times;4 + 4</td><td>7,700</td><td>learned</td></tr>
 <tr><th scope="row">&beta; scalars (&beta;<sub>1</sub>, &alpha;, &beta;<sub>0</sub>)</th><td>3</td><td>3</td><td>learned</td></tr>
-<tr><th scope="row">Trainable total</th><td></td><td><strong>27,072</strong></td><td>vs 361,821,120 frozen</td></tr></tbody></table></div>
+<tr><th scope="row">Trainable total</th><td></td><td><strong>27,072</strong></td><td>vs 361,821,120 frozen</td></tr></tbody></table></div></div>
 <div class="block"><h4>Training and timing boundaries (receipt8, measured)</h4><ul>
 <li>Training: 60 Adam steps, lr 0.02, 8 passages per step, at n = 4. Energy arm: 2,176 head evals + 2,176 second-order gradient calls, 2.0 s wall. Direct arm: 2,176 head evals, 0 gradient calls, 0.7 s wall. Equal Adam steps is NOT equal compute.</li>
 <li>Input: passage text &rarr; 48-token ids &rarr; 960-dim key. Output: one of 4 class labels. No text generation.</li></ul></div></section>

@@ -1,7 +1,158 @@
 {
- "experiment": "E12 \u2014 confirmation of the E11 growth-config sweep on the full 5-seed set [1,7,42,123,999]",
+ "experiment": "E12 — confirmation of the E11 growth-config sweep on the full 5-seed set [1,7,42,123,999]",
  "objective_declared_before_run": "Re-run top-3 E11 configs on the full pre-registered seed set; score = gain_pts / (thaw_steps_used/100); hard retention gate retention_drop_pts <= max.",
- "results": [],
+ "results": [
+  {
+   "run": 1,
+   "seed": 1,
+   "config": "router_midpoint_small_b100",
+   "fired": 320,
+   "gain_pts": 26.67,
+   "retention_drop_pts": 0.0,
+   "gated": true,
+   "score": 26.6667
+  },
+  {
+   "run": 2,
+   "seed": 7,
+   "config": "router_midpoint_small_b100",
+   "fired": 320,
+   "gain_pts": 8.33,
+   "retention_drop_pts": 0.0,
+   "gated": true,
+   "score": 8.3333
+  },
+  {
+   "run": 3,
+   "seed": 42,
+   "config": "router_midpoint_small_b100",
+   "fired": 320,
+   "gain_pts": 8.33,
+   "retention_drop_pts": 3.89,
+   "gated": false,
+   "score": 8.3333
+  },
+  {
+   "run": 4,
+   "seed": 123,
+   "config": "router_midpoint_small_b100",
+   "fired": 320,
+   "gain_pts": 31.67,
+   "retention_drop_pts": -1.11,
+   "gated": true,
+   "score": 31.6667
+  },
+  {
+   "run": 5,
+   "seed": 999,
+   "config": "router_midpoint_small_b100",
+   "fired": 320,
+   "gain_pts": 11.67,
+   "retention_drop_pts": 0.0,
+   "gated": true,
+   "score": 11.6667
+  },
+  {
+   "run": 6,
+   "seed": 1,
+   "config": "router_midpoint_large_b100",
+   "fired": 320,
+   "gain_pts": 23.89,
+   "retention_drop_pts": 0.56,
+   "gated": true,
+   "score": 23.8889
+  },
+  {
+   "run": 7,
+   "seed": 7,
+   "config": "router_midpoint_large_b100",
+   "fired": 320,
+   "gain_pts": 18.89,
+   "retention_drop_pts": 0.56,
+   "gated": true,
+   "score": 18.8889
+  },
+  {
+   "run": 8,
+   "seed": 42,
+   "config": "router_midpoint_large_b100",
+   "fired": 320,
+   "gain_pts": 15.56,
+   "retention_drop_pts": 2.22,
+   "gated": false,
+   "score": 15.5556
+  },
+  {
+   "run": 9,
+   "seed": 123,
+   "config": "router_midpoint_large_b100",
+   "fired": 320,
+   "gain_pts": 21.67,
+   "retention_drop_pts": -0.56,
+   "gated": true,
+   "score": 21.6667
+  },
+  {
+   "run": 10,
+   "seed": 999,
+   "config": "router_midpoint_large_b100",
+   "fired": 320,
+   "gain_pts": 22.78,
+   "retention_drop_pts": -1.11,
+   "gated": true,
+   "score": 22.7778
+  },
+  {
+   "run": 11,
+   "seed": 1,
+   "config": "router_abs_energy_large_b100",
+   "fired": 352,
+   "gain_pts": 18.33,
+   "retention_drop_pts": -1.67,
+   "gated": true,
+   "score": 18.3333
+  },
+  {
+   "run": 12,
+   "seed": 7,
+   "config": "router_abs_energy_large_b100",
+   "fired": 32,
+   "gain_pts": 0.0,
+   "retention_drop_pts": 0.56,
+   "gated": true,
+   "score": 0.0
+  },
+  {
+   "run": 13,
+   "seed": 42,
+   "config": "router_abs_energy_large_b100",
+   "fired": null,
+   "gain_pts": 0.56,
+   "retention_drop_pts": -0.56,
+   "gated": true,
+   "score": 0.0
+  },
+  {
+   "run": 14,
+   "seed": 123,
+   "config": "router_abs_energy_large_b100",
+   "fired": 192,
+   "gain_pts": 0.56,
+   "retention_drop_pts": 0.0,
+   "gated": true,
+   "score": 0.0
+  },
+  {
+   "run": 15,
+   "seed": 999,
+   "config": "router_abs_energy_large_b100",
+   "fired": 0,
+   "gain_pts": 0.56,
+   "retention_drop_pts": 0.0,
+   "gated": true,
+   "score": 0.0
+  }
+ ],
  "confirmed_winner": {
   "config": [
    "router",
@@ -16,6 +167,53 @@
  "provenance": {
   "source_log": "REPOS/new-ai-e22-candidate/e12_run.log",
   "source_sha256": "97fa9958522bfc6ea387e69f59b357d960fb56b0beb95ecdc62224912a87869e",
-  "published": "2026-10-08"
- }
+  "published": "2026-10-08",
+  "source_sha256_raw_crlf": "bfa463c3b87707fe0db269911b432c8a06894f22db220b2c5c19caa9c4efc5e3",
+  "source_sha256_lf": "97fa9958522bfc6ea387e69f59b357d960fb56b0beb95ecdc62224912a87869e",
+  "note": "results[] transcribed verbatim from the retained run log e12_run.log (15 per-seed rows). The earlier published summary had results=[] and was a reconstructed aggregate, not raw per-run evidence. Corrected 2026-10-09 per publication QA."
+ },
+ "per_config_summary": [
+  {
+   "config": [
+    "router",
+    "midpoint",
+    "large",
+    100
+   ],
+   "n": 5,
+   "mean_score": 20.556,
+   "mean_gain_pts": 20.56,
+   "mean_retention_drop_pts": 0.33,
+   "gated_frac": 0.8,
+   "confirmed": true
+  },
+  {
+   "config": [
+    "router",
+    "midpoint",
+    "small",
+    100
+   ],
+   "n": 5,
+   "mean_score": 17.333,
+   "mean_gain_pts": 17.33,
+   "mean_retention_drop_pts": 0.56,
+   "gated_frac": 0.8,
+   "confirmed": false
+  },
+  {
+   "config": [
+    "router",
+    "abs_energy",
+    "large",
+    100
+   ],
+   "n": 5,
+   "mean_score": 3.667,
+   "mean_gain_pts": 4.0,
+   "mean_retention_drop_pts": -0.33,
+   "gated_frac": 1.0,
+   "confirmed": false
+  }
+ ]
 }
